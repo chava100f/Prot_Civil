@@ -13,8 +13,10 @@
 		//$query = 'SELECT nombre FROM super_usuario WHERE nombre = "'.$user.'" AND contrasenia = "'.$pass.'"';
 		$consulta = ejecutarQuery($conexion, $query);
 		
-		if (mysqli_num_rows($consulta)) {
-			while ($dat = mysqli_fetch_array($consulta)){
+		if (mysqli_num_rows($consulta)) 
+		{
+			while ($dat = mysqli_fetch_array($consulta))
+			{
 				//Revisar tambien el tipo de perfil que se tiene y redireccionar dependiendo de este a la pagina adecuada!!!
 
 				session_start();
@@ -36,13 +38,37 @@
 					header("Location: index_jefe_patrulla.php");
 					exit();					
 				}
+				if($tipo_cuenta == "admin")
+				{
+					$_SESSION['logged_admin'] = $user;
+					header("Location: index_admin.php");
+					exit();					
+				}
 
 			}
 		}
 		else
-		{
-			desconectar($conexion);
-			$error_login = '<p name="error_log"><b>El usuario o la contraseña son incorrectos.</b></p>';
+		{	
+			$query = 'SELECT nombre FROM super_usuario WHERE nombre = "'.$user.'" AND contrasenia = "'.$pass.'"';
+			$consulta = ejecutarQuery($conexion, $query);
+
+			if (mysqli_num_rows($consulta)) 
+			{
+				while ($dat = mysqli_fetch_array($consulta))
+				{
+					session_start();
+					$_SESSION['logged'] = 'yes';
+					desconectar($conexion);
+					$_SESSION['logged_admin'] = $user;
+					header("Location: index_admin.php");
+					exit();					
+				}
+			}
+			else
+			{
+				desconectar($conexion);
+				$error_login = '<p name="error_log"><b>El usuario o la contraseña son incorrectos.</b></p>';
+			}
 		}
 	}
 
