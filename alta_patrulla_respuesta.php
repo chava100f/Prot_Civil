@@ -4,7 +4,7 @@ if($_SESSION['logged'] == 'yes')
 {
 
         $nombre = $_GET['nombre'];
-        $clave = $_GET['clave'];
+        $id_p = $_GET['id_p'];
 
         $n="";
         $c="";
@@ -13,13 +13,13 @@ if($_SESSION['logged'] == 'yes')
         $conexion = conectar();
 
 
-        $query = 'SELECT nombre, clave FROM patrullas WHERE nombre = "'.$nombre.'" AND clave = "'.$clave.'"';
+        $query = 'SELECT id_patrullas, nombre FROM patrullas WHERE nombre = "'.$nombre.'" AND id_patrullas = "'.$id_p.'"';
         $consulta = ejecutarQuery($conexion, $query);
 
         if (mysqli_num_rows($consulta)) {
             while ($dat = mysqli_fetch_array($consulta)){
                 $n = $dat['nombre'];
-                $c = $dat['clave'];
+                $c = $dat['id_patrullas'];
             }
         }
 

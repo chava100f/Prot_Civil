@@ -5,7 +5,7 @@
     require_once("funciones.php");
     $conexion = conectar();
 
-    $query = 'SELECT id_patrullas, nombre, clave FROM patrullas WHERE clave="'.$patrulla.'"';
+    $query = 'SELECT id_patrullas, nombre FROM patrullas WHERE id_patrullas="'.$patrulla.'"';
     $consulta = ejecutarQuery($conexion, $query);
     $mensaje="";
 
@@ -13,7 +13,6 @@
 	    while ($dat = mysqli_fetch_array($consulta)){
 	        $id = $dat['id_patrullas'];
 	        $nombre = $dat['nombre'];
-	        $clave = $dat['clave'];
 
 	        $mensaje = $id."-".$nombre;
 	    }

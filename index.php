@@ -49,7 +49,7 @@
 		}
 		else
 		{	
-			$query = 'SELECT nombre FROM super_usuario WHERE nombre = "'.$user.'" AND contrasenia = "'.$pass.'"';
+			$query = 'SELECT admin FROM super_usuario WHERE admin = "'.$user.'" AND contrasenia = "'.$pass.'"';
 			$consulta = ejecutarQuery($conexion, $query);
 
 			if (mysqli_num_rows($consulta)) 

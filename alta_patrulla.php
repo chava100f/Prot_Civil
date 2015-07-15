@@ -10,18 +10,18 @@ if($_SESSION['logged'] == 'yes')
 
         if($nombre_patrulla != "")
         {
-			    $clave=rand(100,1000);
+			    $id_p=rand(100,1000);
 
         	require_once("funciones.php");
           $conexion = conectar();
 
           $nombre_patrulla = mysqli_real_escape_string($conexion, $nombre_patrulla);
     
-        	$query = 'INSERT INTO patrullas(nombre, clave) VALUES ("'.$nombre_patrulla.'", "'.$clave.'")';
+        	$query = 'INSERT INTO patrullas(id_patrullas, nombre) VALUES ("'.$id_p.'", "'.$nombre_patrulla.'")';
         	$consulta = ejecutarQuery($conexion, $query);
         	desconectar($conexion);
         	
-        	header("Location: alta_patrulla_respuesta.php?nombre=".$nombre_patrulla."&clave=".$clave."");
+        	header("Location: alta_patrulla_respuesta.php?nombre=".$nombre_patrulla."&id_p=".$id_p."");
 			    exit();
         }
         else

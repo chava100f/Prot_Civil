@@ -36,8 +36,8 @@ if($_SESSION['logged'] == 'yes')
 
         //TO DO Elaboración del Query (tratar de pasar esto a un Store procedure)!!!
         //Actualización de los datos en la tabla info_fisica
-        $query = 'INSERT INTO info_fisica(sexo, estatura, peso, complexion, cabello, ojos, cara, nariz, senias_particulares, datos_personales_id_num_reg)';
-        $query = $query.' VALUES ("'.$sexo.'", "'.$estatura.'", "'.$peso.'", '.$complexion.', "'.$cabello.'", "'.$ojos.'", "'.$cara.'", "'.$nariz.'", "'.$senias.'", '.$id_user.')';
+        $query = 'INSERT INTO info_fisica(genero, estatura, peso, complexion, cabello, ojos, cara, nariz, senias_particulares, datos_personales_id_num_reg)';
+        $query = $query.' VALUES ("'.$sexo.'", '.$estatura.', '.$peso.', "'.$complexion.'", "'.$cabello.'", "'.$ojos.'", "'.$cara.'", "'.$nariz.'", "'.$senias.'", '.$id_user.')';
 
         $consulta = ejecutarQuery($conexion, $query);
         desconectar($conexion);
@@ -77,13 +77,13 @@ if($_SESSION['logged'] == 'yes')
                 	<tr>
                 		<td>Estatura:</td>
                 		<td>
-                			<input type="text" id="estatura" name="estatura" maxlength="4"> metros
+                			<input type="number" id="estatura" name="estatura" maxlength="4" step="0.01" min="0.00" max="2.50"> metros
                 		</td>
                 	</tr>
                 	<tr>
                 		<td>Peso:</td>
                 		<td>
-                			<input type="text" id="peso" name="peso" maxlength="3"> kg
+                			<input type="number" id="peso" name="peso" maxlength="3" maxlength="6" step="0.01" min="0.00" max="200.00"> kg
                 		</td>
                 	</tr>
                 	<tr>

@@ -100,10 +100,10 @@ if($_SESSION['logged'] == 'yes')
                 		<td>Estado Civil:</td>
                 		<td>
                 			<select id="estado_civil" name="estado_civil">
-                                <option value="soltero">Soltero(a)</option>
-                                <option value="casado">Casado(a)</option>
-                                <option value="divorciado">Divorciado(a)</option>
-                                <option value="viudo">Viudo(a)</option>
+                                <option value="soltero">SOLTERO(A)</option>
+                                <option value="casado">CASADO(A)</option>
+                                <option value="divorciado">DIVORCIADO(A)</option>
+                                <option value="viudo">VIUDO(A)</option>
                             </select>
                 		</td>
                 	</tr>
@@ -131,7 +131,15 @@ if($_SESSION['logged'] == 'yes')
                         <td>Tipo:
                         </td>
                 		<td>
-                			<input type="text" id="licencia_tipo" name="licencia_tipo" maxlength="3">
+                            <select id="licencia_tipo" name="licencia_tipo">
+                                <option value="AUTOMOVILISTA">AUTOMOVILISTA</option>
+                                <option value="CHOFER DE SERVICIO PARTICULAR">CHOFER DE SERVICIO PARTICULAR</option>
+                                <option value="MOTOCICLISTA">MOTOCICLISTA</option>
+                                <option value="PERMISO PROVICIONAL A">PERMISO PROVICIONAL A</option>
+                                <option value="PERMISO PROVICIONAL B">PERMISO PROVICIONAL B</option>
+                                <option value="DUPLICADO">DUPLICADO</option>
+                                <option value="SERVICIO PÚBLICO">SERVICIO PÚBLICO</option>
+                            </select>
                 		</td>
                 	</tr>
                 	<tr>

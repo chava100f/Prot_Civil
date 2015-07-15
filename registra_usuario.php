@@ -71,11 +71,10 @@
                     $correo1 = mysqli_real_escape_string($conexion, $correo1);
                     $pass1 = mysqli_real_escape_string($conexion, $pass1);
 
-                    //Elaboración del Query (tratar de pasar esto a un Store procedure)!!!
-                    //TO DO  hacer le codigo para insertar los datos en la BD..
+                    //TO DO Elaboración del Query (tratar de pasar esto a un Store procedure)!!!
                     
-                    $query = 'INSERT INTO datos_personales(nombre, apellido_p, apellido_m, fecha_nac, dom_calle, dom_num_ext, dom_num_int, dom_col, dom_del_mun, dom_estado, dom_cp, telefono_casa, telefono_celular, telefono_trabajo, telefono_extension, email, contrasenia, tipo_cuenta, patrullas_id_patrullas)';
-                    $query = $query.' VALUES ("'.$nombres.'", "'.$apellido_p.'", "'.$apellido_m.'", "'.$fecha_nac.'", "'.$dom_calle.'", "'.$dom_num_ext.'", "'.$dom_num_int.'", "'.$dom_colonia.'", "'.$dom_del_mun.'", "'.$dom_estado.'", "'.$dom_cp.'", "'.$telefono_casa.'", "'.$telefono_celular.'", "'.$telefono_trabajo.'", "'.$telefono_extension.'", "'.$correo1.'", "'.$pass1.'","usuario",'.$id_p.')'; //sustituir el final para el id de la patrulla
+                    $query = 'INSERT INTO datos_personales(nombre, apellido_p, apellido_m, fecha_nac, dom_calle, dom_num_ext, dom_num_int, dom_col, dom_del_mun, dom_estado, dom_cp, telefono_casa, telefono_celular, telefono_trabajo, telefono_extension, email, contrasenia, tipo_cuenta, calidad_miembro, fecha_registro, patrullas_id_patrullas)';
+                    $query = $query.' VALUES ("'.$nombres.'", "'.$apellido_p.'", "'.$apellido_m.'", "'.$fecha_nac.'", "'.$dom_calle.'", "'.$dom_num_ext.'", "'.$dom_num_int.'", "'.$dom_colonia.'", "'.$dom_del_mun.'", "'.$dom_estado.'", "'.$dom_cp.'", "'.$telefono_casa.'", "'.$telefono_celular.'", "'.$telefono_trabajo.'", "'.$telefono_extension.'", "'.$correo1.'", "'.$pass1.'","usuario", "activo", now(),'.$id_p.')'; 
                     $consulta = ejecutarQuery($conexion, $query);
                         
                     desconectar($conexion);
@@ -124,8 +123,8 @@
                         
                         var respuesta = xmlhttp.responseText;
 
-                        id = respuesta.substring(0, 1);
-                        nombre = respuesta.substring(2,50);
+                        id = respuesta.substring(0, 3);
+                        nombre = respuesta.substring(4,50);
                         
                         if(respuesta == "No se encontro Patrulla ingresada")
                         {

@@ -99,6 +99,15 @@ if($_SESSION['logged'] == 'yes')
                 $porcentaje = $porcentaje + 20;
             }
         }
+
+        $query = 'SELECT datos_personales_id_num_reg FROM antecedentes WHERE datos_personales_id_num_reg='.$id_user;
+        $consulta = ejecutarQuery($conexion, $query);
+        if (mysqli_num_rows($consulta)) {
+            while ($dat = mysqli_fetch_array($consulta)){
+                $porcentaje = $porcentaje + 20;
+            }
+        }
+
         //TO DO revisar como subir los datos de experiencia y revisar que si se encuentren todos los datos que creo que faltan algunos de hecho hasta en la BD
 
         desconectar($conexion);
@@ -121,11 +130,12 @@ if($_SESSION['logged'] == 'yes')
 <h2><?php echo obtener_mensaje(); ?></h2>
 <h3> Patrulla actual: <u><?php echo obtener_patrulla_actual(); ?></u><h3/>
 <br>
-<h4>Porcentaje de Datos en el sistema <?php echo obtener_porcentaje_datos_bd();?>%</h4>
+<h4>Porcentaje de Datos en el sistema <span style="color:green"> <?php echo obtener_porcentaje_datos_bd();?>% </span> </h4>
 <br>
 <h4><a href="form_complementario.php">Actualizar información Complementaria del perfil</a></h4>
 <h4><a href="form_medico.php">Actualizar información Medica</a></h4>
 <h4><a href="form_info_fisica.php">Actualizar información Fisica</a></h4>
+<h4><a href="form_experiencia.php">Actualizar información de experiencia en Patrullaje y Rescate</a></h4>
 
 
 </html>

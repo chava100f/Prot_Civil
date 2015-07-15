@@ -8,7 +8,7 @@ if($_SESSION['logged'] == 'yes')
         require_once("funciones.php");
         $conexion = conectar();
 
-        $query = 'SELECT DISTINCT patrullas.nombre, IFNULL((SELECT datos_personales.nombre FROM datos_personales WHERE datos_personales.tipo_cuenta="jefe" AND id_patrullas = datos_personales.patrullas_id_patrullas ),"NA") as nombreJefe, patrullas.clave FROM patrullas, datos_personales';
+        $query = 'SELECT DISTINCT nombre, IFNULL((SELECT datos_personales.nombre FROM datos_personales, patrullas WHERE datos_personales.tipo_cuenta="jefe" AND datos_personales.patrullas_id_patrullas = id_patrullas),"NA") AS nombreJefe, id_patrullas FROM patrullas;';
         $consulta = ejecutarQuery($conexion, $query);
         $opciones_e="";
 
@@ -16,7 +16,7 @@ if($_SESSION['logged'] == 'yes')
             while ($dat = mysqli_fetch_array($consulta)){
                 $np = $dat['nombre'];
                 $nj = $dat['nombreJefe'];
-                $c = $dat['clave'];
+                $c = $dat['id_patrullas'];
                 //Agregar codigo para mandar a modificar la patrulla seleccionada
                 $opciones_e = $opciones_e.'<tr><td>'.$np.'</td><td>'.$nj.'</td><td>'.$c.'</td><td>Modificar</td</tr>';
             }

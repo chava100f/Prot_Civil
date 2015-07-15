@@ -24,7 +24,7 @@ if($_SESSION['logged'] == 'yes')
         //Recoleccion de datos...
 
         $sangre = mysqli_real_escape_string($conexion, strip_tags($_POST['sangre']));
-        $vacuna_local = mysqli_real_escape_string($conexion, strip_tags($_POST['vacuna_local']));
+        $vacuna_local =$_POST['vacuna_local'];
         $vacuna_internacional = mysqli_real_escape_string($conexion, strip_tags($_POST['vacuna_internacional']));
         $padecimientos_limitfisicas = mysqli_real_escape_string($conexion, strip_tags($_POST['padecimientos_limitfisicas']));
         $alergias = mysqli_real_escape_string($conexion, strip_tags($_POST['alergias']));
@@ -32,14 +32,35 @@ if($_SESSION['logged'] == 'yes')
 
         //TO DO Elaboración del Query (tratar de pasar esto a un Store procedure)!!!
         //Actualización de los datos en la tabla info_medica
-        $query = 'INSERT INTO info_medica(tipo_sangre, vacunas, vacunas_internacionales, padecimientos_limitfisicas, alergias, servicio_medico, datos_personales_id_num_reg)';
-        $query = $query.' VALUES("'.$sangre.'", "'.$vacuna_local.'", "'.$vacuna_internacional.'", '.$padecimientos_limitfisicas.', "'.$alergias.'", "'.$servicio_medico.'",'.$id_user.')';
 
+        $query = 'INSERT INTO info_medica(tipo_sangre, padecimientos_limitfisicas, alergias, servicio_medico, datos_personales_id_num_reg)';
+        $query = $query.' VALUES("'.$sangre.'","'.$padecimientos_limitfisicas.'", "'.$alergias.'", "'.$servicio_medico.'",'.$id_user.')';
         $consulta = ejecutarQuery($conexion, $query);
-        desconectar($conexion);
         
-        header("Location: index_usuario.php");
-        exit();
+        //Cuenta los datos de los checkbox para insertarlos en la tabla vacunas
+        $count = count($vacuna_local);
+
+        //Inserta los datos de los checkbox en la tabla vacunas
+        for ($i = 0; $i < $count; $i++)
+        {
+            $query="";
+            $consulta="";
+            $query='INSERT INTO vacunas(vacunas, datos_personales_id_num_reg) VALUES("'.$vacuna_local[$i].'",'.$id_user.');';
+           
+            $consulta = ejecutarQuery($conexion, $query);
+
+        }
+        //Revisa si la variable vacunas internacionales tiene algo escrito, si sí lo inserta en la base de datos
+        if($vacuna_internacional!="")
+        {
+            $query='INSERT INTO vacunas(vacunas, datos_personales_id_num_reg) VALUES("'.$vacuna_internacional.'",'.$id_user.');';
+            $consulta = ejecutarQuery($conexion, $query);
+        }
+
+        desconectar($conexion);
+
+       header("Location: index_usuario.php");
+       exit();
                
     }
 ?>
@@ -65,36 +86,67 @@ if($_SESSION['logged'] == 'yes')
                     <tr>
                         <td>Tipo de Sangre:</td>
                         <td>
-                            <input type="text" name="sangre" maxlength="3">
+                            <select name="sangre" id="sangre">
+                                <option value="A+">A+</option>                                
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>                               
+                            </select>
                         </td>
                     </tr>
                 	<tr>
-                		<td colspan="2">Vacunas:</td>
-                    </tr>
-                    <tr>
-                		<td>Locales: 
-                			<input type="text" id="vacuna_local" name="vacuna_local" maxlength="80">
+                		<td>Vacunas Locales:</td>
+                		<td> 
+                			<input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="BCG">BCG<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="HEPATITIS B"> HEPATITIS B<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="PENTAVALENTE ACELULAR">PENTAVALENTE ACELULAR<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="NEUMOCOCO">NEUMOCOCO<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="ROTAVIRUS">ROTAVIRUS<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="SRP">SRP<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="SR">SR<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="Td">Td<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="DPT">DPT<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="Tdpa">Tdpa<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="VPH">VPH<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="INFLUENCA INACTIVADA">INFLUENCA INACTIVADA<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="POLIOMIELITIS TIPO SABIN">POLIOMIELITIS TIPO SABIN<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="VARICELA">VARICELA<br>
+                            <input type="checkbox" id="vacuna_local[]" name="vacuna_local[]" value="HEPATITIS A">HEPATITIS A<br>
                 		</td>
-                        <td>Internacionales: 
-                            <input type="text" id="vacuna_internacional" name="vacuna_internacional" maxlength="80">
-                        </td>
+                        
                 	</tr>
+                    <tr>
+                        <td>Vacunas Internacionales:</td>
+                        <td>    
+                            <textarea style="width: 300px; height: 75px;" id="vacuna_internacional" name="vacuna_internacional" maxlength="180" placeholder="Describir aquí"></textarea>
+                        </td>
+                    </tr>
                 	<tr>
                 		<td>Padecimientos o Limitaciones físicas:</td>
                 		<td>
-                			<input type="text" id="padecimientos_limitfisicas" name="padecimientos_limitfisicas" maxlength="180">
+                			<textarea style="width: 300px; height: 75px;" id="padecimientos_limitfisicas" name="padecimientos_limitfisicas" maxlength="180" placeholder="Describir aquí"></textarea>
                 		</td>
                 	</tr>
                 	<tr>
                 		<td>Alergias:</td>
                 		<td>
-                			<input type="text" id="alergias" name="alergias" maxlength="130">
+                            <textarea style="width: 300px; height: 75px;" id="alergias" name="alergias" maxlength="180" placeholder="Describir aquí"></textarea>
                 		</td>
                 	</tr>
                 	<tr>
                 		<td>Servicio Médico:</td>
                 		<td>
-                			<input type="text" id="servicio_medico" name="servicio_medico" maxlength="40" placeholder="IMSS, ISSSTE, Seguro Popular, etc">
+                            <select name="servicio_medico" id="servicio_medico">
+                                <option value="IMSS">IMSS</option>
+                                <option value="ISSSTE">ISSSTE</option>
+                                <option value="PEMEX">PEMEX</option>
+                                <option value="SEGURO POPUKAR">SEGURO POPULAR</option>
+                                <option value="PARTICULAR">PARTICULAR</option>
+                            </select>
                 		</td>
                 	</tr>
                 </table>
