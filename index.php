@@ -44,7 +44,6 @@
 					header("Location: index_admin.php");
 					exit();					
 				}
-
 			}
 		}
 		else
@@ -67,7 +66,7 @@
 			else
 			{
 				desconectar($conexion);
-				$error_login = '<p name="error_log"><b>El usuario o la contraseña son incorrectos.</b></p>';
+				$error_login = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> El usuario o la contraseña son incorrectos.</div>';
 			}
 		}
 	}
@@ -75,36 +74,93 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset = "utf-8">
-	<link rel="stylesheet" type="text/css" href="EstiloT0202.css">
 	<title>Login Alumno</title>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	
+	<!-- Custom styles for this template -->
+    <link rel="stylesheet" href="css/signin.css" >
+
 </head>
 <body>
-	<h1> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h1>
-	<form action = "index.php" method = "POST">
-		<fieldset>
-                <legend>Ingresar</legend>
-				<ul>		
-                    <li>
-					<label>Usuario:</label>
-					 <input type = "textbox" name = "user">
-					</li>
-					<label>Contraseña:</label>
-					<input type = "password" name = "pass">
-					</li>
-				</ul>
-
- 		</fieldset>
-		<br>
-		<input type = "submit" value = "Entrar" name = "log" width="100" height="50">
-	</form>
-
-	<?php echo $error_login; //muestra el error de login ?>
+	<div class="container" >
+		<header class="header-index">
+			
+			<img src="imagenes/brsam-logo.png" />
+			<h2> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h2>
+			
+		</header>
+	</div>
 	
-	<p  class="hiper"><a href="registra_usuario.php">¿Aún No Te Registras? Registrarse en el Sistema</a></p> 
+	<br/>
+	
+	<div class="container" id="login-form">
+		<div class="col-xs-1 col-sm-2 col-md-4 col-lg-4"></div>
 
+		<div class="col-xs-11 col-sm-8 col-md-4 col-lg-4">
+			<h3>Inicio de sesión:</h3>
 
+			<fieldset>			
+				<form  action="index.php" method="POST" >
+
+				<input type="text" name="user" class="form-control" placeholder="Ingresar Usuario" required>
+				<input type="password" name="pass" class="form-control" placeholder="Ingresar Contraseña" required>
+				<br/>
+				<?php echo $error_login; //muestra el error de login ?>
+
+				<div class="row">
+
+					<p class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+						<span class="info">!</span>
+						<a href="registra_usuario.php">Registrarse</a>   
+						<br/>
+						<span class="info">!</span>
+					   	<a href="olvido_password.php">Recuperar contraseña</a>
+				   	</p>
+
+				   	<p class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+						<input type="submit" name="log" value="Entrar"/>
+					</p>
+			   	</div>
+				</form>
+			</fieldset>
+
+			<footer class="footer">
+				<small>Última modificación Julio 2015</small>
+			</footer>
+		</div>
+
+		<div class="col-xs-1 col-sm-2 col-md-4 col-lg-4"></div>
+	</div>
+	
+    <!-- Javascript -->
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript"> //función para hacer dinamigo el fondo 
+     $(function(){
+    
+		var limit = 0; // 0 = infinite.
+		var interval = 2;// Secs
+		var images = [
+		    "imagenes/Fondos/1.jpg",
+		    "imagenes/Fondos/2.jpg",
+		    "imagenes/Fondos/3.jpg"
+		];
+
+		var inde = 0; 
+		var limitCount = 0;
+		var myInterval = setInterval(function() {
+		   if (limit && limitCount >= limit-1) clearTimeout(myInterval);
+		   if (inde >= images.length) inde = 0;
+		    $('body').css({ "background-image":"url(" + images[inde]+ ")" });
+		   inde++;
+		   limitCount++;
+		}, interval*10000);
+
+		});
+    </script>
 </body>
 </html>

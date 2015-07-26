@@ -1,0 +1,137 @@
+
+
+body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      color: #fff;
+      background-image:  url(../imagenes/Fondos/1.jpg);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: relative;
+      background-size: cover;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+      -webkit-transition:background 0.5s ease-in;
+      -moz-transition:background 0.5s ease-in;
+      -o-transition:background 0.5s ease-in;
+      -ms-transition:background 0.5s ease-in;
+      transition:background 0.5s ease-in;
+}
+
+
+fieldset {
+  border: none;
+  margin: 0;
+}
+
+h2 
+{
+  text-shadow: 1px 2px #000;
+}
+
+h3 { margin: 0; }
+/*
+#login-form{
+   max-width: 35%;
+}*/
+
+#login-form h3 {
+  background-color: #282830;
+  border-radius: 5px 5px 0 0;
+  color: #fff;
+  font-size: 16px;
+  padding: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#login-form fieldset {
+  background: #fff;
+  border-radius: 0 0 5px 5px;
+  padding: 20px;
+  position: relative;
+}
+
+#login-form fieldset:before {
+  background-color: #fff;
+  content: "";
+  height: 8px;
+  left: 50%;
+  margin: -4px 0 0 -4px;
+  position: absolute;
+  top: 0;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+  width: 8px;
+}
+
+#login-form input {
+  font-size: 16px;
+}
+
+#login-form input {
+  border: 1px solid #dcdcdc;
+  padding: 12px 10px;
+  width: 100%;
+}
+
+#login-form input[type="text"] {
+  border-radius: 3px 3px 0 0;
+}
+
+#login-form input[type="password"] {
+  border-top: none;
+  border-radius: 0px 0px 3px 3px;
+}
+
+#login-form input[type="submit"] {
+  background: #26449F;
+  border-radius: 5px;
+  color: #fff;
+  float: right;
+  font-weight: bold;
+  padding: 12px 20px;
+}
+
+#login-form input[type="submit"]:hover { background: #344B9F; }
+
+.header-index{
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 60%;
+  text-align: center;
+}
+
+.info {
+  background: #e5e5e5;
+  border-radius: 50%;
+  display: inline-block;
+  height: 20px;
+  line-height: 20px;
+  margin: 0 10px 0 0;
+  text-align: center;
+  width: 20px;
+  color: #344B9F;
+}
+
+img{
+  height: 150px;
+}
+
+.footer {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 40px;
+  border-top: 1px solid #eee;
+  text-align: center;  
+  text-shadow: 1px 1px #000;
+}

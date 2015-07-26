@@ -105,8 +105,10 @@
 <html>
 <head>
 	<meta charset = "utf-8">
-	<link rel="stylesheet" type="text/css" href="EstiloT0202.css">
-	<title>Login Alumno</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/forms-estilo.css" >
+    <!-- Custom styles for this template -->
+	<title>Registro de Usuarios</title>
     <script>
 
         var id, nombre;
@@ -191,7 +193,16 @@
 
 </head>
 <body>
-	<h1> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h1>
+	<div class="container" >
+        <header class="header-index">
+            
+            <img src="imagenes/brsam-logo.png" />
+            <h2> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h2>
+            
+        </header>
+    </div>
+
+    
 	<form action = "registra_usuario.php" method = "POST">
 		<fieldset>
                 <legend>Registro</legend>
