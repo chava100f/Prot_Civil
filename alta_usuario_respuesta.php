@@ -28,11 +28,11 @@
 
     if($n!=$nombre)
     {   
-        $mensaje = "Ocurrio un error al dar de alta la patrulla intente de nuevo";
+        $mensaje = "<div class='alert alert-danger' role='alert'> Ocurrió un <strong>error</strong> al dar de alta la patrulla intente de nuevo</div>";
     }
     else
     {
-        $mensaje = "El usuario ".$n." ".$ap." ".$am." a sido agregado Exitosamente <br> Con el usuario: <b>".$email."</b>";
+        $mensaje = "<div class='alert alert-success' role='alert'> El usuario ".$n." ".$ap." ".$am." a sido agregado Exitosamente <br> Con el usuario: <strong>".$email."</strong> </div>";
     }
 
 ?>
@@ -40,18 +40,41 @@
 <html>
 <head>
 	<meta charset = "utf-8">
-	<link rel="stylesheet" type="text/css" href="EstiloT0202.css">
-	<title>Alta Patrulla Respuesta</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/forms-estilo.css" >
+	<title>Alta Usuario Respuesta</title>
 </head>
 <body>
+
+	<div class="container" id="general-form">
+        <header class="header-index">
+            
+            <img src="imagenes/brsam-logo.png" />
+            <h2> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h2>
+            
+        </header>
+    </div>
+
+    <div class="container col-xs-offset-3 col-xs-6" id="general-form" >
+
+        <h3>Alta nueva patrulla al sistema</h3>
+
+        <fieldset class="form-horizontal">
+            
+            <?php echo $mensaje; ?>
+
+            <a href="index.php">
+                <button type="button" class="btn btn-lg btn-primary btn-block" name="log">Regresar a la página de inicio de sesión</button>
+            </a>
+        
+        </fieldset>
+
+        <footer class="footer">
+            <small>Última modificación Julio 2015</small>
+        </footer>
+    </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
-
-	<h1> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h1>
-	<h2>Alta nueva patrulla al sistema</h2>
-
-	<h3>
-        <b><?php echo $mensaje; ?></b>
-    </h3>
-
-    <h4><a href="index.php">Regresar a la pagina de log in</a></h4>
 </html>

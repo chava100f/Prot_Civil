@@ -105,10 +105,292 @@
 <html>
 <head>
 	<meta charset = "utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.min.css" >
     <link rel="stylesheet" href="css/forms-estilo.css" >
     <!-- Custom styles for this template -->
 	<title>Registro de Usuarios</title>
+    
+
+</head>
+<body>
+	<div class="container" >
+        <header class="header-index">
+            
+            <img src="imagenes/brsam-logo.png" />
+            <h2> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h2>
+            
+        </header>
+    </div>
+
+    <div class="container" id="general-form">
+        
+        <div class="col-xs-1 col-sm-3 col-md-3 col-lg-3"></div>
+
+        <div class="col-xs-10 col-sm-6 col-md-6 col-lg-6">
+
+            <h3>Registro</h3>
+
+            <fieldset>
+	           <form action = "registra_usuario.php" method = "POST" class="form-horizontal" role="form">
+                    
+                    <div class="form-group">
+
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Introduzca el ID de patrulla:
+                        </label>
+
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="patrulla" maxlength="10" required onkeyup="revisa_patrulla(this.value)" aria-describedby="addon" >
+                                <span class="input-group-addon" id="mensaje_server"></span>
+                            </div>
+                            <input type="hidden" id="id_patrulla" name="id_patrulla">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Nombre(s):
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="nombres" name="nombres" maxlength="35" required disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Apellido Paterno:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="apelldio_p" name="apellido_p" maxlength="35" required disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Apellido Materno:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="apellido_m" name="apellido_m" maxlength="35"  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Fecha de nacimiento:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+                            <div class="input-group date" data-date-format="dd/mm/yyyy">
+
+                                <input type="text" class="form-control datepicker" id="fecha_nac" name="fecha_nac"  placeholder="dd/mm/aaaa" disabled/>
+                                <span class="input-group-addon" id="datepicker1">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 centrado-element">
+                            <b>Dirección</b> <br>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Calle o Avenida:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="dom_calle" name="dom_calle" maxlength="35"  disabled> 
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label  class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Num. Ext:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input  type="text" class="form-control" id="dom_num_ext" name="dom_num_ext" maxlength="10"  disabled>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label  class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Num. Int:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input  type="text" class="form-control" id="dom_num_int" name="dom_num_int" maxlength="10"  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Colonia:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="dom_colonia" name="dom_colonia" maxlength="35"  disabled> 
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Estado:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <select id="dom_estado" class="form-control" name="dom_estado"  disabled>
+
+                                <?php //código para llenar el catálogo de los estados.
+                                    echo obtener_opcion_e();
+                                ?>
+
+                            </select> 
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Delegación o Municipio:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <?php 
+                            //Tentativa para manejar en un futuro con la BD 
+                                /*<select name="dom_del_mun">
+                                    <option value="m1">Municipio 1</option>
+                                    ...
+                                </select>*/
+                            ?>
+                            <input type="text" class="form-control" id="dom_del_mun" name="dom_del_mun" maxlength="60"  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Código Postal:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="dom_cp" name="dom_cp" maxlength="5"  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 centrado-element">
+                            <b>Contacto</b> <br>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            <!-- TO DO Agregar codigo para la lada o el input type text-->
+                            Tel. Casa:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="telefono_casa" name="telefono_casa" maxlength="20"  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Tel. Celular:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="telefono_celular" name="telefono_celular" maxlength="20"  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Tel. Trabajo:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="telefono_trabajo" name="telefono_trabajo" maxlength="20"  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Extensión del teléfono trabajo:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="telefono_extension" name="telefono_extension" maxlength="10"  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 centrado-element">
+                            <b>Usuario y contraseña</b> <br>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Correo electrónico:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control" id="correo1" name="correo1" maxlength="25" required  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Confirmar correo electrónico:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="text" class="form-control"  id="correo2" name="correo2" onkeypress='validate(event)' maxlength="25"  required  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Contraseña:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="password" class="form-control" id="pass1" name="pass1" maxlength="10" required disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                            Confirmar contraseña:
+                        </label>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                            <input type="password" class="form-control" id="pass2" name="pass2" onkeypress='validate(event)' maxlength="10" required  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off  disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-offset-2 col-xs-8">
+                            <input type = "submit" class="btn btn-primary btn-block" value = "Registrarse" id="registro" name = "registro" disabled>
+                        </div>
+                    </div>
+
+                </form>
+            </fieldset>
+
+            <footer class="footer">
+                <small>Última modificación Julio 2015</small>
+            </footer>
+
+        </div>
+
+        <div class="col-xs-1 col-sm-3 col-md-3 col-lg-3"></div>
+    </div>
+    
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('.datepicker').datepicker({
+                format: "dd/mm/yyyy",
+                language: "es"
+            });
+        });
+    </script>
     <script>
 
         var id, nombre;
@@ -190,157 +472,5 @@
 
         
     </script>
-
-</head>
-<body>
-	<div class="container" >
-        <header class="header-index">
-            
-            <img src="imagenes/brsam-logo.png" />
-            <h2> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h2>
-            
-        </header>
-    </div>
-
-    
-	<form action = "registra_usuario.php" method = "POST">
-		<fieldset>
-                <legend>Registro</legend>
-
-                <table>
-                    <tr>
-                        <td>Introduzca el ID de patrulla:</td>
-                        <td>
-                            <input type="text" name="patrulla" maxlength="10" required onkeyup="revisa_patrulla(this.value)">
-                            <span id="mensaje_server"  value="" ></span>
-                            <input type="hidden" id="id_patrulla" name="id_patrulla">
-                        </td>
-                    </tr>
-                	<tr>
-                		<td>Nombre(s):</td>
-                		<td>
-                			<input type="text" id="nombres" name="nombres" maxlength="35" required disabled>
-                		</td>
-                	</tr>
-                	<tr>
-                		<td>Apellido Paterno:</td>
-                		<td>
-                			<input type="text" id="apelldio_p" name="apellido_p" maxlength="35" required disabled>
-                		</td>
-                	</tr>
-                	<tr>
-                		<td>Apellido Materno:</td>
-                		<td>
-                			<input type="text" id="apellido_m" name="apellido_m" maxlength="35"  disabled>
-                		</td>
-                	</tr>
-                	<tr>
-                		<td>Fecha de nacimiento:</td>
-                		<td>
-                			<input type="date" id="fecha_nac" name="fecha_nac" maxlength="10" placeholder="dd/mm/aaaa"  disabled>
-                		</td>
-                	</tr>
-                	<tr>	
-                		<td colspan="2">
-                			<b>Dirección</b>
-                		</td>
-                	</tr>	
-                	<tr>
-                		<td>Calle o Avenida:</td>
-                		<td>
-                			<input type="text" id="dom_calle" name="dom_calle" maxlength="35"  disabled> 
-                		</td>
-                	</tr>
-                	<tr>
-                		<td>Num. Ext: <input  type="text" id="dom_num_ext" name="dom_num_ext" maxlength="10"  disabled> </td>
-                		<td>Num. Int: <input  type="text" id="dom_num_int" name="dom_num_int" maxlength="10"  disabled> </td>
-                	</tr>
-                	<tr>
-                		<td>Colonia:</td>
-                		<td>
-                			<input type="text" id="dom_colonia" name="dom_colonia" maxlength="35"  disabled>
-                		</td>
-                	</tr>
-                	<tr>
-                		<td>Estado:</td>
-                		<td>
-                            
-                            <select id="dom_estado" name="dom_estado"  disabled>
-
-                            <?php //código para llenar el catálogo de los estados.
-                                echo obtener_opcion_e();
-                            ?>
-
-    				        </select>   
-                			
-                		</td>
-                	</tr>
-                	<tr>
-                		<td>Delegación o Municipio:</td>
-                		<td>
-                            <?php 
-                            //Tentativa para manejar en un futuro con la BD 
-                                /*<select name="dom_del_mun">
-                                    <option value="m1">Municipio 1</option>
-                                    ...
-                                </select>*/
-                            ?>
-                            <input type="text" id="dom_del_mun" name="dom_del_mun" maxlength="60"  disabled>
-                			
-                		</td>
-                	</tr>
-                	
-                	<tr>
-                		<td>Código Postal:</td>
-                		<td>
-                			<input type="text" id="dom_cp" name="dom_cp" maxlength="5"  disabled>
-                		</td>
-                	</tr>
-                	<tr><!-- TO DO Agregar codigo para la lada o el input type text-->
-                		<td>Teléfono casa:</td>
-                		<td>
-                			<input type="text" id="telefono_casa" name="telefono_casa" maxlength="20"  disabled>
-                	</tr>
-                	<tr>
-                		<td>Teléfono celular:</td>
-                		<td>
-                			<input type="text" id="telefono_celular" name="telefono_celular" maxlength="20"  disabled>
-                	</tr>
-                	<tr>
-                		<td>Teléfono trabajo:</td>
-                		<td>
-                			<input type="text" id="telefono_trabajo" name="telefono_trabajo" maxlength="20"  disabled>
-                	</tr>
-                	<tr>
-                		<td>Extensión del teléfono trabajo:</td>
-                		<td>
-                			<input type="text" id="telefono_extension" name="telefono_extension" maxlength="10"  disabled>
-                	</tr>
-                	<tr>
-                		<td>Correo electrónico:</td>
-                		<td>
-                			<input type="text" id="correo1" name="correo1" maxlength="25" required  disabled>
-                	</tr>
-                	<tr>
-                		<td>Confirmar correo electrónico:</td>
-                		<td>
-                			<input type="text"  id="correo2" name="correo2" onkeypress='validate(event)' maxlength="25"  required  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off  disabled>
-                	</tr>
-                	<tr>
-                		<td>Contraseña:</td>
-                		<td>
-                			<input type="password" id="pass1" name="pass1" maxlength="10" required disabled>
-                	</tr>
-                	<tr>
-                		<td>Confirmar contraseña:</td>
-                		<td>
-                			<input type="password" id="pass2" name="pass2" onkeypress='validate(event)' maxlength="10" required  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off  disabled>
-                </table>
-
- 		</fieldset>
- 		<br>
-		<input type = "submit" value = "Registrarse" id="registro" name = "registro" width="100" height="50" disabled>
-	</form>
-
 </body>
 </html>
