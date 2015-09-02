@@ -12,7 +12,7 @@ if((empty($_SESSION['logged'])) && ($basename!="index"))
 else
 {
 
-	function obtener_mensaje() //código para llenar la tabla de las patrullas actuales en la BD.
+	function obtener_mensaje() //código para obtener el nombre del usuario
     {
 
         require_once("funciones.php");
@@ -40,7 +40,7 @@ else
         return $mensaje;
     }
 
-    function obtener_patrulla_actual()
+    function obtener_patrulla_actual()//código para obtener el nombre de la patrulla
     {
         require_once("funciones.php");
         $conexion = conectar();
@@ -68,7 +68,7 @@ else
         return $nombre_patrulla;
     }
 
-    function obtener_jefe_patrulla()
+    function obtener_jefe_patrulla()//código para obtener el nombre del jefe patrulla
     {
         require_once("funciones.php");
         $conexion = conectar();
@@ -105,7 +105,7 @@ else
         return $nombre." ".$apellido_p." ".$apellido_m;
     }
 
-    function obtener_porcentaje_datos_bd()
+    function obtener_porcentaje_datos_bd()//código para obtener el porcentaje de registro en la BD
     {
         require_once("funciones.php");
         $conexion = conectar();
@@ -161,6 +161,42 @@ else
         return $porcentaje;
     }
 
+    function obtener_patrulla_integrantes()//código para obtener el nombre de los integrantes de la patrulla
+    {
+        require_once("funciones.php");
+        $conexion = conectar();
+
+        $user=$_SESSION['logged_user'];
+
+        $query = 'SELECT patrullas_id_patrullas FROM datos_personales WHERE email="'.$user.'"';
+        $consulta = ejecutarQuery($conexion, $query);
+        if (mysqli_num_rows($consulta)) {
+            while ($dat = mysqli_fetch_array($consulta)){
+                $id_patrulla = $dat['patrullas_id_patrullas'];
+            }
+        }
+
+        $query = 'SELECT nombre, apellido_p, apellido_m FROM datos_personales WHERE patrullas_id_patrullas='.$id_patrulla.' AND tipo_cuenta="usuario"';
+        $consulta = ejecutarQuery($conexion, $query);
+        $mensaje ="";
+        $cont=1;
+        if (mysqli_num_rows($consulta)) {
+            while ($dat = mysqli_fetch_array($consulta)){
+                $mensaje="<tr><td>".$cont++."</td>";
+                $mensaje.="<td>".$dat['nombre']."</td>";
+                $mensaje.="<td>".$dat['apellido_p']."</td>";
+                $mensaje.="<td>".$dat['apellido_m']."</td></tr>";
+            }
+        }
+        else
+        {
+            $mensaje="<tr><td>".$cont."</td></tr>";
+        }
+        desconectar($conexion);
+        return $mensaje;
+    }
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -182,7 +218,7 @@ else
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Bienveido Patrullero</a>
+          <p class="navbar-brand">Bienveido Patrullero</p>
         </div>
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
           <ul class="nav navbar-nav navbar-right">
@@ -192,6 +228,7 @@ else
                 Modificar Datos <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu inverse-dropdown" >
+                    <li><a href="form_personales.php">Información Personal Básica</a></li>
                     <li><a href="form_complementario.php">Información Complementaria del perfil</a></li>
                     <li><a href="form_medico.php">Información Medica</a></li>
                     <li><a href="form_info_fisica.php">Información Fisica</a></li>
@@ -251,39 +288,9 @@ else
                         <th>Nombre(s)</th>
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
-                        <th>Edad</th>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Nombre</td>
-                            <td>Apellido P</td>
-                            <td>Apellido M</td>
-                            <td>Edad</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Nombre</td>
-                            <td>Apellido P</td>
-                            <td>Apellido M</td>
-                            <td>Edad</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Nombre</td>
-                            <td>Apellido P</td>
-                            <td>Apellido M</td>
-                            <td>Edad</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Nombre</td>
-                            <td>Apellido P</td>
-                            <td>Apellido M</td>
-                            <td>Edad</td>
-                        </tr>
-
-
+                        <?php echo obtener_patrulla_integrantes(); ?>
                     </tbody>
                   </table>
                 </div>                
@@ -295,7 +302,7 @@ else
         
         <footer class="footer">
             
-                <small>Última modificación Julio 2015</small>
+                <small>Última modificación Agosto 2015</small>
             
         </footer>
         
@@ -324,7 +331,7 @@ else
                 $('header').css({ "background-image":"url(" + images[inde]+ ")" });
                inde++;
                limitCount++;
-            }, interval*1000);
+            }, interval*5000);
             //codigo para obtener la imagen de perfil... TO DO agregar php 
             $("#menu-izq-foto").attr("src","imagenes/epic_link.jpg");
             $("#progress-bar1").attr("style","width: "+<?php echo obtener_porcentaje_datos_bd(); ?>+"%;");

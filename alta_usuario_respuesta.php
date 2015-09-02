@@ -71,7 +71,7 @@
         </fieldset>
 
         <footer class="footer">
-            <small>Última modificación Julio 2015</small>
+            <small>Última modificación Agosto 2015</small>
         </footer>
     </div>
     <script type="text/javascript" src="js/jquery.js"></script>

@@ -27,76 +27,86 @@
     $error_email = '';
     $error_na = "";
     $error_patrulla = "";
+    $error_contrato ="";
 
     if(isset($_POST['registro'])) //código para validar los datos del formulario
     {   
+        $acepta_contrato = strip_tags($_POST['acepta']);
 
-        $pass1 = strip_tags($_POST['pass1']);
-        $pass2 = strip_tags($_POST['pass2']);
-
-        if($pass1 === $pass2)// valida contraseñas
+        if($acepta_contrato ==="si")
         {
-            $correo1 = strip_tags($_POST['correo1']);
-            $correo2 = strip_tags($_POST['correo2']);
 
-            if($correo1 === $correo2) //valida los correos 
+            $pass1 = strip_tags($_POST['pass1']);
+            $pass2 = strip_tags($_POST['pass2']);
+
+            if($pass1 === $pass2)// valida contraseñas
             {
-                $nombres = strip_tags($_POST['nombres']);
-                $apellido_p = strip_tags($_POST['apellido_p']);
+                $correo1 = strip_tags($_POST['correo1']);
+                $correo2 = strip_tags($_POST['correo2']);
 
-                if($nombres != "" and  $apellido_p != "") //valida que no haya datos falsos en nombre y apellido paterno
+                if($correo1 === $correo2) //valida los correos 
                 {
-                    // ALTA A USUARIO NUEVO
-                    require_once("funciones.php");
-                    $conexion = conectar();
-                    
-                    //Recoleccion de datos...
+                    $nombres = strip_tags($_POST['nombres']);
+                    $apellido_p = strip_tags($_POST['apellido_p']);
 
-                    $id_p = mysqli_real_escape_string($conexion, strip_tags($_POST['id_patrulla']));
-                    $nombres = mysqli_real_escape_string($conexion, $nombres);                        
-                    $apellido_p = mysqli_real_escape_string($conexion, $apellido_p);
-                    $apellido_m = mysqli_real_escape_string($conexion, strip_tags($_POST['apellido_m']));
-                    $fecha_nac = mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_nac']));
-                    $dom_calle = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_calle']));
-                    $dom_num_ext = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_ext']));
-                    $dom_num_int = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_int']));
-                    $dom_colonia = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_colonia']));
-                    $dom_estado = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_estado']));
-                    $dom_del_mun = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_del_mun']));
-                    $dom_cp = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_cp']));
-                    $telefono_casa = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_casa']));
-                    $telefono_celular = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_celular']));
-                    $telefono_trabajo = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_trabajo']));
-                    $telefono_extension = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_extension']));
-                    $correo1 = mysqli_real_escape_string($conexion, $correo1);
-                    $pass1 = mysqli_real_escape_string($conexion, $pass1);
+                    if($nombres != "" and  $apellido_p != "") //valida que no haya datos falsos en nombre y apellido paterno
+                    {
+                        // ALTA A USUARIO NUEVO
+                        require_once("funciones.php");
+                        $conexion = conectar();
+                        
+                        //Recoleccion de datos...
 
-                    //TO DO Elaboración del Query (tratar de pasar esto a un Store procedure)!!!
-                    
-                    $query = 'INSERT INTO datos_personales(nombre, apellido_p, apellido_m, fecha_nac, dom_calle, dom_num_ext, dom_num_int, dom_col, dom_del_mun, dom_estado, dom_cp, telefono_casa, telefono_celular, telefono_trabajo, telefono_extension, email, contrasenia, tipo_cuenta, calidad_miembro, fecha_registro, patrullas_id_patrullas)';
-                    $query = $query.' VALUES ("'.$nombres.'", "'.$apellido_p.'", "'.$apellido_m.'", "'.$fecha_nac.'", "'.$dom_calle.'", "'.$dom_num_ext.'", "'.$dom_num_int.'", "'.$dom_colonia.'", "'.$dom_del_mun.'", "'.$dom_estado.'", "'.$dom_cp.'", "'.$telefono_casa.'", "'.$telefono_celular.'", "'.$telefono_trabajo.'", "'.$telefono_extension.'", "'.$correo1.'", "'.$pass1.'","usuario", "activo", now(),'.$id_p.')'; 
-                    $consulta = ejecutarQuery($conexion, $query);
+                        $id_p = mysqli_real_escape_string($conexion, strip_tags($_POST['id_patrulla']));
+                        $nombres = mysqli_real_escape_string($conexion, $nombres);                        
+                        $apellido_p = mysqli_real_escape_string($conexion, $apellido_p);
+                        $apellido_m = mysqli_real_escape_string($conexion, strip_tags($_POST['apellido_m']));
+                        $fecha_nac = mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_nac']));
+                        $dom_calle = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_calle']));
+                        $dom_num_ext = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_ext']));
+                        $dom_num_int = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_int']));
+                        $dom_colonia = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_colonia']));
+                        $dom_estado = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_estado']));
+                        $dom_del_mun = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_del_mun']));
+                        $dom_cp = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_cp']));
+                        $telefono_casa = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_casa']));
+                        $telefono_celular = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_celular']));
+                        $telefono_trabajo = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_trabajo']));
+                        $telefono_extension = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_extension']));
+                        $correo1 = mysqli_real_escape_string($conexion, $correo1);
+                        $pass1 = mysqli_real_escape_string($conexion, $pass1);
+
+                        //TO DO Elaboración del Query (tratar de pasar esto a un Store procedure)!!!
                         
-                    desconectar($conexion);
-                    
-                    header("Location: alta_usuario_respuesta.php?nombre=".$nombres."&ap=".$apellido_p."&am=".$apellido_m."");
-                    exit();
+                        $query = 'INSERT INTO datos_personales(nombre, apellido_p, apellido_m, fecha_nac, dom_calle, dom_num_ext, dom_num_int, dom_col, dom_del_mun, dom_estado, dom_cp, telefono_casa, telefono_celular, telefono_trabajo, telefono_extension, email, contrasenia, tipo_cuenta, calidad_miembro, fecha_registro, patrullas_id_patrullas)';
+                        $query = $query.' VALUES ("'.$nombres.'", "'.$apellido_p.'", "'.$apellido_m.'", "'.$fecha_nac.'", "'.$dom_calle.'", "'.$dom_num_ext.'", "'.$dom_num_int.'", "'.$dom_colonia.'", "'.$dom_del_mun.'", "'.$dom_estado.'", "'.$dom_cp.'", "'.$telefono_casa.'", "'.$telefono_celular.'", "'.$telefono_trabajo.'", "'.$telefono_extension.'", "'.$correo1.'", "'.$pass1.'","usuario", "activo", now(),'.$id_p.')'; 
+                        $consulta = ejecutarQuery($conexion, $query);
+                            
+                        desconectar($conexion);
                         
+                        header("Location: alta_usuario_respuesta.php?nombre=".$nombres."&ap=".$apellido_p."&am=".$apellido_m."");
+                        exit();
+                            
+                    }
+                    else
+                    {
+                        $error_na = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> Faltan datos favor de revisar el nombre o apellidos.</div>';
+                    }
                 }
                 else
                 {
-                    $error_na = 'Faltan datos favor de revisar el nombre o apellidos';
+                    $error_email = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> Los correos electrónicos no coinciden.</div>';
                 }
+
             }
             else
             {
-                $error_email = 'Los correos electrónicos no coinciden';
+                $error_pass = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> Las contraseñas no coinciden.</div>';
             }
-
         }
         else
         {
-            $error_pass = 'Las contraseñas no coinciden';
+            $error_contrato = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> Debe de aceptar los terminos y condiciones.</div>';
         }
     }
 ?>
@@ -133,7 +143,7 @@
             <h3>Registro</h3>
 
             <fieldset>
-	           <form action = "registra_usuario.php" method = "POST" class="form-horizontal" role="form">
+	           <form action = "registra_usuario.php" method = "POST" class="form-horizontal" role="form" onsubmit="return validacion();">
                     
                     <div class="form-group">
 
@@ -168,6 +178,8 @@
                         </div>
                     </div>
 
+                    <?php echo $error_na; //error por si no ingresa nombre y apellido paterno ?>
+
                     <div class="form-group">
                         <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             Apellido Materno:
@@ -185,7 +197,7 @@
 
                             <div class="input-group date" data-date-format="dd/mm/yyyy">
 
-                                <input type="text" class="form-control datepicker" id="fecha_nac" name="fecha_nac"  placeholder="dd/mm/aaaa" disabled/>
+                                <input type="text" class="form-control datepicker" id="fecha_nac" name="fecha_nac" pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="dd/mm/aaaa" disabled/>
                                 <span class="input-group-addon" id="datepicker1">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </span>
@@ -289,16 +301,24 @@
                             Tel. Casa:
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <input type="text" class="form-control" id="telefono_casa" name="telefono_casa" maxlength="20"  disabled>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">045</span>
+                                <input type="text" class="form-control" id="telefono_casa" name="telefono_casa" maxlength="20" disabled aria-describedby="basic-addon1">
+                            </div>
                         </div>
                     </div>
+
+
 
                     <div class="form-group">
                         <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             Tel. Celular:
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <input type="text" class="form-control" id="telefono_celular" name="telefono_celular" maxlength="20"  disabled>
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">044</span>
+                                <input type="text" class="form-control" id="telefono_celular" name="telefono_celular" maxlength="20"  disabled aria-describedby="basic-addon1">
+                            </div>
                         </div>
                     </div>
 
@@ -331,7 +351,7 @@
                             Correo electrónico:
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <input type="text" class="form-control" id="correo1" name="correo1" maxlength="25" required  disabled>
+                            <input type="email" class="form-control" id="correo1" name="correo1" maxlength="25" required  disabled>
                         </div>
                     </div>
 
@@ -340,16 +360,18 @@
                             Confirmar correo electrónico:
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <input type="text" class="form-control"  id="correo2" name="correo2" onkeypress='validate(event)' maxlength="25"  required  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off  disabled>
+                            <input type="email" class="form-control"  id="correo2" name="correo2" onkeypress='validate(event)' maxlength="25"  required  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off  disabled>
                         </div>
                     </div>
+
+                    <?php echo $error_email; //error por si no coinciden los correos electrónicos ?>
 
                     <div class="form-group">
                         <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             Contraseña:
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <input type="password" class="form-control" id="pass1" name="pass1" maxlength="10" required disabled>
+                            <input type="password" class="form-control" id="pass1" name="pass1" maxlength="10" required disabled pattern=".{5,10}" title="5 to 10 caracteres">
                         </div>
                     </div>
 
@@ -358,7 +380,47 @@
                             Confirmar contraseña:
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <input type="password" class="form-control" id="pass2" name="pass2" onkeypress='validate(event)' maxlength="10" required  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off  disabled>
+                            <input type="password" class="form-control" id="pass2" name="pass2" onkeypress='validate(event)' maxlength="10" required  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off  disabled pattern=".{5,10}" title="5 to 10 caracteres">
+                        </div>
+                    </div>
+
+                    <?php echo $error_pass; //error por si no coinciden las contraseñas ?>
+
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-12">
+                            He leído y acepto los términos y condiciones de uso &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Si <input type="radio" id="acepta" name="acepta" value="si" disabled required> | No <input type="radio" id="acepta" name="acepta" value="no">
+                        </label>
+                            
+                    </div>
+
+                    <?php echo $error_contrato; //error por si no coinciden las contraseñas ?>
+
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <textarea class="form-control" style="height: 300px;" id="terminosycondiciones" name="terminosycondiciones" maxlength="180" placeholder="Describir aquí" disabled>
+AVISO DE PRIVACIDAD
+
+Toda aquella información personal que el elemento proporciona se encuentra sujeta  a las normas de confidencialidad y privacidad y es almacenada en una base de datos de la Asociación. Los datos personales que usted comparta con la BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. no serán difundidos, distribuidos o comercializados. Esta información confidencial no se compoartirá con terceras partes, excepto que se tenga expresa autorización de quien la suscribe o cuando haya sido requerida por orden judicial para cumplor con las disposiciones procesales, su uso interno será con fines de administración de la información y recursos humanos de la Brigada.
+
+PRIMERO:
+La B.R.S.A.M.A.C. no asume responsabilidad alguna al aceptar esta solicitud, únicamente la recibe; por lo tanto el solicitante no queda automáticamente registrado como miembro por el solo hecho de haber entregado esta solicitud aun cuando hubiese pagado la cuota relativa. La B.R.S.A.M.A.C. se reserva el derecho de aceptar al solicitante y de aceptarlo como miembro, será avalado entregándole la credencial correspondiente al año en curso.
+
+SEGUNDO:
+Al aceptar la presente solicitud de registro el solicitante se compromete a cumplir y hacer los estatutos y reglamento(s) de la B.R.S.A.M.A.C.
+"Conforme a los mismos confirmo que durante mi permanencia dentro de esta Institución en automático se renueve mi registro anual, el cual me comprometo a cubrir la cuota anual correspondiente, con la finalidad de agilizar el trámite cíclico hasta que por mi propio derecho desee continuar, hasta que así convenga a mis interés entonces realizaré por escrito mi baja o retiro de esta Brigada, con lo cual daré formal conclusión a mi relación con la misma".
+
+TERCERO (SI EL SOLICITANTE ES MENOR DE EDAD):
+"Declaramos bajo protesta decir la verdad de los datos personales escritos en esta solicitud de ingreso a la Brigada de Rescate del Socorro Alpino de México A. C., corresponden al solicitante menor de edad de quien ejercemos legalmente la patria potestad. Así mismo que lo autorizamos a ingresar a dicha Institución y a participar en las actividades que desarrolla. Liberamos y eximimos a la B.R.S.A.M.A.C., sus miembros y colaboradores de toda responsabilidad por los daños prejuicios y lesiones que nuestro autorizado sufriera durante estas actividades o por causa de ellas y asumimos las responsabilidades por los daños que resultan debido a su intervención. Este permiso se lo otorgamos por todo el tiempo que sea aspirante o miembro de la Brigada, sin menoscabo de que su permanencia en ella tenga interrupciones largas o cortas, y hasta que sea mayor de edad o lo cancelemos formalmente por escrito dirigido al Presidente de la Institución".
+
+CUARTO (PARA SOLICITANTES MAYOR DE EDAD):
+Libero y eximo a la B.R.S.A.M.A.C., sus miembros y colaboradores de toda responsabilidad por los daños, prejuicios y lesiones que sufriera durante sus actividades o por causa de ellas y asumo las responsabilidades por los daños que resulten debido a mi intervención. Este permiso lo otorgo por todo el tiempo que sea aspirante o miembro de la Brigada, sin menoscabo de que mi permanencia en ella tenga interrupciones largas o cortas, para realizar mi renuncia lo haré por escrito o me podrá ser revoada la calidad de miembro en los casos previstos en los estatutos, reglamento o ley vigilante.
+
+Original para la Secretaria C.C.P. Tesorería Jefatura Operativa Nacional
+
+Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
+
+                            </textarea>
                         </div>
                     </div>
 
@@ -372,7 +434,7 @@
             </fieldset>
 
             <footer class="footer">
-                <small>Última modificación Julio 2015</small>
+                <small>Última modificación Agosto 2015</small>
             </footer>
 
         </div>
@@ -384,7 +446,56 @@
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
     <script type="text/javascript">
-        $(function(){
+
+    function validacion(){
+
+        var pass1 = document.getElementById("pass1").value;
+        var pass2 = document.getElementById("pass2").value;
+
+        var correo1 = document.getElementById("correo1").value;
+        var correo2 = document.getElementById("correo2").value;
+
+        var nombres = document.getElementById("nombres").value;
+        var apellido_p = document.getElementById("apellido_p").value;
+
+        var resultado;
+
+        if(pass1 == pass2)
+        {
+            if(correo1 == correo2)
+            {
+                if(nombres != "" && apellido_p != "")
+                {
+                    resultado = true;
+                }
+                else
+                {
+                    resultado = false;
+                    alert("Falta información en el nombre o apellido paterno");
+                    document.getElementById("nombres").focus();
+                }
+            }
+            else
+            {
+                resultado = false;
+                alert("Los correos electrónicos no coinciden");
+                document.getElementById("correo1").focus();
+            }
+
+        }
+        else
+        {
+            resultado = false;
+            alert("Las contrasñeas no coinciden");
+            document.getElementById("pass1").focus();
+        }
+
+        return resultado;
+    }
+
+    </script>
+    <script type="text/javascript"> 
+        $(function(){ //script para dar formato al datepicker
             $('.datepicker').datepicker({
                 format: "dd/mm/yyyy",
                 language: "es"
@@ -433,6 +544,8 @@
                             document.getElementById("pass1").disabled=true;
                             document.getElementById("pass2").disabled=true;
                             document.getElementById("registro").disabled=true;
+                            document.getElementById("acepta").disabled=true;
+                            
                         }  
                         else
                         {
@@ -458,6 +571,7 @@
                             document.getElementById("pass1").disabled=false;
                             document.getElementById("pass2").disabled=false;
                             document.getElementById("registro").disabled=false;
+                            document.getElementById("acepta").disabled=false;
                             //ID de patrulla 
                             document.getElementById("id_patrulla").value=id;
                             
