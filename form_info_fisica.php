@@ -11,114 +11,8 @@ if((empty($_SESSION['logged'])) && ($basename!="index"))
 }//Si a inicado sesion entra en el "else"
 else
 {
-    //código para obtener los datos de la BD y mostrarlos ----------------------------------------------
-
-    $user=$_SESSION['logged_user'];
-
-    require_once("funciones.php");
-    $conexion = conectar();
-    
-    $query = 'SELECT id_num_reg FROM datos_personales WHERE email="'.$user.'"';
-    $consulta = ejecutarQuery($conexion, $query);
-    if (mysqli_num_rows($consulta)) {
-        while ($dat = mysqli_fetch_array($consulta)){
-            $id_user = $dat['id_num_reg'];
-        }
-    }
-
-    $sexo = "";                 
-    $estatura = "";
-    $peso = "";
-    $complexion ="";
-    $cabello = "";
-    $ojos = "";
-    $cara = "";
-    $nariz = "";
-    $senias = "";
-
-    $query = 'SELECT * FROM info_fisica WHERE datos_personales_id_num_reg="'.$id_user.'"';
-    $consulta = ejecutarQuery($conexion, $query);
-    if (mysqli_num_rows($consulta)) {
-        while ($dat = mysqli_fetch_array($consulta)){
-            $sexo = $dat['genero'];                      
-            $estatura = $dat['estatura'];
-            $peso = $dat['peso'];
-            $complexion = $dat['complexion'];
-            $cabello = $dat['cabello'];
-            $ojos = $dat['ojos'];
-            $cara = $dat['cara'];
-            $nariz = $dat['nariz'];
-            $senias = $dat['senias_particulares'];
-        }
-    }  
-
-    desconectar($conexion);
-
-    //--------------------------------------------------------------------------------------------
-
-    if(isset($_POST['actualizar'])) //código para validar los datos del formulario
-    {   
-
-        $user=$_SESSION['logged_user'];
-        // Actualizacion de datos complementarios
-
-        require_once("funciones.php");
-        $conexion = conectar();
-        
-        $query = 'SELECT id_num_reg FROM datos_personales WHERE email="'.$user.'"';
-        $consulta = ejecutarQuery($conexion, $query);
-        if (mysqli_num_rows($consulta)) {
-            while ($dat = mysqli_fetch_array($consulta)){
-                $id_user = $dat['id_num_reg'];
-            }
-        }
-
-        //Recoleccion de datos...
-
-        $sexo = mysqli_real_escape_string($conexion, strip_tags($_POST['sexo']));
-        $estatura = mysqli_real_escape_string($conexion, strip_tags($_POST['estatura']));
-        $peso = mysqli_real_escape_string($conexion, strip_tags($_POST['peso']));
-        $complexion = mysqli_real_escape_string($conexion, strip_tags($_POST['complexion']));
-        $cabello = mysqli_real_escape_string($conexion, strip_tags($_POST['cabello']));
-        $ojos = mysqli_real_escape_string($conexion, strip_tags($_POST['ojos']));
-        $cara = mysqli_real_escape_string($conexion, strip_tags($_POST['cara']));
-        $nariz = mysqli_real_escape_string($conexion, strip_tags($_POST['nariz']));
-        $senias = mysqli_real_escape_string($conexion, strip_tags($_POST['senias']));
-
-        //TO DO Elaboración del Query (tratar de pasar esto a un Store procedure)!!!
-        //Actualización de los datos en la tabla info_fisica
-
-        $contador = 0; //variable para revisar si ya esta registrado el usuario, si sí se actualizan los datos, si no se inserta un nuevo registro en la BD
-
-        $query = 'SELECT * FROM info_fisica WHERE datos_personales_id_num_reg="'.$id_user.'"';
-        $consulta = ejecutarQuery($conexion, $query);
-        if (mysqli_num_rows($consulta)) {
-            while ($dat = mysqli_fetch_array($consulta)){
-                $contador = 1;
-            }
-        }
-
-        if($contador === 0) //se inserta un nuevo registro en la BD
-        {
-            //Inserta nuevo registro en la tabla info_fisica
-            $query = 'INSERT INTO info_fisica(genero, estatura, peso, complexion, cabello, ojos, cara, nariz, senias_particulares, datos_personales_id_num_reg)';
-            $query = $query.' VALUES ("'.$sexo.'", '.$estatura.', '.$peso.', "'.$complexion.'", "'.$cabello.'", "'.$ojos.'", "'.$cara.'", "'.$nariz.'", "'.$senias.'", '.$id_user.')';
-        }
-        else //se actualizan los datos que ya existian en la BD
-        {
-            //Actualiza la tabla info_fisica
-            $query = 'UPDATE info_fisica SET genero="'.$sexo.'", estatura="'.$estatura.'", peso="'.$peso.'", complexion="'.$complexion.'", cabello="'.$cabello.'", ';
-            $query.= 'ojos="'.$ojos.'", cara="'.$cara.'", nariz="'.$nariz.'", senias_particulares="'.$senias.'" ';
-            $query .= 'WHERE datos_personales_id_num_reg = "'.$id_user.'"';  
-        }
-
-        $consulta = ejecutarQuery($conexion, $query);
-        desconectar($conexion);
-        
-        header("Location: index_usuario.php");
-        exit();
-               
-    }
+     //código para obtener los datos de la BD y mostrarlos ----------------------------------------------
+    require("funciones_form_info_fisica.php");
 ?>
 
 <!DOCTYPE html>
@@ -136,7 +30,8 @@ else
 
 </head>
 <body>
-	   <nav class="navbar navbar-inverse navbar-fixed-top">
+	<!-- Menu contextual-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -145,7 +40,7 @@ else
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <p class="navbar-brand">Información física</p>
+          <p class="navbar-brand">Bienveido Patrullero</p>
         </div>
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
           <ul class="nav navbar-nav navbar-right">
@@ -156,13 +51,14 @@ else
                 </a>
                 <ul class="dropdown-menu inverse-dropdown" >
                     <li><a href="form_personales.php">Información Personal Básica</a></li>
-                    <li><a href="form_complementario.php">Información Complementaria</a></li>
+                    <li><a href="form_complementario.php">Información Complementaria del perfil</a></li>
                     <li><a href="form_medico.php">Información Medica</a></li>
                     <li><a href="form_info_fisica.php">Información Fisica</a></li>
-                    <li><a href="form_experiencia.php">Información de Experiencia en Patrullaje y Rescate</a></li>
+                    <li><a href="form_experiencia.php">Información de experiencia en Patrullaje y Rescate</a></li>
+                    <li><a href="form_foto.php">Cambiar imagen de perfil</a></li>
+                    <li><a href="form_cambio_pass.php">Cambiar contraseña</a></li>
                 </ul>
             </li>
-            <li><a href="#">Cambiar contraseña</a></li>
             <li><a href="cerrar_sesion.php">Cerrar sesión</a></li>
           </ul>
         </div>
@@ -299,34 +195,9 @@ else
 
     </div>
 
-
-
-
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript"> //función para hacer dinamigo el fondo 
-     $(function(){
-    
-            var limit = 0; // 0 = infinite.
-            var interval = 2;// Secs
-            var images = [
-                "imagenes/Fondos/1.jpg",
-                "imagenes/Fondos/2.jpg",
-                "imagenes/Fondos/3.jpg"
-            ];
-
-            var inde = 0; 
-            var limitCount = 0;
-            var myInterval = setInterval(function() {
-               if (limit && limitCount >= limit-1) clearTimeout(myInterval);
-               if (inde >= images.length) inde = 0;
-                $('header').css({ "background-image":"url(" + images[inde]+ ")" });
-               inde++;
-               limitCount++;
-            }, interval*5000);
-        });    
-
-    </script>
+    <script type="text/javascript" src="fondo_encabezado.js" ></script>
 </body>
 </html>
 

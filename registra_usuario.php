@@ -521,7 +521,7 @@ Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
                         id = respuesta.substring(0, 3);
                         nombre = respuesta.substring(4,50);
                         
-                        if(respuesta == "No se encontro Patrulla ingresada")
+                        if(respuesta == "Patrulla inexistente")
                         {
                             document.getElementById("mensaje_server").innerHTML = respuesta;
                             document.getElementById("nombres").disabled=true;

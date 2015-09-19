@@ -11,28 +11,28 @@ if((empty($_SESSION['logged'])) && ($basename!="index"))
 }//Si a inicado sesion entra en el "else"
 else
 {
-     //código para obtener los datos de la BD y mostrarlos ----------------------------------------------
-    require("funciones_form_experiencia.php");
+    //código para obtener los datos de la BD y mostrarlos ----------------------------------------------
+    require("funciones_form_cambio_pass.php");
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset = "utf-8">
+    <meta charset = "utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index-estilo.css" >
     <link rel="stylesheet" href="css/forms-estilo.css" >
-    <link rel="stylesheet" href="css/bootstrap-datepicker.min.css" >
-	<title>Actualización de Experiencia</title>
+    <link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <title>Cambio de contraseña</title>
     <script>
         
     </script>
 
 </head>
 <body>
-	
-     <nav class="navbar navbar-inverse navbar-fixed-top">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -41,7 +41,7 @@ else
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <p class="navbar-brand">Bienveido Patrullero</p>
+          <p class="navbar-brand">Cambio de contraseña</p>
         </div>
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
           <ul class="nav navbar-nav navbar-right">
@@ -71,7 +71,6 @@ else
             <div class="col-xs-12 col-sm-12 col-md-2" >
                 <img src="imagenes/brsam-logo.png" />
             </div>
-            
             <h2 class="col-xs-12 col-sm-12 col-md-10"> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h2>
         
         </div>
@@ -82,118 +81,77 @@ else
 
     <div class="container" id="general-form">
 
-    <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2"></div>
+        <div class="col-xs-1 col-sm-2 col-md-1 col-lg-2"></div>
 
-        <div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
+        <div class="col-xs-10 col-sm-8 col-md-10 col-lg-8">
 
-        <h3>Información de experiencia en Patrullaje, Rescate, etc.</h3>
+        <h3>Cambio de contraseña</h3>
 
         <fieldset>
-            <form action = "form_experiencia.php" method = "POST" class="form-horizontal" >
-                
-                <div class="form-group">
-                    <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        Cargos Anteriores:
-                    </label>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <input class="form-control" type="text" id="cargos" name="cargos" maxlength="50" value=<?php echo '"'.$cargos.'"'?> >
-                    </div>
-                </div>
+           <form id="formulario_password" name="formulario_password" action = "form_cambio_pass.php" method = "POST" class="form-horizontal" >
 
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        Patrullero:
+                        Ingrese su nueva contraseña:
                     </label>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <select id="patrullero" class="form-control" name="patrullero">
-                            <option <?php if ($patrullero == "si" ) echo 'selected'; ?> value="si">SI</option>
-                            <option <?php if ($patrullero == "no" ) echo 'selected'; ?> value="no">NO</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            Fecha de graduación:
-                        </label>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-
-                            <div class="input-group date" data-date-format="dd/mm/yyyy">
-
-                                <input type="text" class="form-control datepicker" id="fecha_g" name="fecha_g"  placeholder="dd/mm/aaaa" value=<?php echo '"'.$fecha_g.'"'?> />
-                                <span class="input-group-addon" id="datepicker1">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                <div class="form-group">
-                    <label class="col-xs-12">
-                        Experiencia:
-                    </label>
-                </div>
-
-                <div class="form-group">
-                    <?php echo insertar_experiencia_web();//-------------------------------------------------------------------------------------------------------------- ?> 
-                </div>
-
-                <div class="form-group">
-                    <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        Otra (Especificar):
-                    </label>
-                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                         <textarea class="form-control" id="experiencia_otra" name="experiencia_otra" maxlength="180" placeholder="Describir aquí"><?php echo insertar_experiencia_otra_web(); ?></textarea>
+                        <input type="password" class="form-control" id="pass1" name="pass1" maxlength="10" pattern=".{5,10}" title="5 to 10 caracteres">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        Nombre del Dir. C.C.P.P. o calidad:
+                        Confirme su contraseña:
                     </label>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                         <input type="text" id="nom_dir" name="nom_dir" maxlength="50" class="form-control" value=<?php echo '"'.$nom_dir.'"'?> >
+                        <input type="password" class="form-control" id="pass2" name="pass2" onkeypress='validate(event)' maxlength="10" onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off pattern=".{5,10}" title="5 to 10 caracteres">
                     </div>
                 </div>
+
+                <?php echo $mensaje_server; //error por si no coinciden las contraseñas ?>
 
                 <div class="form-group">
                     <div class="col-xs-offset-2 col-xs-8">
                         <input type = "submit" class="btn btn-primary btn-block" value = "Actualizar Datos" id="actualizar" name = "actualizar" width="100" height="50">
                     </div>
                 </div>
+               
             </form>
 
- 		</fieldset>
-
+        </fieldset>
+        
         <footer class="footer">
 
-            <small>Última modificación Agosto 2015</small>
+            <small>Última modificación Septiembre 2015</small>
 
         </footer>
         
-    </div>
-    <div class="col-xs-1 col-sm-2 col-md-1 col-lg-2"></div>
- 		
+        </div>
+        <div class="col-xs-1 col-sm-2 col-md-1 col-lg-2"></div>
 
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            $('.datepicker').datepicker({
-                format: "dd/mm/yyyy",
-                language: "es"
-            });
-        });
-    </script>
     <script type="text/javascript" src="fondo_encabezado.js" ></script>
+    <script src="js/fileinput.min.js"></script> <!-- https://github.com/kartik-v/bootstrap-fileinput -->
+    <script src="js/fileinput_locale_es.js"></script>
+    <script>
+    $(document).on('ready', function() {
+
+        $("#foto_perfil").fileinput({
+            language: "es",
+            allowedFileExtensions: ["jpg", "png", "jpeg"],
+            maxFileSize: 2000, //Size is in KB, aceptable "MB"
+            showUpload: false,
+            maxFileCount: 1,
+            previewClass: "bg-warning"
+        });
+    });
+    </script>
 
 </body>
 </html>
 
 <?php
 }
-
 ?>
+

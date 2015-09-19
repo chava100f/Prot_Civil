@@ -22,6 +22,6 @@
 
     
     // Salida si no encuentra nada en la  BD
-	echo $mensaje === "" ? "No se encontro Patrulla ingresada" : $mensaje;
+	echo $mensaje === "" ? "Patrulla inexistente" : $mensaje;
 
 ?>

@@ -12,169 +12,7 @@ if((empty($_SESSION['logged'])) && ($basename!="index"))
 else
 {
     //código para obtener los datos de la BD y mostrarlos ----------------------------------------------
-
-    $user=$_SESSION['logged_user'];
-
-    require_once("funciones.php");
-    $conexion = conectar();
-    
-    $query = 'SELECT id_num_reg FROM datos_personales WHERE email="'.$user.'"';
-    $consulta = ejecutarQuery($conexion, $query);
-    if (mysqli_num_rows($consulta)) {
-        while ($dat = mysqli_fetch_array($consulta)){
-            $id_user = $dat['id_num_reg'];
-        }
-    }
-
-    $nombres = "";                 
-    $apellido_p = "";
-    $apellido_m = "";
-    $fecha_nac = "";
-    $dom_calle = "";
-    $dom_num_ext = "";
-    $dom_num_int = "";
-    $dom_colonia = "";
-    $dom_estado = "";
-    $dom_del_mun = "";
-    $dom_cp = "";
-    $telefono_casa = "";
-    $telefono_celular = "";
-    $telefono_trabajo = "";
-    $telefono_extension = "";
-
-    $query = 'SELECT * FROM datos_personales WHERE id_num_reg="'.$id_user.'"';
-    $consulta = ejecutarQuery($conexion, $query);
-    if (mysqli_num_rows($consulta)) {
-        while ($dat = mysqli_fetch_array($consulta)){
-            $id_user = $dat['id_num_reg'];
-            $nombres = $dat['nombre'];                      
-            $apellido_p = $dat['apellido_p'];
-            $apellido_m = $dat['apellido_m'];
-            $fecha_nac = $dat['fecha_nac'];
-            $dom_calle = $dat['dom_calle'];
-            $dom_num_ext = $dat['dom_num_ext'];
-            $dom_num_int = $dat['dom_num_int'];
-            $dom_colonia = $dat['dom_col'];
-            $dom_estado = $dat['dom_estado'];
-            $dom_del_mun = $dat['dom_del_mun'];
-            $dom_cp = $dat['dom_cp'];
-            $telefono_casa = $dat['telefono_casa'];
-            $telefono_celular = $dat['telefono_celular'];
-            $telefono_trabajo = $dat['telefono_trabajo'];
-            $telefono_extension = $dat['telefono_extension'];
-        }
-    }
-
-    desconectar($conexion);
-
-    //------------------------------------------------------------------------------------------------------
-
-    function obtener_opcion_e() //código para llenar el catálogo de los estados.
-    {
-
-        $user1=$_SESSION['logged_user'];
-
-        require_once("funciones.php");
-        $conexion = conectar();
-        
-        $query = 'SELECT id_num_reg FROM datos_personales WHERE email="'.$user1.'"'; //obtener id de usuario
-        $consulta = ejecutarQuery($conexion, $query);
-        if (mysqli_num_rows($consulta)) {
-            while ($dat = mysqli_fetch_array($consulta)){
-                $id_user1 = $dat['id_num_reg'];
-            }
-        }
-
-        $query = 'SELECT dom_estado FROM datos_personales WHERE id_num_reg="'.$id_user1.'"'; //obtener el estado registrado en la BD
-        $consulta = ejecutarQuery($conexion, $query);
-        if (mysqli_num_rows($consulta)) {
-            while ($dat = mysqli_fetch_array($consulta)){
-                $dom_estado = $dat['dom_estado'];
-            }
-        }
-
-        $query = 'SELECT nombre, id FROM estados'; //seleccionar el estado que se había seleccionado
-        $consulta = ejecutarQuery($conexion, $query);
-        $opciones_e="";
-        $contador=0;
-        $seleccion="";
-
-        if (mysqli_num_rows($consulta)) {
-            while ($dat = mysqli_fetch_array($consulta)){
-                $id = $dat['id'];
-                $nombre = $dat['nombre'];
-                $contador++;
-
-                if($dom_estado == $contador ) 
-                {
-                    $seleccion = 'selected'; 
-                }
-                else
-                {
-                 $seleccion= "";
-                }
-
-                $opciones_e = $opciones_e.'<option '.$seleccion.' value='.$id.'>'.$nombre.'</option>';
-            }
-        }
-
-        desconectar($conexion);
-
-        return $opciones_e;
-    }
-    //--------------------------------------------------------------------------------------------------------
-
-
-    //Si se da Submit o Enviar primero se validan los datos y despues se incertan en la BD
-    if(isset($_POST['actualizar'])) //código para validar los datos del formulario
-    {   
-
-        $user=$_SESSION['logged_user'];
-        // Actualizacion de datos complementarios
-
-        require_once("funciones.php");
-        $conexion = conectar();
-        
-        $query = 'SELECT id_num_reg FROM datos_personales WHERE email="'.$user.'"';
-        $consulta = ejecutarQuery($conexion, $query);
-        if (mysqli_num_rows($consulta)) {
-            while ($dat = mysqli_fetch_array($consulta)){
-                $id_user = $dat['id_num_reg'];
-            }
-        }
-
-        //Recoleccion de datos...
-
-        $fecha_nac = mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_nac']));
-        $dom_calle = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_calle']));
-        $dom_num_ext = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_ext']));
-        $dom_num_int = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_int']));
-        $dom_colonia = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_colonia']));
-        $dom_estado = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_estado']));
-        $dom_del_mun = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_del_mun']));
-        $dom_cp = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_cp']));
-        $telefono_casa = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_casa']));
-        $telefono_celular = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_celular']));
-        $telefono_trabajo = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_trabajo']));
-        $telefono_extension = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_extension']));
-
-        //TO DO Elaboración del Query (tratar de pasar esto a un Store procedure)!!!
-
-
-        //Actualiza la tabla datos personales....
-
-        $query = 'UPDATE datos_personales SET fecha_nac = "'.$fecha_nac.'", dom_calle = "'.$dom_calle.'", dom_num_ext = "'.$dom_num_ext.'", dom_num_int = "'.$dom_num_int.'", dom_col = "'.$dom_colonia.'",';
-        $query .= 'dom_estado = "'.$dom_estado.'", dom_del_mun = "'.$dom_del_mun.'", dom_cp = "'.$dom_cp.'", telefono_casa = "'.$telefono_casa.'", telefono_celular = "'.$telefono_celular.'", ';
-        $query .= 'telefono_trabajo = "'.$telefono_trabajo.'", telefono_extension = "'.$telefono_extension.'" ';  
-        $query .= 'WHERE id_num_reg = "'.$id_user.'"';      
-        $consulta = ejecutarQuery($conexion, $query);
-
-        desconectar($conexion);
-        
-        header("Location: index_usuario.php");
-        exit();
-               
-    }
+    require("funciones_form_personales.php");
 ?>
 
 <!DOCTYPE html>
@@ -193,7 +31,8 @@ else
 
 </head>
 <body>
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<!-- Menu contextual-->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -202,7 +41,7 @@ else
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <p class="navbar-brand">Información personal básica</p>
+          <p class="navbar-brand">Bienveido Patrullero</p>
         </div>
         <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
           <ul class="nav navbar-nav navbar-right">
@@ -213,13 +52,14 @@ else
                 </a>
                 <ul class="dropdown-menu inverse-dropdown" >
                     <li><a href="form_personales.php">Información Personal Básica</a></li>
-                    <li><a href="form_complementario.php">Información Complementaria</a></li>
+                    <li><a href="form_complementario.php">Información Complementaria del perfil</a></li>
                     <li><a href="form_medico.php">Información Medica</a></li>
                     <li><a href="form_info_fisica.php">Información Fisica</a></li>
-                    <li><a href="form_experiencia.php">Información de Experiencia en Patrullaje y Rescate</a></li>
+                    <li><a href="form_experiencia.php">Información de experiencia en Patrullaje y Rescate</a></li>
+                    <li><a href="form_foto.php">Cambiar imagen de perfil</a></li>
+                    <li><a href="form_cambio_pass.php">Cambiar contraseña</a></li>
                 </ul>
             </li>
-            <li><a href="#">Cambiar contraseña</a></li>
             <li><a href="cerrar_sesion.php">Cerrar sesión</a></li>
           </ul>
         </div>
@@ -460,29 +300,7 @@ else
             });
         });
     </script>
-    <script type="text/javascript"> //función para hacer dinamigo el fondo 
-     $(function(){
-    
-            var limit = 0; // 0 = infinite.
-            var interval = 2;// Secs
-            var images = [
-                "imagenes/Fondos/1.jpg",
-                "imagenes/Fondos/2.jpg",
-                "imagenes/Fondos/3.jpg"
-            ];
-
-            var inde = 0; 
-            var limitCount = 0;
-            var myInterval = setInterval(function() {
-               if (limit && limitCount >= limit-1) clearTimeout(myInterval);
-               if (inde >= images.length) inde = 0;
-                $('header').css({ "background-image":"url(" + images[inde]+ ")" });
-               inde++;
-               limitCount++;
-            }, interval*5000);
-        });    
-
-    </script>
+    <script type="text/javascript" src="fondo_encabezado.js" ></script>
 </body>
 </html>
 
