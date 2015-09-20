@@ -13,6 +13,8 @@ else
 {
     //código para obtener los datos de la BD y mostrarlos ----------------------------------------------
     require("funciones_form_medico.php");
+
+    require("funciones_menu_contextual.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -31,40 +33,9 @@ else
 </head>
 <body>
     <!-- Menu contextual-->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <p class="navbar-brand">Bienveido Patrullero</p>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="index_usuario.php">Inicio</a></li>
-            <li role="presentation" class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                Modificar Datos <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu inverse-dropdown" >
-                    <li><a href="form_personales.php">Información Personal Básica</a></li>
-                    <li><a href="form_complementario.php">Información Complementaria del perfil</a></li>
-                    <li><a href="form_medico.php">Información Medica</a></li>
-                    <li><a href="form_info_fisica.php">Información Fisica</a></li>
-                    <li><a href="form_experiencia.php">Información de experiencia en Patrullaje y Rescate</a></li>
-                    <li><a href="form_foto.php">Cambiar imagen de perfil</a></li>
-                    <li><a href="form_cambio_pass.php">Cambiar contraseña</a></li>
-                </ul>
-            </li>
-            <li><a href="cerrar_sesion.php">Cerrar sesión</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    </nav>
+    
+    <?php echo obtener_menu()?>
+    
     <!-- Cabecera de la página -->
     <header id="header">
         <div class="container">

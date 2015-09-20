@@ -10,34 +10,9 @@ if((empty($_SESSION['logged'])) && ($basename!="index"))
 }//Si a inicado sesion entra en el "else"
 else
 {
-	function obtener_mensaje() //código para llenar la tabla de las patrullas actuales en la BD.
-    {
-    	//TO DO revisar como quedara lo del campo jefe de patrulla...
+     require("funciones_index_jefe_patrulla.php"); //Aqui estan todas las funicones para obtener los datos de la BD para el index de usuario
 
-        require_once("funciones.php");
-        $conexion = conectar();
-
-        $user=$_SESSION['logged_jefe'];
-
-        $query = 'SELECT nombre, apellido_p, apellido_m, patrullas_id_patrullas FROM datos_personales WHERE email="'.$user.'"';
-        $consulta = ejecutarQuery($conexion, $query);
-        $mensaje="";
-
-        if (mysqli_num_rows($consulta)) {
-            while ($dat = mysqli_fetch_array($consulta)){
-                $apellido_p = $dat['apellido_p'];
-                $apellido_m = $dat['apellido_m'];
-                $nombre = $dat['nombre'];
-                $patrulla = $dat['patrullas_id_patrullas'];
-            }
-        }
-
-        $mensaje="Bienvenido Jefe de patrulla ".$nombre." ".$apellido_p." ".$apellido_m;
-
-        desconectar($conexion);
-
-        return $mensaje;
-    }
+     require("funciones_menu_contextual.php"); 
 
 ?>
 <!DOCTYPE html>
@@ -51,45 +26,74 @@ else
 </head>
 <body>
     <!-- Menu contextual-->
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <p class="navbar-brand">Bienvenido Patrullero</p>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="index_usuario.php">Inicio</a></li>
-            <li role="presentation" class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                Modificar Datos <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu inverse-dropdown" >
-                    <li><a href="form_personales.php">Información Personal Básica</a></li>
-                    <li><a href="form_complementario.php">Información Complementaria del perfil</a></li>
-                    <li><a href="form_medico.php">Información Medica</a></li>
-                    <li><a href="form_info_fisica.php">Información Fisica</a></li>
-                    <li><a href="form_experiencia.php">Información de experiencia en Patrullaje y Rescate</a></li>
-                    <li><a href="form_foto.php">Cambiar imagen de perfil</a></li>
-                    <li><a href="form_cambio_pass.php">Cambiar contraseña</a></li>
-                </ul>
-            </li>
-            <li><a href="cerrar_sesion.php">Cerrar sesión</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+    
+    <?php echo obtener_menu()?>
+
     <!-- Cabecera de la página -->
+    <header id="header">
+        <div class="container">
+            <div class="col-xs-12 col-sm-12 col-md-2" >
+                <img src="imagenes/brsam-logo.png" />
+            </div>
+            
+            <h2 class="col-xs-12 col-sm-12 col-md-10"> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h2>
+        
+        </div>
+    </header>
 
+    <!--Comienza el contenido -->
 
-<h1> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h1>
-<h2><?php echo obtener_mensaje(); ?></h2>
-<h3> Patrulla actual<h3/>
+        <section class="row">
+            
+                <aside class="col-xs-12 col-sm-5 col-md-3" id="menu-izq">
+                    <div id="menu-izq-perfil">
+                        <img src="#" id="menu-izq-foto">
+                        <br><br>
+                        <h3><?php echo obtener_mensaje(); ?></h3>
+                        <h5>Registro completado a un...</h5>
+                    </div>
+                    
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;" id="progress-bar1">
+                        <?php echo obtener_porcentaje_datos_bd();?>%
+                      </div>
+                    </div>
+                </aside>
+            
+
+            <article class="col-xs-12 col-sm-7 col-md-9">
+                <h2 class="sub-header"><?php echo obtener_patrulla_actual(); ?></h2>  
+
+                <p id="principal">
+                    <label>Jefe de Patrulla:</label>
+                    <?php echo obtener_jefe_patrulla();?><br/><br/>
+                    <label>Integrates de la Patrulla:</label>
+                </p> 
+                <div class="table-responsive">
+                  <table class="table table-hover table-striped">
+                    <thead>
+                        <th>#</th>
+                        <th>Nombre(s)</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                    </thead>
+                    <tbody>
+                        <?php echo obtener_patrulla_integrantes(); ?>
+                    </tbody>
+                  </table>
+                </div>                
+
+            </article>
+
+        </section>
+
+        
+        <footer class="footer">
+            
+                <small>Última modificación Agosto 2015</small>
+            
+        </footer>
+
 
 <table border="1px">
 	<tr>
@@ -97,7 +101,6 @@ else
 		<th>Jefe de Patrulla</th>
 		<th>Clave</th>
 	</tr>
-	<?php //echo obtener_patrullas(); ?>
 </table>
 
     <script type="text/javascript" src="js/jquery.js"></script>
