@@ -57,12 +57,14 @@
 				while ($dat = mysqli_fetch_array($consulta))
 				{
 					session_start();
+					$_SESSION['logged'] = 'yes';
 					$_SESSION['logged_user'] = $user;
-					desconectar($conexion);
 					$_SESSION['user_type'] = "admin";
-					header("Location: index_admin.php");
-					exit();					
 				}
+
+				desconectar($conexion);
+				header("Location: index_admin.php");
+				exit();	
 			}
 			else
 			{
@@ -107,8 +109,8 @@
 			<fieldset>			
 				<form  action="index.php" method="POST" >
 
-				<input type="text" name="user" class="form-control" placeholder="Ingresar Usuario" required>
-				<input type="password" name="pass" class="form-control" placeholder="Ingresar Contraseña" required>
+				<input type="text" id="user" name="user" class="form-control" placeholder="Ingresar Usuario" required>
+				<input type="password" id="pass" name="pass" class="form-control" placeholder="Ingresar Contraseña" required>
 				<br/>
 				<?php echo $error_login; //muestra el error de login ?>
 

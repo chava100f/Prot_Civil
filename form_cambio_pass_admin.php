@@ -26,9 +26,6 @@ else
     <link rel="stylesheet" href="css/index-estilo.css" >
     <link rel="stylesheet" href="css/forms-estilo.css" >
     <title>Cambio de contraseña</title>
-    <script>
-        
-    </script>
 
 </head>
 <body>
@@ -60,7 +57,7 @@ else
         <h3>Cambio de contraseña</h3>
 
         <fieldset>
-           <form id="formulario_password" name="formulario_password" action = "form_cambio_pass.php" method = "POST" class="form-horizontal" >
+           <form id="formulario_password" name="formulario_password" action = "form_cambio_pass_admin.php" method = "POST" class="form-horizontal" >
 
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">

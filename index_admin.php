@@ -6,7 +6,7 @@ $basename = substr(strtolower(basename($_SERVER['PHP_SELF'])),0,strlen(basename(
 if((empty($_SESSION['logged'])) && ($basename!="index"))
 {
     header('Location: index.php');
-    exit;
+    exit();
 }//Si a inicado sesion entra en el "else"
 else
 {   
@@ -21,7 +21,7 @@ else
     
     if($tipo_cuenta=="jefe")
     {
-        header("Location: index_jefe_patrullaa.php");
+        header("Location: index_jefe_patrulla.php");
         exit();
     }
 
@@ -33,7 +33,7 @@ else
         require_once("funciones.php");
         $conexion = conectar();
 
-        $query = 'SELECT DISTINCT nombre, IFNULL((SELECT datos_personales.nombre FROM datos_personales, patrullas WHERE datos_personales.tipo_cuenta="jefe" AND datos_personales.patrullas_id_patrullas = id_patrullas),"NA") AS nombreJefe, id_patrullas FROM patrullas;';
+        $query = 'SELECT DISTINCT patrullas.nombre, IFNULL((SELECT datos_personales.nombre FROM datos_personales WHERE datos_personales.tipo_cuenta="jefe" AND datos_personales.patrullas_id_patrullas = id_patrullas),"NA") AS nombreJefe, patrullas.id_patrullas FROM patrullas,datos_personales;';
         $consulta = ejecutarQuery($conexion, $query);
         $opciones_e="";
 
@@ -43,13 +43,51 @@ else
                 $nj = $dat['nombreJefe'];
                 $c = $dat['id_patrullas'];
                 //Agregar codigo para mandar a modificar la patrulla seleccionada
-                $opciones_e = $opciones_e.'<tr><td>'.$np.'</td><td>'.$nj.'</td><td>'.$c.'</td><td>Modificar</td</tr>';
+                $opciones_e = $opciones_e.'<tr><td>'.$np.'</td><td>'.$nj.'</td><td>'.$c.'</td>';
+                $opciones_e.='<td><a href="ver_patrulla.php?id='.$c.'" class="btn btn-info">Modificar</td</tr>';
             }
         }
 
         desconectar($conexion);
 
         return $opciones_e;
+    }
+
+    function obtener_usuarios() //código para llenar la tabla de los usuarios actuales en la BD.
+    {
+
+        require_once("funciones.php");
+        $conexion = conectar();
+
+        $query = 'SELECT id_num_reg, nombre, apellido_p, apellido_m, fotografia, patrullas_id_patrullas, calidad_miembro,';
+        $query.= ' tipo_cuenta FROM datos_personales';
+        $consulta = ejecutarQuery($conexion, $query);
+        $usuarios_tabla="";
+
+        if (mysqli_num_rows($consulta)) {
+            while ($dat = mysqli_fetch_array($consulta)){
+                $id_num_reg = $dat['id_num_reg'];
+                $nombre = $dat['nombre'];
+                $apellido_p = $dat['apellido_p'];
+                $apellido_m = $dat['apellido_m'];
+                $fotografia = $dat['fotografia'];
+                $patrullas_id_patrullas = $dat['patrullas_id_patrullas'];
+                $calidad_miembro = $dat['calidad_miembro'];
+                $tipo_cuenta = $dat['tipo_cuenta'];
+
+                //Agregar codigo para mandar a modificar la patrulla seleccionada
+                $usuarios_tabla.='<tr><td><img src="'.$fotografia.'" style="width:50px;height:50px;" /></td>';
+                $usuarios_tabla.='<td>'.$nombre." ".$apellido_p." ".$apellido_m.'</td>';
+                $usuarios_tabla.='<td>'.$patrullas_id_patrullas.'</td>';
+                $usuarios_tabla.='<td>'.strtoupper($calidad_miembro).'</td>';
+                $usuarios_tabla.='<td>'.strtoupper($tipo_cuenta).'</td>';
+                $usuarios_tabla.='<td><a href="ver_usuario.php?id='.$id_num_reg.'" class="btn btn-info">Modificar</td</tr>';
+            }
+        }
+
+        desconectar($conexion);
+
+        return $usuarios_tabla;
     }
 
 ?>
@@ -65,7 +103,7 @@ else
 <body>
     <!-- Menu contextual-->
     
-    <?php echo obtener_menu()?>
+    <?php echo obtener_menu();?>
 
     <!-- Cabecera de la página -->
     <header id="header">
@@ -80,32 +118,61 @@ else
     </header>
 
     <!--Comienza el contenido -->
-<h2>Bienvenido Administrador</h2>
+    <section class="row"> 
+        <br>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <h2>Patrullas</h2>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6">
+                <h2>Usuarios</h2>
+            </div>
+        <br>
+    </section>
 
-<p><a href="alta_patrulla.php">Dar de alta una nueva patrulla al sistema</a></p>
+    <section class="row"> 
 
-<table border="1px">
-	<tr>
-		<th>Nombre</th>
-		<th>Jefe de Patrulla</th>
-		<th>Clave</th>
-        <th>Modificar Patrulla</th>
-	</tr>
-	<?php echo obtener_patrullas(); ?>
-</table>
+        <div class="col-xs-12 col-sm-12 col-md-6">      
+            <table class="table table-hover table-striped">
+            	<thead>
+                    <th>Nombre</th>
+                    <th>Jefe de Patrulla</th>
+                    <th>Clave</th>
+                    <th>Modificar Patrulla</th>
+            	</thead>
+                <tbody>
+            	    <?php echo obtener_patrullas(); ?>
+                </tbody>
+            </table>
+        </div> 
 
-<script type="text/javascript" src="js/jquery.js"></script>
+        <div class="col-xs-12 col-sm-12 col-md-6">      
+            <table class="table table-hover table-striped">
+                <thead>
+                    <th>Foto</th>
+                    <th>Nombre</th>
+                    <th>Patrulla</th>
+                    <th>Estatus</th>
+                    <th>Tipo de cuenta</th>
+                    <th>Modificar Usuario</th>
+                </thead>
+                    <?php echo obtener_usuarios(); ?>
+                <tbody>
+                    
+                </tbody>
+            </table>
+        </div> 
+
+    </section>
+            
+    <footer class="footer">
+        
+            <small>Última modificación Agosto 2015</small>
+        
+    </footer>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="fondo_encabezado.js" ></script>
-    <script type="text/javascript"> //función para hacer dinamigo el fondo 
-     $(function(){
-            //codigo para obtener la imagen de perfil... TO DO agregar php 
-            $("#menu-izq-foto").attr("src",<?php echo '"'.obtener_imagen_perfil().'"'; ?>);
-            $("#progress-bar1").attr("style","width: "+<?php echo obtener_porcentaje_datos_bd(); ?>+"%;");
-            $("#progress-bar1").attr("aria-valuenow",""+<?php echo obtener_porcentaje_datos_bd(); ?>+";");
-        });    
-
-    </script>
 </body>
 
 </html>

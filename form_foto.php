@@ -70,6 +70,8 @@ else
                 </div>
             </div>
 
+            <?php echo $mensaje_server; //error por si no se sube la imagen o aviso de que se logró correctamente ?>
+
             <div class="form-group">
                 <label class="col-xs-12"> <h4><label class="label label-warning">Nota:</label></h4>Las caracterisiticas de la imagen de perfil son:
                         <ul>
@@ -83,8 +85,6 @@ else
                     Las características generales de la imagen de perfil son las mismas que las solicitadas en las fotografías para el trámite de pasaporte. Para más información de <a href="http://sre.gob.mx/fotografias">click aquí</a>.
                 </label>
             </div>
-
-             <?php echo $mensaje_server; //error por si no se sube la imagen o aviso de que se logró correctamente ?>
 
             <div class="form-group">
                 <div class="col-xs-offset-2 col-xs-8">

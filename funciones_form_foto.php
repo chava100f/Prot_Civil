@@ -109,7 +109,7 @@
 		}
 
 		desconectar($conexion);
-        exit();
+        
    	}
 
 ?>

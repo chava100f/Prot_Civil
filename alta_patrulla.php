@@ -1,8 +1,21 @@
-<?php
+<?php 
+
+//Codigo para revisar si la sesion a sido iniciada
 session_start();
-if($_SESSION['logged'] == 'yes')
+$basename = substr(strtolower(basename($_SERVER['PHP_SELF'])),0,strlen(basename($_SERVER['PHP_SELF']))-4);
+
+if((empty($_SESSION['logged'])) && ($basename!="index"))
 {
+    header('Location: index.php');
+    exit;
+}//Si a inicado sesion entra en el "else"
+else
+{ 
+    require("funciones_menu_contextual.php"); 
+
     $error_nombre_p="";
+
+    $mensaje_server = "";
 
     if(isset($_POST['alta_patrulla'])) //código para validar los datos del formulario
     {   
@@ -12,17 +25,52 @@ if($_SESSION['logged'] == 'yes')
         {
 			    $id_p=rand(100,1000);
 
-        	require_once("funciones.php");
+        	require("funciones.php");
           $conexion = conectar();
 
           $nombre_patrulla = mysqli_real_escape_string($conexion, $nombre_patrulla);
-    
-        	$query = 'INSERT INTO patrullas(id_patrullas, nombre) VALUES ("'.$id_p.'", "'.$nombre_patrulla.'")';
-        	$consulta = ejecutarQuery($conexion, $query);
-        	desconectar($conexion);
-        	
-        	header("Location: alta_patrulla_respuesta.php?nombre=".$nombre_patrulla."&id_p=".$id_p."");
-			    exit();
+
+          $bandera_alta="";
+
+          //Revisa que no exista ya esa patrulla en la BD
+          $query = 'SELECT id_patrullas FROM patrullas WHERE nombre = "'.$nombre_patrulla.'";';
+          $consulta = ejecutarQuery($conexion, $query);
+          if (mysqli_num_rows($consulta)) {
+            while ($dat = mysqli_fetch_array($consulta)){
+                $c = $dat['id_patrullas'];
+            }
+              $bandera_alta =1;
+          }
+
+          if($bandera_alta!=1)//Si no se activo la bandera puede dar de alta la patrulla
+          {
+          	$query = 'INSERT INTO patrullas(id_patrullas, nombre) VALUES ("'.$id_p.'", "'.$nombre_patrulla.'")';
+          	$consulta = ejecutarQuery($conexion, $query);
+          	
+            //Revisa que se haya subido correctamente la patrulla a la BD
+            $query = 'SELECT id_patrullas, nombre FROM patrullas WHERE nombre = "'.$nombre_patrulla.'" AND id_patrullas = "'.$id_p.'"';
+            $consulta = ejecutarQuery($conexion, $query);
+
+            if (mysqli_num_rows($consulta)) {
+                while ($dat = mysqli_fetch_array($consulta)){
+                    $n = $dat['nombre'];
+                    $c = $dat['id_patrullas'];
+                }
+                $mensaje_server = '<div class="alert  alert-success" role="alert"><strong>¡Éxito!</strong> La patrulla '.$nombre_patrulla.' a sido agregada con la clave <b><u>'.$id_p.'</u></b></div>';
+            }
+            else
+            {
+                $mensaje_server = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> No se pudo dar de alta la patrulla intente de nuevo.</div>';
+            }
+        	}
+          else
+          {
+              $mensaje_server = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> La patrulla '.$nombre_patrulla.' ya existe, intente con otro nombre.</div>';
+          }
+        	//header("Location: alta_patrulla_respuesta.php?nombre=".$nombre_patrulla."&id_p=".$id_p."");
+			    //exit();
+
+          desconectar($conexion);
         }
         else
         {
@@ -35,45 +83,82 @@ if($_SESSION['logged'] == 'yes')
 <html>
 <head>
 	<meta charset = "utf-8">
-	<link rel="stylesheet" type="text/css" href="EstiloT0202.css">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index-estilo.css" >
+  <link rel="stylesheet" href="css/forms-estilo.css" >
 	<title>Alta Patrulla</title>
 </head>
 <body>
-</body>
 
-	<h1> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h1>
-	<h2>Alta nueva patrulla al sistema</h2>
+	<!-- Menu contextual-->
+    
+    <?php echo obtener_menu()?>
+    
+    <!-- Cabecera de la página -->
+    <header id="header">
+        <div class="container">
+            <div class="col-xs-12 col-sm-12 col-md-2" >
+                <img src="imagenes/brsam-logo.png" />
+            </div>
+            <h2 class="col-xs-12 col-sm-12 col-md-10"> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </h2>
+        
+        </div>
+    </header>
 
-	<form action = "alta_patrulla.php" method = "POST">
-		<fieldset>
-                <legend>Registrar nueva patrulla</legend>
+    <!--Comienza el contenido -->
 
-       <table>
-       		<tr>
-       			<td>
-       				Nombre:
-       			</td>
-       			<td>
-       				<input type="text" name="nombre_patrulla" required/>
-       			</td>
-       			<td>
-       		</tr>
-       	</table>
+    <br>
+
+    <div class="container" id="general-form">
+
+        <div class="col-xs-1 col-sm-2 col-md-1 col-lg-2"></div>
+
+        <div class="col-xs-10 col-sm-8 col-md-10 col-lg-8">
+
+        <h3>Dar de alta a patrulla nueva al sistema</h3>
+
+        <fieldset>
+           <form id="formulario_alta" name="formulario_alta" action = "alta_patrulla.php" method = "POST" class="form-horizontal" >
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        Registrar nueva patrulla:
+                    </label>
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                        <input type="text" class="form-control" id="nombre_patrulla" name="nombre_patrulla" maxlength="20" required>
+                    </div>
+                </div>
+
+                <?php echo $error_nombre_p; //error por si no se pone ningun nombre a la patrulla ?>
+                <?php echo $mensaje_server; //muestra mensaje de exito o error si se crea la patrulla X ?>
+
+                <div class="form-group">
+                    <div class="col-xs-offset-2 col-xs-8">
+                        <input type = "submit" class="btn btn-primary btn-block" value = "Dar de Alta" id="alta_patrulla" name = "alta_patrulla" width="100" height="50">
+                    </div>
+                </div>
+               
+            </form>
 
         </fieldset>
-        <br>
-        <?php
-        	echo $error_nombre_p;
-        ?>
+        
+        <footer class="footer">
 
-        <input type = "submit" value = "Dar de Alta" name = "alta_patrulla" width="100" height="50">
-	</form>
+            <small>Última modificación Septiembre 2015</small>
 
+        </footer>
+        
+        </div>
+        <div class="col-xs-1 col-sm-2 col-md-1 col-lg-2"></div>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="fondo_encabezado.js" ></script>
+</body>
 </html>
 
 
 <?php
 }
-else
-	header('Location : index.php');
 ?>

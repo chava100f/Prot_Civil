@@ -209,7 +209,7 @@ function insertar_experiencia_web() //código para poner los checkbox en la pág
             $consulta = ejecutarQuery($conexion, $query);
         }
         //Revisa si la variable experiencia internacionales tiene algo escrito, si sí lo inserta en la base de datos
-        if($vacuna_internacional!="")
+        if($experiencia_otra!="")
         {
             $query='INSERT INTO experiencia(experiencia, datos_personales_id_num_reg) VALUES("'.$experiencia_otra.'",'.$id_user.');';
             $consulta = ejecutarQuery($conexion, $query);
