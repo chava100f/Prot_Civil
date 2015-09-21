@@ -9,7 +9,21 @@ if((empty($_SESSION['logged'])) && ($basename!="index"))
     exit;
 }//Si a inicado sesion entra en el "else"
 else
-{
+{   
+
+    $tipo_cuenta=$_SESSION['user_type'];
+
+    if($tipo_cuenta=="usuario")
+    {
+        header("Location: index_usuario.php");
+        exit();
+    }
+    if($tipo_cuenta=="admin")
+    {
+        header("Location: index_admin.php");
+        exit();
+    }
+
      require("funciones_index_jefe_patrulla.php"); //Aqui estan todas las funicones para obtener los datos de la BD para el index de usuario
 
      require("funciones_menu_contextual.php"); 
@@ -62,11 +76,15 @@ else
             
 
             <article class="col-xs-12 col-sm-7 col-md-9">
-                <h2 class="sub-header"><?php echo obtener_patrulla_actual(); ?></h2>  
+                <h2 class="sub-header"><?php echo obtener_patrulla_actual("nombre"); ?></h2>  
 
                 <p id="principal">
                     <label>Jefe de Patrulla:</label>
-                    <?php echo obtener_jefe_patrulla();?><br/><br/>
+                    <?php echo obtener_jefe_patrulla();?><br/>
+                    <label>Clave de la patrulla: </label>
+                    <?php echo obtener_patrulla_actual("clave_patrulla");?>
+                    <br/><br/>
+                    
                     <label>Integrates de la Patrulla:</label>
                 </p> 
                 <div class="table-responsive">
@@ -76,6 +94,9 @@ else
                         <th>Nombre(s)</th>
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
+                        <th>Email</th>
+                        <th>Calidad</th>
+                        <th>Reporte</th>
                     </thead>
                     <tbody>
                         <?php echo obtener_patrulla_integrantes(); ?>
@@ -94,15 +115,6 @@ else
             
         </footer>
 
-
-<table border="1px">
-	<tr>
-		<th>Nombre</th>
-		<th>Jefe de Patrulla</th>
-		<th>Clave</th>
-	</tr>
-</table>
-
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="fondo_encabezado.js" ></script>
@@ -117,8 +129,6 @@ else
     </script>
 </body>
 </html>
-
-
 
 <?php
 }

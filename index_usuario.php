@@ -10,7 +10,20 @@ if((empty($_SESSION['logged'])) && ($basename!="index"))
     exit;
 }//Si a inicado sesion entra en el "else"
 else
-{
+{   
+    $tipo_cuenta=$_SESSION['user_type'];
+
+    if($tipo_cuenta=="jefe")
+    {
+        header("Location: index_jefe_patrulla.php");
+        exit();
+    }
+    if($tipo_cuenta=="admin")
+    {
+        header("Location: index_admin.php");
+        exit();
+    }
+    
     require("funciones_index_usuario.php"); //Aqui estan todas las funicones para obtener los datos de la BD para el index de usuario
 
     require("funciones_menu_contextual.php"); 

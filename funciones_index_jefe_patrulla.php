@@ -58,7 +58,7 @@ function obtener_imagen_perfil() //código extra para conocer las vacunas intern
     return $dir_temp_foto;
 }
 
-function obtener_patrulla_actual()//código para obtener el nombre de la patrulla
+function obtener_patrulla_actual($peticion)//código para obtener el nombre de la patrulla
 {
     require_once("funciones.php");
     $conexion = conectar();
@@ -73,17 +73,26 @@ function obtener_patrulla_actual()//código para obtener el nombre de la patrull
         }
     }
 
-    $query = 'SELECT nombre FROM patrullas WHERE id_patrullas='.$id_patrulla;
-    $consulta = ejecutarQuery($conexion, $query);
-    if (mysqli_num_rows($consulta)) {
-        while ($dat = mysqli_fetch_array($consulta)){
-            $nombre_patrulla = $dat['nombre'];
-        }
+    if($peticion=="clave_patrulla")
+    {
+        desconectar($conexion);
+        return $id_patrulla;
+        exit();
     }
+    else //peticion="nombre"
+    {
+        $query = 'SELECT nombre FROM patrullas WHERE id_patrullas='.$id_patrulla;
+        $consulta = ejecutarQuery($conexion, $query);
+        if (mysqli_num_rows($consulta)) {
+            while ($dat = mysqli_fetch_array($consulta)){
+                $nombre_patrulla = $dat['nombre'];
+            }
+        }
 
-    desconectar($conexion);
-
-    return $nombre_patrulla;
+        desconectar($conexion);
+        return $nombre_patrulla;
+        exit();
+    }
 }
 
 function obtener_jefe_patrulla()//código para obtener el nombre del jefe patrulla
@@ -194,16 +203,19 @@ function obtener_patrulla_integrantes()//código para obtener el nombre de los i
         }
     }
 
-    $query = 'SELECT nombre, apellido_p, apellido_m FROM datos_personales WHERE patrullas_id_patrullas='.$id_patrulla.' AND tipo_cuenta="usuario"';
+    $query = 'SELECT id_num_reg, nombre, apellido_p, apellido_m, email, calidad_miembro FROM datos_personales WHERE patrullas_id_patrullas='.$id_patrulla.' AND calidad_miembro="activo"';
     $consulta = ejecutarQuery($conexion, $query);
     $mensaje ="";
     $cont=1;
     if (mysqli_num_rows($consulta)) {
         while ($dat = mysqli_fetch_array($consulta)){
-            $mensaje="<tr><td>".$cont++."</td>";
+            $mensaje.="<tr><td>".$cont++."</td>";
             $mensaje.="<td>".$dat['nombre']."</td>";
             $mensaje.="<td>".$dat['apellido_p']."</td>";
-            $mensaje.="<td>".$dat['apellido_m']."</td></tr>";
+            $mensaje.="<td>".$dat['apellido_m']."</td>";
+            $mensaje.="<td>".$dat['email']."</td>";
+            $mensaje.="<td>".$dat['calidad_miembro']."</td>";
+            $mensaje.="<td><a href='genera_reporte_usuario.php?id=".$dat['id_num_reg']."' class='btn btn-info'>Generar reporte</a></td></tr>";
         }
     }
     else

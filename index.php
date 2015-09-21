@@ -57,9 +57,9 @@
 				while ($dat = mysqli_fetch_array($consulta))
 				{
 					session_start();
-					$_SESSION['logged'] = 'yes';
+					$_SESSION['logged_user'] = $user;
 					desconectar($conexion);
-					$_SESSION['logged_admin'] = $user;
+					$_SESSION['user_type'] = "admin";
 					header("Location: index_admin.php");
 					exit();					
 				}

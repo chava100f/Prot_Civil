@@ -1,5 +1,5 @@
 <?php
-
+	$mensaje_server = "";
     if(isset($_POST["actualizar"])) 
     {
     	require("funciones.php");
@@ -93,7 +93,7 @@
 		
 		// Check if $uploadOk is set to 0 by an error
 		if ($uploadOk == 0) {
-		    echo "Error, el archivo no pudo subirse";
+		    $mensaje_server = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> la imagen no pudo subirse.</div>';
 		// if everything is ok, try to upload file
 		} else {
 		    if (move_uploaded_file($_FILES["foto_perfil"]["tmp_name"], $target_file)) {
@@ -102,14 +102,13 @@
 		        //agrega la ruta a la BD
 		        $query = 'UPDATE datos_personales SET fotografia = "'.$target_file.'" WHERE id_num_reg="'.$id_usuario.'"';
 		    	$consulta = ejecutarQuery($conexion, $query);
+		    	$mensaje_server = '<div class="alert  alert-success" role="alert"><strong>¡Éxito!</strong> se ha cambiado la imagen de perfil correctamente.</div>';
 		    } else {
-		        echo "Ocurrio un error al tratar de subir el archivo.";
+		        $mensaje_server = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> la imagen no pudo subirse.</div>';
 		    }
 		}
 
 		desconectar($conexion);
-        
-        header("Location: index_usuario.php");
         exit();
    	}
 

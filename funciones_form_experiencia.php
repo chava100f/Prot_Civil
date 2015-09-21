@@ -118,6 +118,7 @@ function insertar_experiencia_web() //código para poner los checkbox en la pág
     $cargos = "";                 
     $patrullero = "";
     $fecha_g ="";
+    $fecha_i="";
     $nom_dir = "";
 
     $query = 'SELECT * FROM antecedentes WHERE datos_personales_id_num_reg="'.$id_user.'"';
@@ -127,6 +128,7 @@ function insertar_experiencia_web() //código para poner los checkbox en la pág
             $cargos = $dat['cargos_anteriores'];                      
             $patrullero = $dat['patrullero'];
             $fecha_g = $dat['fecha_graduacion'];
+            $fecha_i = $dat['fecha_ingreso'];
             $nom_dir = $dat['dir_ccpp'];
         }
     }
@@ -157,6 +159,7 @@ function insertar_experiencia_web() //código para poner los checkbox en la pág
         $cargos = mysqli_real_escape_string($conexion, strip_tags($_POST['cargos']));
         $patrullero = mysqli_real_escape_string($conexion, strip_tags($_POST['patrullero']));
         $fecha_g = mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_g']));
+        $fecha_i = mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_i']));
         $experiencia =$_POST['experiencia'];
         $experiencia_otra = mysqli_real_escape_string($conexion, strip_tags($_POST['experiencia_otra']));
         $nom_dir = mysqli_real_escape_string($conexion, strip_tags($_POST['nom_dir']));
@@ -177,13 +180,13 @@ function insertar_experiencia_web() //código para poner los checkbox en la pág
         if($contador === 0) //se inserta un nuevo registro en la BD
         {
             //Inserta nuevo registro en la tabla antecedentes
-            $query = 'INSERT INTO antecedentes(cargos_anteriores, patrullero, fecha_graduacion, dir_ccpp, datos_personales_id_num_reg)';
-            $query = $query.' VALUES("'.$cargos.'","'.$patrullero.'", "'.$fecha_g.'", "'.$nom_dir.'",'.$id_user.')';
+            $query = 'INSERT INTO antecedentes(cargos_anteriores, patrullero, fecha_graduacion, fecha_ingreso, dir_ccpp, datos_personales_id_num_reg)';
+            $query = $query.' VALUES("'.$cargos.'","'.$patrullero.'", "'.$fecha_g.'", "'.$fecha_i.'", "'.$nom_dir.'",'.$id_user.')';
         }
         else //se actualizan los datos que ya existian en la BD
         {
             //Actualiza la tabla antecedentes
-            $query = 'UPDATE antecedentes SET cargos_anteriores="'.$cargos.'", patrullero="'.$patrullero.'", fecha_graduacion="'.$fecha_g.'", dir_ccpp="'.$nom_dir.'" ';
+            $query = 'UPDATE antecedentes SET cargos_anteriores="'.$cargos.'", patrullero="'.$patrullero.'", fecha_graduacion="'.$fecha_g.'", fecha_ingreso="'.$fecha_i.'", dir_ccpp="'.$nom_dir.'" ';
             $query .= 'WHERE datos_personales_id_num_reg = "'.$id_user.'"';  
         }
 

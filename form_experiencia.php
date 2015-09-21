@@ -86,22 +86,40 @@ else
                 </div>
 
                 <div class="form-group">
-                        <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                            Fecha de graduación:
-                        </label>
-                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        Fecha de ingreso:
+                    </label>
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 
-                            <div class="input-group date" data-date-format="dd/mm/yyyy">
+                        <div class="input-group date" data-date-format="dd/mm/yyyy">
 
-                                <input type="text" class="form-control datepicker" id="fecha_g" name="fecha_g"  placeholder="dd/mm/aaaa" value=<?php echo '"'.$fecha_g.'"'?> />
-                                <span class="input-group-addon" id="datepicker1">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-
-                            </div>
+                            <input type="text" class="form-control datepicker" id="fecha_i" name="fecha_i"  placeholder="dd/mm/aaaa" value=<?php echo '"'.$fecha_i.'"'?> />
+                            <span class="input-group-addon" id="datepicker1">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </span>
 
                         </div>
+
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        Fecha de graduación:
+                    </label>
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+                        <div class="input-group date" data-date-format="dd/mm/yyyy">
+
+                            <input type="text" class="form-control datepicker" id="fecha_g" name="fecha_g"  placeholder="dd/mm/aaaa" value=<?php echo '"'.$fecha_g.'"'?> />
+                            <span class="input-group-addon" id="datepicker1">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </span>
+
+                        </div>
+
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label class="col-xs-12">

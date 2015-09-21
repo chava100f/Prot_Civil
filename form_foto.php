@@ -84,6 +84,8 @@ else
                 </label>
             </div>
 
+             <?php echo $mensaje_server; //error por si no se sube la imagen o aviso de que se logró correctamente ?>
+
             <div class="form-group">
                 <div class="col-xs-offset-2 col-xs-8">
                     <input type = "submit" class="btn btn-primary btn-block" value = "Actualizar Datos" id="actualizar" name = "actualizar" width="100" height="50">

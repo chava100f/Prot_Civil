@@ -71,7 +71,6 @@
 			                    <li><a href='form_cambio_pass.php'>Cambiar contraseña</a></li>
 			                </ul>
 			            </li>
-			            <li><a href='#'>Buscar Integrante</a></li>
 			            <li><a href='cerrar_sesion.php'>Cerrar sesión</a></li>
 			          </ul>
 			        </div>
@@ -95,15 +94,7 @@
 			        <div id='navbar' class='navbar-collapse collapse' aria-expanded='false' style='height: 1px;'>
 			          <ul class='nav navbar-nav navbar-right'>
 			            <li><a href='index_admin.php'>Inicio</a></li>
-			            <li role='presentation' class='dropdown'>
-			                <a class='dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
-			                Modificar Datos <span class='caret'></span>
-			                </a>
-			                <ul class='dropdown-menu inverse-dropdown' >
-			                    <li><a href='form_foto.php'>Cambiar imagen de perfil</a></li>
-			                    <li><a href='form_cambio_pass.php'>Cambiar contraseña</a></li>
-			                </ul>
-			            </li>
+	                    <li><a href='form_cambio_pass_admin.php'>Cambiar contraseña</a></li>
 			            <li role='presentation' class='dropdown'>
 			                <a class='dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
 			                Buscar <span class='caret'></span>

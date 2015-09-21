@@ -18,13 +18,13 @@
 	        }
 	    }
 
-	    $correo1 = strip_tags($_POST['pass1']);
-        $correo2 = strip_tags($_POST['pass2']);
+	    $pass1 = strip_tags($_POST['pass1']);
+        $pass2 = strip_tags($_POST['pass2']);
 
-        if($correo1 === $correo2) //valida los correos 
+        if($pass1 === $pass2) //valida los passs 
         {
-        	$correo1 = mysqli_real_escape_string($conexion, $correo1);
-        	$query = 'UPDATE datos_personales SET contrasenia = "'.$correo1.'" WHERE id_num_reg="'.$id_usuario.'"';
+        	$pass1 = mysqli_real_escape_string($conexion, $pass1);
+        	$query = 'UPDATE datos_personales SET contrasenia = "'.$pass1.'" WHERE id_num_reg="'.$id_usuario.'"';
             $consulta = ejecutarQuery($conexion, $query);
 
             $mensaje_server = '<div class="alert  alert-success" role="alert"><strong>¡Éxito!</strong> se ha cambiado la contraseña correctamente.</div>';

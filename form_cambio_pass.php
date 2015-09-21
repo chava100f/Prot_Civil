@@ -12,7 +12,7 @@ if((empty($_SESSION['logged'])) && ($basename!="index"))
 else
 {
     //código para obtener los datos de la BD y mostrarlos ----------------------------------------------
-    require("funciones_form_cambio_pass.php");
+    require("funciones_form_cambio_pass_admin.php");
 
     require("funciones_menu_contextual.php"); 
 ?>
@@ -25,7 +25,6 @@ else
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/index-estilo.css" >
     <link rel="stylesheet" href="css/forms-estilo.css" >
-    <link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
     <title>Cambio de contraseña</title>
     <script>
         
@@ -34,7 +33,7 @@ else
 </head>
 <body>
 
-     <!-- Menu contextual-->
+    <!-- Menu contextual-->
     
     <?php echo obtener_menu()?>
     
@@ -61,7 +60,7 @@ else
         <h3>Cambio de contraseña</h3>
 
         <fieldset>
-           <form id="formulario_password" name="formulario_password" action = "form_cambio_pass.php" method = "POST" class="form-horizontal" >
+           <form id="formulario_password" name="formulario_password" action = "form_cambio_pass_admin.php" method = "POST" class="form-horizontal" >
 
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
@@ -105,21 +104,6 @@ else
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="fondo_encabezado.js" ></script>
-    <script src="js/fileinput.min.js"></script> <!-- https://github.com/kartik-v/bootstrap-fileinput -->
-    <script src="js/fileinput_locale_es.js"></script>
-    <script>
-    $(document).on('ready', function() {
-
-        $("#foto_perfil").fileinput({
-            language: "es",
-            allowedFileExtensions: ["jpg", "png", "jpeg"],
-            maxFileSize: 2000, //Size is in KB, aceptable "MB"
-            showUpload: false,
-            maxFileCount: 1,
-            previewClass: "bg-warning"
-        });
-    });
-    </script>
 
 </body>
 </html>

@@ -81,6 +81,7 @@ CREATE TABLE IF NOT EXISTS `bd_proteccion_civil`.`antecedentes` (
   `cargos_anteriores` VARCHAR(50) NULL DEFAULT NULL,
   `patrullero` ENUM('si','no') NULL DEFAULT NULL,
   `fecha_graduacion` VARCHAR(50) NULL DEFAULT NULL,
+  `fecha_ingreso` VARCHAR(50) NULL DEFAULT NULL,
   `dir_ccpp` TEXT NULL DEFAULT NULL,
   `datos_personales_id_num_reg` INT(11) NOT NULL,
   PRIMARY KEY (`datos_personales_id_num_reg`),
