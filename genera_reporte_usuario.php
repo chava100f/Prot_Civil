@@ -19,9 +19,9 @@ else
 
   $id_usuario_reporte = $_GET['id']; //lo obtiene por URL en el link de la tabla
 
-  $color_celda="<td bgcolor='#0099FF' style='color:white;'>";
-  $color_celda_titulo="<td bgcolor='#0099FF' colspan='6' align='center' style='color:white;'>";
-  $color_celda_esp1="<td bgcolor='#0099FF' colspan='3' style='color:white;'>";
+  $color_celda="<td bgcolor='#224FB0' style='color:white;'>";
+  $color_celda_titulo="<td bgcolor='#224FB0' colspan='6' align='center' style='color:white;'>";
+  $color_celda_esp1="<td bgcolor='#224FB0' colspan='3' style='color:white;'>";
 
 
   $query = 'SELECT * FROM datos_personales WHERE id_num_reg="'.$id_usuario_reporte.'"';
@@ -144,22 +144,23 @@ $codigoHTML='
           <img src="imagenes/brsam-logo.png"  style="width:100px;height:107px;"/>
         </td>
         <td colspan="4" align="center" width="60%">
-          <strong> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </strong><br>
-          <strong> BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. </strong><br>
+          <div style="color: white; font-size: 4px;">BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C.</div><br>
+          <p><b>BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C.</b><br>
           RFC: BRS660309598<br>
           PREMIO NACIONAL DE PROTECCIÓN CIVIL 2009<br>
           PREMIO NACIONAL DE ACCIÓN VOLUNTARIA Y SOLIDARIADAD 2012<br>
-          www.socorroalpinodemexico.org.mx
+          www.socorroalpinodemexico.org.mx<br></p>
         </td>
         <td align="center" width="20%">
           <img src="imagenes/brsam-logo.png" style="width:100px;height:107px;"/>
         </td>
       </tr>
+     
       <tr>
-        <td rowspan="11" colspan="2" align="center">
+        <td rowspan="7" colspan="2" align="center">
 
       ';
-              $codigo_mostrar = "<img src='".$fotografia."' style='width:150px;height:200px;'/>";
+              $codigo_mostrar = "<img src='".$fotografia."' style='width:220px;height:300px;'/>";
               $codigoHTML.=$codigo_mostrar;
 
        $codigoHTML.='
@@ -267,7 +268,7 @@ $codigoHTML='
        $codigoHTML.=$color_celda;
 
        $codigoHTML.='<strong>Email</strong></td>
-        <td colspan="3">';
+        <td colspan="5">';
 
               $codigo_mostrar = $email;
               $codigoHTML.=$codigo_mostrar;
@@ -280,7 +281,7 @@ $codigoHTML='
       $codigoHTML.=$color_celda;
 
       $codigoHTML.='<strong>Fecha de Nacimiento</strong></td>
-        <td>';
+        <td colspan="2">';
 
               $codigo_mostrar = $fecha_nac;
               $codigoHTML.=$codigo_mostrar;
@@ -291,7 +292,7 @@ $codigoHTML='
       $codigoHTML.=$color_celda;
 
       $codigoHTML.='<strong>Edad</strong></td>
-        <td>';
+        <td colspan="2">';
           
               $codigo_mostrar = $edad;
               $codigoHTML.=$codigo_mostrar;
@@ -304,7 +305,7 @@ $codigoHTML='
       $codigoHTML.=$color_celda;
 
       $codigoHTML.='<strong>Estado Civil</strong></td>
-        <td>';
+        <td colspan="2">';
           
               $codigo_mostrar = ucfirst($estado_civil); //convierte la primer letra del string en Mayúscula
               $codigoHTML.=$codigo_mostrar;
@@ -314,7 +315,7 @@ $codigoHTML='
       $codigoHTML.=$color_celda;
 
       $codigoHTML.='<strong>Nacionalidad</strong></td>
-        <td>';
+        <td colspan="2">';
           
               $codigo_mostrar = $nacionalidad;
               $codigoHTML.=$codigo_mostrar;
@@ -326,7 +327,7 @@ $codigoHTML='
       $codigoHTML.=$color_celda;
 
       $codigoHTML.='<strong>Escolaridad</strong></td>
-        <td>';
+        <td colspan="2">';
           
               $codigo_mostrar = $escolaridad; //convierte la primer letra del string en Mayúscula
               $codigoHTML.=$codigo_mostrar;
@@ -336,7 +337,7 @@ $codigoHTML='
       $codigoHTML.=$color_celda;
 
       $codigoHTML.='<strong>Ocupación</strong></td>
-        <td>';
+        <td colspan="2">';
           
               $codigo_mostrar = $ocupacion;
               $codigoHTML.=$codigo_mostrar;
@@ -772,6 +773,54 @@ $codigoHTML='
               $codigoHTML.=$codigo_mostrar;
           
       $codigoHTML.='</td>
+      </tr>
+      <tr>';
+
+      $codigoHTML.=$color_celda_titulo;
+
+      $codigoHTML.='<strong>Nombre y Firma de los padres o tutores</strong></td>
+      </tr> 
+      <tr>';
+
+      $codigoHTML.=$color_celda;
+
+      $codigoHTML.='<strong>Nombre</strong></td>
+        <td colspan="2">____________________________</td>';
+
+      $codigoHTML.=$color_celda;
+
+      $codigoHTML.='<strong>Firma</strong></td>
+        <td colspan="2">____________________________</td>
+      </tr>
+      <tr>';
+
+      $codigoHTML.=$color_celda;
+
+      $codigoHTML.='<strong>Nombre</strong></td>
+        <td colspan="2">____________________________</td>';
+
+      $codigoHTML.=$color_celda;
+
+      $codigoHTML.='<strong>Firma</strong></td>
+        <td colspan="2">____________________________</td>
+      </tr>
+      <tr>';
+
+      $codigoHTML.=$color_celda_titulo;
+
+      $codigoHTML.='<strong>Firma de Miembro de la BRSAM y/o Jefe de patrulla</strong></td>
+      </tr> 
+      <tr>';
+
+      $codigoHTML.=$color_celda;
+
+      $codigoHTML.='<strong>Miembro BRSAM Patrulla/Delegación</strong></td>
+        <td colspan="2">____________________________</td>';
+
+      $codigoHTML.=$color_celda;
+
+      $codigoHTML.='<strong>Vo. Bo. Jefe de Patrulla o Delegación</strong></td>
+        <td colspan="2">____________________________</td>
       </tr>
       <tr>
         <td colspan="6" align="center">

@@ -27,19 +27,19 @@
 				$tipo_cuenta = $dat['tipo_cuenta'];
 				$_SESSION['user_type'] = $tipo_cuenta; //determina el tipo de cuenta que es el usuario para el menu
 
-				if($tipo_cuenta == "usuario")
+				if($tipo_cuenta == "USUARIO")
 				{
 					$_SESSION['logged_user'] = $user;
 					header("Location: index_usuario.php");
 					exit();					
 				}
-				if($tipo_cuenta == "jefe")
+				if($tipo_cuenta == "JEFE")
 				{
 					$_SESSION['logged_user'] = $user;
 					header("Location: index_jefe_patrulla.php");
 					exit();					
 				}
-				if($tipo_cuenta == "admin")
+				if($tipo_cuenta == "ADMIN")
 				{
 					$_SESSION['logged_user'] = $user;
 					header("Location: index_admin.php");
@@ -59,7 +59,7 @@
 					session_start();
 					$_SESSION['logged'] = 'yes';
 					$_SESSION['logged_user'] = $user;
-					$_SESSION['user_type'] = "admin";
+					$_SESSION['user_type'] = "ADMIN";
 				}
 
 				desconectar($conexion);

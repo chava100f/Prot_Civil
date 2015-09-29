@@ -23,58 +23,67 @@ else
 
         if($nombre_patrulla != "")
         {
-			    $id_p=rand(100,1000);
+          $id_p = strip_tags($_POST['clave_p']);
 
-        	require("funciones.php");
-          $conexion = conectar();
-
-          $nombre_patrulla = mysqli_real_escape_string($conexion, $nombre_patrulla);
-
-          $bandera_alta="";
-
-          //Revisa que no exista ya esa patrulla en la BD
-          $query = 'SELECT id_patrullas FROM patrullas WHERE nombre = "'.$nombre_patrulla.'";';
-          $consulta = ejecutarQuery($conexion, $query);
-          if (mysqli_num_rows($consulta)) {
-            while ($dat = mysqli_fetch_array($consulta)){
-                $c = $dat['id_patrullas'];
-            }
-              $bandera_alta =1;
-          }
-
-          if($bandera_alta!=1)//Si no se activo la bandera puede dar de alta la patrulla
+          if(strlen($id_p)>=4 && strlen($id_p)<=6)
           {
-          	$query = 'INSERT INTO patrullas(id_patrullas, nombre) VALUES ("'.$id_p.'", "'.$nombre_patrulla.'")';
-          	$consulta = ejecutarQuery($conexion, $query);
-          	
-            //Revisa que se haya subido correctamente la patrulla a la BD
-            $query = 'SELECT id_patrullas, nombre FROM patrullas WHERE nombre = "'.$nombre_patrulla.'" AND id_patrullas = "'.$id_p.'"';
-            $consulta = ejecutarQuery($conexion, $query);
+          	require("funciones.php");
+            $conexion = conectar();
 
+            $nombre_patrulla = mysqli_real_escape_string($conexion, $nombre_patrulla);
+            $id_p = mysqli_real_escape_string($conexion, $id_p);
+
+            $bandera_alta="";
+
+            //Revisa que no exista ya esa patrulla en la BD
+            $query = 'SELECT id_patrullas FROM patrullas WHERE nombre = "'.$nombre_patrulla.'";';
+            $consulta = ejecutarQuery($conexion, $query);
             if (mysqli_num_rows($consulta)) {
-                while ($dat = mysqli_fetch_array($consulta)){
-                    $n = $dat['nombre'];
-                    $c = $dat['id_patrullas'];
-                }
-                $mensaje_server = '<div class="alert  alert-success" role="alert"><strong>¡Éxito!</strong> La patrulla '.$nombre_patrulla.' a sido agregada con la clave <b><u>'.$id_p.'</u></b></div>';
+              while ($dat = mysqli_fetch_array($consulta)){
+                  $c = $dat['id_patrullas'];
+              }
+                $bandera_alta =1;
             }
+
+            if($bandera_alta!=1)//Si no se activo la bandera puede dar de alta la patrulla
+            {
+            	$query = 'INSERT INTO patrullas(clave, nombre) VALUES ("'.$id_p.'", "'.$nombre_patrulla.'")';
+            	$consulta = ejecutarQuery($conexion, $query);
+            	
+              //Revisa que se haya subido correctamente la patrulla a la BD
+              $query = 'SELECT clave, nombre FROM patrullas WHERE nombre = "'.$nombre_patrulla.'" AND clave = "'.$id_p.'"';
+              $consulta = ejecutarQuery($conexion, $query);
+
+              if (mysqli_num_rows($consulta)) {
+                  while ($dat = mysqli_fetch_array($consulta)){
+                      $nombre_patrulla = $dat['nombre'];
+                      $clave = $dat['clave'];
+                  }
+                  $mensaje_server = '<div class="alert  alert-success" role="alert"><strong>¡Éxito!</strong> La patrulla <b>'.$nombre_patrulla.'</b> ha sido agregada con la clave <b><u>'.$clave.'</u></b></div>';
+              }
+              else
+              {
+                  $mensaje_server = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> No se pudo dar de alta la patrulla intente de nuevo.</div>';
+              }
+          	}
             else
             {
-                $mensaje_server = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> No se pudo dar de alta la patrulla intente de nuevo.</div>';
+                $mensaje_server = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> La patrulla '.$nombre_patrulla.' ya existe, intente con otro nombre.</div>';
             }
-        	}
+          	//header("Location: alta_patrulla_respuesta.php?nombre=".$nombre_patrulla."&id_p=".$id_p."");
+  			    //exit();
+
+            desconectar($conexion);
+          } 
           else
           {
-              $mensaje_server = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> La patrulla '.$nombre_patrulla.' ya existe, intente con otro nombre.</div>';
+            $error_nombre_p = "<div class='alert alert-danger' role='alert'><strong>Error:</strong> La longitud de la clave de patrulla debe ser entre 4 a 6 caracteres.</div>";
           }
-        	//header("Location: alta_patrulla_respuesta.php?nombre=".$nombre_patrulla."&id_p=".$id_p."");
-			    //exit();
 
-          desconectar($conexion);
         }
         else
         {
-        	$error_nombre_p = "El nombre de patrulla es inválido";
+        	$error_nombre_p = "<div class='alert alert-danger' role='alert'><strong>Error:</strong> El nombre de patrulla es inválido.</div>";
         }
 
     }
@@ -123,11 +132,31 @@ else
 
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                        Registrar nueva patrulla:
+                        Nombre de la nueva patrulla:
                     </label>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                         <input type="text" class="form-control" id="nombre_patrulla" name="nombre_patrulla" maxlength="20" required>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        Clave de la nueva patrulla:
+                    </label>
+                    <div class="col-xs-6 col-sm-8 col-md-6">
+                        <input type="text" class="form-control" id="clave_p" name="clave_p" minlength="4" maxlength="6" required placeholder="De 4 a 6 caracteres" style='font-family: serif;'>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-2">
+                      <button type="button" class="btn btn-success btn-block" onclick="obtiene_clave_p()">Aleatorio</button>
+                    </div>
+                </div>
+
+                
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        
+                    </label>
                 </div>
 
                 <?php echo $error_nombre_p; //error por si no se pone ningun nombre a la patrulla ?>
@@ -155,6 +184,18 @@ else
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="fondo_encabezado.js" ></script>
+    <script type="text/javascript">
+      function obtiene_clave_p()
+      {
+          var text = "";
+          var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+          for( var i=0; i < 6; i++ )
+              {text += possible.charAt(Math.floor(Math.random() * possible.length));}
+
+          document.getElementById("clave_p").value=text; 
+      }
+    </script>
 </body>
 </html>
 

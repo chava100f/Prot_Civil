@@ -62,7 +62,7 @@ else
         <fieldset>
     	   <form action = "form_personales.php" method = "POST" class="form-horizontal" >
 
-                <div class="form-group">
+                    <div class="form-group">
 
                         <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                             Nombre(s):
@@ -96,10 +96,10 @@ else
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 
-                            <div class="input-group date" data-date-format="dd/mm/yyyy">
+                            <div class="input-group date">
 
                                 <input type="text" class="form-control datepicker" id="fecha_nac" name="fecha_nac" pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="dd/mm/aaaa" value=<?php echo '"'.$fecha_nac.'"'?> />
-                                <span class="input-group-addon" id="datepicker1">
+                                <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </span>
 
@@ -264,11 +264,13 @@ else
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.es.js"></script>
     <script type="text/javascript"> 
         $(function(){ //script para dar formato al datepicker
-            $('.datepicker').datepicker({
-                format: "dd/mm/yyyy",
-                language: "es"
+            $('.input-group.date').datepicker({
+                format: "dd/mm/yyyy", 
+                startView: 2,         
+                language: "es"   
             });
         });
     </script>

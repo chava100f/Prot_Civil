@@ -13,12 +13,12 @@ else
 {   
     $tipo_cuenta=$_SESSION['user_type'];
 
-    if($tipo_cuenta=="jefe")
+    if($tipo_cuenta=="JEFE")
     {
         header("Location: index_jefe_patrulla.php");
         exit();
     }
-    if($tipo_cuenta=="admin")
+    if($tipo_cuenta=="ADMIN")
     {
         header("Location: index_admin.php");
         exit();

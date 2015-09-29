@@ -134,12 +134,12 @@
         //Recoleccion de datos...
 
         $fecha_nac = mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_nac']));
-        $dom_calle = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_calle']));
-        $dom_num_ext = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_ext']));
-        $dom_num_int = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_int']));
-        $dom_colonia = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_colonia']));
-        $dom_estado = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_estado']));
-        $dom_del_mun = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_del_mun']));
+        $dom_calle = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_calle'])));
+        $dom_num_ext = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_ext'])));
+        $dom_num_int = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_int'])));
+        $dom_colonia = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_colonia'])));
+        $dom_estado = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_estado'])));
+        $dom_del_mun = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_del_mun'])));
         $dom_cp = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_cp']));
         $telefono_casa = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_casa']));
         $telefono_celular = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_celular']));

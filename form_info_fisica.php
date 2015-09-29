@@ -68,9 +68,9 @@ else
                     </label>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                         <select id="sexo" class="form-control" name="sexo">
-                            <option <?php if ($sexo == "hombre" ) echo 'selected'; ?> value="hombre" >HOMBRE</option>
-                            <option <?php if ($sexo == "mujer" ) echo 'selected'; ?> value="mujer">MUJER</option>
-                            <option <?php if ($sexo == "otro" ) echo 'selected'; ?> value="otro">OTRO</option>
+                            <option <?php if ($sexo == "HOMBRE" ) echo 'selected'; ?> value="HOMBRE" >HOMBRE</option>
+                            <option <?php if ($sexo == "MUJER" ) echo 'selected'; ?> value="MUJER">MUJER</option>
+                            <option <?php if ($sexo == "OTRO" ) echo 'selected'; ?> value="OTRO">OTRO</option>
                         </select>
                     </div>
                 </div>

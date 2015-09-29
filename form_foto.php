@@ -66,7 +66,7 @@ else
             <div class="form-group">
                 <label class="col-xs-12 col-sm-12 col-md-4 col-lg-4 ">Selecciona un archivo:</label>
                  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                    <input class="file-loading" type="file" id="foto_perfil" name="foto_perfil" multiple=false >
+                    <input class="file-loading" type="file" id="foto_perfil" name="foto_perfil" multiple="false" required>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@ else
                             <li>Mostrar en primer plano la cabeza y los hombros del solicitante(aproximadamente de las clavículas hacia arriba).</li>
                             <li>Ser a color, sin retoques, que los contrastes y tonos coincidan con los tonos naturales de la piel.</li>
                             <li>Cabeza y cara descubierta, sin gorras, sombreros, diademas, moños, turbantes, lentes de ningún tipo y peinados que oculten el contorno de la cara, el rostro o las orejas.</li>
-                            <li>CEl solicitante debe aparecer con la cabeza derecha y viendo directamente a la cámara, tener la boca cerrada sin sonrisa y mantener una expresión neutra (evite poses artísticas).</li>
+                            <li>El solicitante debe aparecer con la cabeza derecha y viendo directamente a la cámara, tener la boca cerrada sin sonrisa y mantener una expresión neutra (evite poses artísticas).</li>
                         </ul>
                     Las características generales de la imagen de perfil son las mismas que las solicitadas en las fotografías para el trámite de pasaporte. Para más información de <a href="http://sre.gob.mx/fotografias">click aquí</a>.
                 </label>

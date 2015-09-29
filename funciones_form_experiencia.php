@@ -156,13 +156,13 @@ function insertar_experiencia_web() //código para poner los checkbox en la pág
 
         //Recoleccion de datos...
 
-        $cargos = mysqli_real_escape_string($conexion, strip_tags($_POST['cargos']));
-        $patrullero = mysqli_real_escape_string($conexion, strip_tags($_POST['patrullero']));
-        $fecha_g = mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_g']));
-        $fecha_i = mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_i']));
+        $cargos = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['cargos'])));
+        $patrullero = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['patrullero'])));
+        $fecha_g = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_g'])));
+        $fecha_i = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_i'])));
         $experiencia =$_POST['experiencia'];
-        $experiencia_otra = mysqli_real_escape_string($conexion, strip_tags($_POST['experiencia_otra']));
-        $nom_dir = mysqli_real_escape_string($conexion, strip_tags($_POST['nom_dir']));
+        $experiencia_otra = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['experiencia_otra'])));
+        $nom_dir = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['nom_dir'])));
 
         //TO DO Elaboración del Query (tratar de pasar esto a un Store procedure)!!!
         //Actualización de los datos en la tabla info_medica

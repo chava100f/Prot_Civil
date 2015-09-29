@@ -5,7 +5,7 @@
 		$tipo_cuenta=$_SESSION['user_type'];
 		$menu="";
 
-		if($tipo_cuenta=="usuario")
+		if($tipo_cuenta=="USUARIO")
 		{
 			$menu = "<nav class='navbar navbar-inverse navbar-fixed-top'>
 			      <div class='container-fluid'>
@@ -41,7 +41,7 @@
 			      </div>
 			    </nav>";
 		}
-		if($tipo_cuenta=="jefe")
+		if($tipo_cuenta=="JEFE")
 		{	
 			$menu = "<nav class='navbar navbar-inverse navbar-fixed-top'>
 			      <div class='container-fluid'>
@@ -78,7 +78,7 @@
 			    </nav>";
 
 		}
-		if($tipo_cuenta=="admin")
+		if($tipo_cuenta=="ADMIN")
 		{	
 			$menu = "<nav class='navbar navbar-inverse navbar-fixed-top'>
 			      <div class='container-fluid'>

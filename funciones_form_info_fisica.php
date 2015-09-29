@@ -64,15 +64,15 @@
 
         //Recoleccion de datos...
 
-        $sexo = mysqli_real_escape_string($conexion, strip_tags($_POST['sexo']));
+        $sexo = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['sexo'])));
         $estatura = mysqli_real_escape_string($conexion, strip_tags($_POST['estatura']));
         $peso = mysqli_real_escape_string($conexion, strip_tags($_POST['peso']));
-        $complexion = mysqli_real_escape_string($conexion, strip_tags($_POST['complexion']));
-        $cabello = mysqli_real_escape_string($conexion, strip_tags($_POST['cabello']));
-        $ojos = mysqli_real_escape_string($conexion, strip_tags($_POST['ojos']));
-        $cara = mysqli_real_escape_string($conexion, strip_tags($_POST['cara']));
-        $nariz = mysqli_real_escape_string($conexion, strip_tags($_POST['nariz']));
-        $senias = mysqli_real_escape_string($conexion, strip_tags($_POST['senias']));
+        $complexion = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['complexion'])));
+        $cabello = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['cabello'])));
+        $ojos = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['ojos'])));
+        $cara = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['cara'])));
+        $nariz = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['nariz'])));
+        $senias = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['senias'])));
 
         //TO DO Elaboración del Query (tratar de pasar esto a un Store procedure)!!!
         //Actualización de los datos en la tabla info_fisica

@@ -8,7 +8,7 @@ function obtener_mensaje() //código para obtener el nombre del usuario
 
     $user=$_SESSION['logged_user'];
 
-    $query = 'SELECT nombre, apellido_p, apellido_m, patrullas_id_patrullas FROM datos_personales WHERE email="'.$user.'"';
+    $query = 'SELECT nombre, apellido_p, apellido_m FROM datos_personales WHERE email="'.$user.'"';
     $consulta = ejecutarQuery($conexion, $query);
     $mensaje="";
 
@@ -17,7 +17,6 @@ function obtener_mensaje() //código para obtener el nombre del usuario
             $apellido_p = $dat['apellido_p'];
             $apellido_m = $dat['apellido_m'];
             $nombre = $dat['nombre'];
-            $id_patrulla = $dat['patrullas_id_patrullas'];
         }
     }
 
@@ -100,7 +99,7 @@ function obtener_jefe_patrulla()//código para obtener el nombre del jefe patrul
         }
     }
 
-    $query = 'SELECT nombre, apellido_p, apellido_m FROM datos_personales WHERE patrullas_id_patrullas='.$id_patrulla.' AND tipo_cuenta="jefe"';
+    $query = 'SELECT nombre, apellido_p, apellido_m FROM datos_personales WHERE patrullas_id_patrullas='.$id_patrulla.' AND tipo_cuenta="JEFE"';
     $consulta = ejecutarQuery($conexion, $query);
     if (mysqli_num_rows($consulta)) {
         while ($dat = mysqli_fetch_array($consulta)){
@@ -170,8 +169,6 @@ function obtener_porcentaje_datos_bd()//código para obtener el porcentaje de re
             $porcentaje = $porcentaje + 20;
         }
     }
-
-    //TO DO revisar como subir los datos de experiencia y revisar que si se encuentren todos los datos que creo que faltan algunos de hecho hasta en la BD
 
     desconectar($conexion);
 

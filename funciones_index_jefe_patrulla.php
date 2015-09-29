@@ -9,7 +9,7 @@ function obtener_mensaje() //código para llenar la tabla de las patrullas actua
 
     $user=$_SESSION['logged_user'];
 
-    $query = 'SELECT nombre, apellido_p, apellido_m, patrullas_id_patrullas FROM datos_personales WHERE email="'.$user.'"';
+    $query = 'SELECT nombre, apellido_p, apellido_m FROM datos_personales WHERE email="'.$user.'"';
     $consulta = ejecutarQuery($conexion, $query);
     $mensaje="";
 
@@ -18,7 +18,6 @@ function obtener_mensaje() //código para llenar la tabla de las patrullas actua
             $apellido_p = $dat['apellido_p'];
             $apellido_m = $dat['apellido_m'];
             $nombre = $dat['nombre'];
-            $patrulla = $dat['patrullas_id_patrullas'];
         }
     }
 
@@ -75,8 +74,16 @@ function obtener_patrulla_actual($peticion)//código para obtener el nombre de l
 
     if($peticion=="clave_patrulla")
     {
+        $query = 'SELECT clave FROM patrullas WHERE id_patrullas='.$id_patrulla;
+        $consulta = ejecutarQuery($conexion, $query);
+        if (mysqli_num_rows($consulta)) {
+            while ($dat = mysqli_fetch_array($consulta)){
+                $clave = $dat['clave'];
+            }
+        }
+
         desconectar($conexion);
-        return $id_patrulla;
+        return $clave;
         exit();
     }
     else //peticion="nombre"
@@ -110,7 +117,7 @@ function obtener_jefe_patrulla()//código para obtener el nombre del jefe patrul
         }
     }
 
-    $query = 'SELECT nombre, apellido_p, apellido_m FROM datos_personales WHERE patrullas_id_patrullas='.$id_patrulla.' AND tipo_cuenta="jefe"';
+    $query = 'SELECT nombre, apellido_p, apellido_m FROM datos_personales WHERE patrullas_id_patrullas='.$id_patrulla.' AND tipo_cuenta="JEFE"';
     $consulta = ejecutarQuery($conexion, $query);
     if (mysqli_num_rows($consulta)) {
         while ($dat = mysqli_fetch_array($consulta)){

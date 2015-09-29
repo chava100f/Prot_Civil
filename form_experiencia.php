@@ -79,8 +79,8 @@ else
                     </label>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                         <select id="patrullero" class="form-control" name="patrullero">
-                            <option <?php if ($patrullero == "si" ) echo 'selected'; ?> value="si">SI</option>
-                            <option <?php if ($patrullero == "no" ) echo 'selected'; ?> value="no">NO</option>
+                            <option <?php if ($patrullero == "SI" ) echo 'selected'; ?> value="SI">SI</option>
+                            <option <?php if ($patrullero == "NO" ) echo 'selected'; ?> value="NO">NO</option>
                         </select>
                     </div>
                 </div>
@@ -91,10 +91,10 @@ else
                     </label>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 
-                        <div class="input-group date" data-date-format="dd/mm/yyyy">
+                        <div class="input-group date">
 
                             <input type="text" class="form-control datepicker" id="fecha_i" name="fecha_i"  placeholder="dd/mm/aaaa" value=<?php echo '"'.$fecha_i.'"'?> />
-                            <span class="input-group-addon" id="datepicker1">
+                            <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-calendar"></i>
                             </span>
 
@@ -109,10 +109,10 @@ else
                     </label>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 
-                        <div class="input-group date" data-date-format="dd/mm/yyyy">
+                        <div class="input-group date">
 
                             <input type="text" class="form-control datepicker" id="fecha_g" name="fecha_g"  placeholder="dd/mm/aaaa" value=<?php echo '"'.$fecha_g.'"'?> />
-                            <span class="input-group-addon" id="datepicker1">
+                            <span class="input-group-addon">
                                 <i class="glyphicon glyphicon-calendar"></i>
                             </span>
 
@@ -171,11 +171,13 @@ else
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            $('.datepicker').datepicker({
-                format: "dd/mm/yyyy",
-                language: "es"
+    <script type="text/javascript" src="js/bootstrap-datepicker.es.js"></script>
+    <script type="text/javascript"> 
+        $(function(){ //script para dar formato al datepicker
+            $('.input-group.date').datepicker({
+                format: "dd/mm/yyyy", 
+                startView: 2,         
+                language: "es"   
             });
         });
     </script>

@@ -93,10 +93,10 @@ else
                     </label>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                         <select id="estado_civil" class="form-control" name="estado_civil">
-                            <option <?php if ($estado_civil == "soltero" ) echo 'selected'; ?> value="soltero">SOLTERO(A)</option>
-                            <option <?php if ($estado_civil == "casado" ) echo 'selected'; ?> value="casado">CASADO(A)</option>
-                            <option <?php if ($estado_civil == "divorciado" ) echo 'selected'; ?> value="divorciado">DIVORCIADO(A)</option>
-                            <option <?php if ($estado_civil == "viudo" ) echo 'selected'; ?> value="viudo">VIUDO(A)</option>
+                            <option <?php if ($estado_civil == "SOLTERO" ) echo 'selected'; ?> value="SOLTERO">SOLTERO(A)</option>
+                            <option <?php if ($estado_civil == "CASADO" ) echo 'selected'; ?> value="CASADO">CASADO(A)</option>
+                            <option <?php if ($estado_civil == "DIVORCIADO" ) echo 'selected'; ?> value="DIVORCIADO">DIVORCIADO(A)</option>
+                            <option <?php if ($estado_civil == "VIUDO" ) echo 'selected'; ?> value="VIUDO">VIUDO(A)</option>
                         </select>
                     </div>
                 </div>
@@ -189,7 +189,7 @@ else
                         Nombre:
                     </label>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <input type="text" class="form-control" id="contacto1" name="contacto1" maxlength="70" value=<?php echo '"'.$contacto1.'"'?> >
+                        <input type="text" class="form-control" id="contacto1" name="contacto1" maxlength="70" placeholder="Apellido Paterno - Apellido Materno - Nombre(s)" value=<?php echo '"'.$contacto1.'"'?> >
                     </div>
                 </div>
 
@@ -207,7 +207,7 @@ else
                         Nombre:
                     </label>
                     <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                        <input type="text" class="form-control" id="contacto2" name="contacto2" maxlength="70" value=<?php echo '"'.$contacto2.'"'?> >
+                        <input type="text" class="form-control" id="contacto2" name="contacto2" maxlength="70" placeholder="Apellido Paterno - Apellido Materno - Nombre(s)" value=<?php echo '"'.$contacto2.'"'?> >
                     </div>
                 </div>
 

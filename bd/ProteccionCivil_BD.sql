@@ -20,6 +20,7 @@ DROP TABLE IF EXISTS `bd_proteccion_civil`.`patrullas` ;
 CREATE TABLE IF NOT EXISTS `bd_proteccion_civil`.`patrullas` (
   `id_patrullas` INT(11) NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
+  `clave` INT(11) NOT NULL,
   PRIMARY KEY (`id_patrullas`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
@@ -51,12 +52,12 @@ CREATE TABLE IF NOT EXISTS `bd_proteccion_civil`.`datos_personales` (
   `email` VARCHAR(50) NULL DEFAULT NULL,
   `email_red_social` VARCHAR(50) NULL DEFAULT NULL,
   `contrasenia` VARCHAR(16) NULL DEFAULT NULL,
-  `tipo_cuenta` ENUM('usuario','jefe','admin') NULL DEFAULT NULL,
+  `tipo_cuenta` ENUM('USUARIO','JEFE','ADMIN') NULL DEFAULT NULL,
   `contacto1` VARCHAR(80) NULL DEFAULT NULL,
   `contacto2` VARCHAR(80) NULL DEFAULT NULL,
   `telefono_c1` VARCHAR(13) NULL DEFAULT NULL,
   `telefono_c2` VARCHAR(13) NULL DEFAULT NULL,
-  `calidad_miembro` ENUM('activo','inactivo','baja','suspendido') NULL DEFAULT NULL,
+  `calidad_miembro` ENUM('ACTIVO','INACTIVO','BAJA','SUSPENDIDO') NULL DEFAULT NULL,
   `fecha_registro` TEXT NULL,
   `fotografia` TEXT NULL,
   `patrullas_id_patrullas` INT(11) NOT NULL,
@@ -79,7 +80,7 @@ DROP TABLE IF EXISTS `bd_proteccion_civil`.`antecedentes` ;
 
 CREATE TABLE IF NOT EXISTS `bd_proteccion_civil`.`antecedentes` (
   `cargos_anteriores` VARCHAR(50) NULL DEFAULT NULL,
-  `patrullero` ENUM('si','no') NULL DEFAULT NULL,
+  `patrullero` ENUM('SI','NO') NULL DEFAULT NULL,
   `fecha_graduacion` VARCHAR(50) NULL DEFAULT NULL,
   `fecha_ingreso` VARCHAR(50) NULL DEFAULT NULL,
   `dir_ccpp` TEXT NULL DEFAULT NULL,
@@ -100,7 +101,7 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `bd_proteccion_civil`.`datos_complementarios` ;
 
 CREATE TABLE IF NOT EXISTS `bd_proteccion_civil`.`datos_complementarios` (
-  `estado_civil` ENUM('soltero','casado','divorciado','viudo') NULL DEFAULT NULL,
+  `estado_civil` ENUM('SOLTERO','CASADO','DIVORCIADO','VIUDO') NULL DEFAULT NULL,
   `ocupacion` VARCHAR(45) NULL DEFAULT NULL,
   `escolaridad` VARCHAR(45) NULL DEFAULT NULL,
   `edad` INT(2) NULL DEFAULT NULL,
@@ -139,7 +140,14 @@ COMMENT = 'Tabla de Estados de la República Mexicana';
 
 LOCK TABLES `estados` WRITE;
 /*!40000 ALTER TABLE `estados` DISABLE KEYS */;
-INSERT INTO `estados` VALUES (1,'01','Aguascalientes','Ags.'),(2,'02','Baja California','BC'),(3,'03','Baja California Sur','BCS'),(4,'04','Campeche','Camp.'),(5,'05','Coahuila de Zaragoza','Coah.'),(6,'06','Colima','Col.'),(7,'07','Chiapas','Chis.'),(8,'08','Chihuahua','Chih.'),(9,'09','Distrito Federal','DF'),(10,'10','Durango','Dgo.'),(11,'11','Guanajuato','Gto.'),(12,'12','Guerrero','Gro.'),(13,'13','Hidalgo','Hgo.'),(14,'14','Jalisco','Jal.'),(15,'15','México','Mex.'),(16,'16','Michoacán de Ocampo','Mich.'),(17,'17','Morelos','Mor.'),(18,'18','Nayarit','Nay.'),(19,'19','Nuevo León','NL'),(20,'20','Oaxaca','Oax.'),(21,'21','Puebla','Pue.'),(22,'22','Querétaro','Qro.'),(23,'23','Quintana Roo','Q. Roo'),(24,'24','San Luis Potosí','SLP'),(25,'25','Sinaloa','Sin.'),(26,'26','Sonora','Son.'),(27,'27','Tabasco','Tab.'),(28,'28','Tamaulipas','Tamps.'),(29,'29','Tlaxcala','Tlax.'),(30,'30','Veracruz de Ignacio de la Llave','Ver.'),(31,'31','Yucatán','Yuc.'),(32,'32','Zacatecas','Zac.');
+INSERT INTO `estados` VALUES (1,'01','AGUASCALIENTES','Ags.'),(2,'02','BAJA CALIFORNIA','BC'),(3,'03','BAJA CALIFORNIA SUR','BCS'),
+(4,'04','CAMPECHE','Camp.'),(5,'05','COAHUILA','Coah.'),(6,'06','COLIMA','Col.'),(7,'07','CHIAPAS','Chis.'),(8,'08','CHIHUAHUA','Chih.'),
+(9,'09','DISTRITO FEDERAL','DF'),(10,'10','DURANGO','Dgo.'),(11,'11','ESTADO DE MÉXICO','Mex.'),(12,'12','GUANAJUATO','Gto.'),
+(13,'13','GUERRERO','Gro.'),(14,'14','HIDALGO','Hgo.'),(15,'15','JALISCO','Jal.'),(16,'16','MICHOACÁN','Mich.'),
+(17,'17','MORELOS','Mor.'),(18,'18','NAYARIT','Nay.'),(19,'19','NUEVO LEÓN','NL'),(20,'20','OAXACA','Oax.'),
+(21,'21','PUEBLA','Pue.'),(22,'22','QUERETARO','Qro.'),(23,'23','QUINTANA ROO','Q. Roo'),(24,'24','SAN LUIS POTOSÍ','SLP'),
+(25,'25','SINALOA','Sin.'),(26,'26','SONORA','Son.'),(27,'27','TABASCO','Tab.'),(28,'28','TAMAULIPAS','Tamps.'),
+(29,'29','TLAXCALA','Tlax.'),(30,'30','VERACRUZ','Ver.'),(31,'31','YUCATÁN','Yuc.'),(32,'32','ZACATECAS','Zac.');
 /*!40000 ALTER TABLE `estados` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +158,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `bd_proteccion_civil`.`info_fisica` ;
 
 CREATE TABLE IF NOT EXISTS `bd_proteccion_civil`.`info_fisica` (
-  `genero` ENUM('hombre','mujer','otro') NULL DEFAULT NULL,
+  `genero` ENUM('HOMBRE','MUJER','OTRO') NULL DEFAULT NULL,
   `estatura` FLOAT NULL DEFAULT NULL,
   `peso` FLOAT NULL DEFAULT NULL,
   `complexion` TEXT NULL DEFAULT NULL,

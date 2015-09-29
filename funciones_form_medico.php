@@ -157,9 +157,9 @@
 
         $sangre = mysqli_real_escape_string($conexion, strip_tags($_POST['sangre']));
         $vacuna_local =$_POST['vacuna_local'];
-        $vacuna_internacional = mysqli_real_escape_string($conexion, strip_tags($_POST['vacuna_internacional']));
-        $padecimientos_limitfisicas = mysqli_real_escape_string($conexion, strip_tags($_POST['padecimientos_limitfisicas']));
-        $alergias = mysqli_real_escape_string($conexion, strip_tags($_POST['alergias']));
+        $vacuna_internacional = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['vacuna_internacional'])));
+        $padecimientos_limitfisicas = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['padecimientos_limitfisicas'])));
+        $alergias = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['alergias'])));
         $servicio_medico = mysqli_real_escape_string($conexion, strip_tags($_POST['servicio_medico']));
 
         //TO DO Elaboración del Query (tratar de pasar esto a un Store procedure)!!!

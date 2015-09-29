@@ -26,9 +26,6 @@ else
     <link rel="stylesheet" href="css/index-estilo.css" >
     <link rel="stylesheet" href="css/forms-estilo.css" >
 	<title>Actualización de Información Médica</title>
-    <script>
-        
-    </script>
 
 </head>
 <body>

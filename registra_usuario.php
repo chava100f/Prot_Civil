@@ -58,16 +58,16 @@
                         //Recoleccion de datos...
 
                         $id_p = mysqli_real_escape_string($conexion, strip_tags($_POST['id_patrulla']));
-                        $nombres = mysqli_real_escape_string($conexion, $nombres);                        
-                        $apellido_p = mysqli_real_escape_string($conexion, $apellido_p);
-                        $apellido_m = mysqli_real_escape_string($conexion, strip_tags($_POST['apellido_m']));
+                        $nombres = strtoupper(mysqli_real_escape_string($conexion, $nombres));                        
+                        $apellido_p = strtoupper(mysqli_real_escape_string($conexion, $apellido_p));
+                        $apellido_m = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['apellido_m'])));
                         $fecha_nac = mysqli_real_escape_string($conexion, strip_tags($_POST['fecha_nac']));
-                        $dom_calle = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_calle']));
-                        $dom_num_ext = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_ext']));
-                        $dom_num_int = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_int']));
-                        $dom_colonia = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_colonia']));
-                        $dom_estado = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_estado']));
-                        $dom_del_mun = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_del_mun']));
+                        $dom_calle = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_calle'])));
+                        $dom_num_ext = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_ext'])));
+                        $dom_num_int = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_num_int'])));
+                        $dom_colonia = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_colonia'])));
+                        $dom_estado = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_estado'])));
+                        $dom_del_mun = strtoupper(mysqli_real_escape_string($conexion, strip_tags($_POST['dom_del_mun'])));
                         $dom_cp = mysqli_real_escape_string($conexion, strip_tags($_POST['dom_cp']));
                         $telefono_casa = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_casa']));
                         $telefono_celular = mysqli_real_escape_string($conexion, strip_tags($_POST['telefono_celular']));
@@ -195,10 +195,10 @@
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 
-                            <div class="input-group date" data-date-format="dd/mm/yyyy">
+                            <div class="input-group date">
 
-                                <input type="text" class="form-control datepicker" id="fecha_nac" name="fecha_nac" pattern="\d{1,2}/\d{1,2}/\d{4}" placeholder="dd/mm/aaaa" disabled/>
-                                <span class="input-group-addon" id="datepicker1">
+                                <input type="text" class="form-control datepicker" id="fecha_nac" name="fecha_nac" placeholder="dd/mm/aaaa" disabled/>
+                                <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </span>
 
@@ -371,7 +371,7 @@
                             Contraseña:
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <input type="password" class="form-control" id="pass1" name="pass1" maxlength="10" required disabled pattern=".{5,10}" title="5 to 10 caracteres">
+                            <input type="password" class="form-control" id="pass1" name="pass1" maxlength="16" required disabled pattern=".{5,16}" title="5 to 16 caracteres">
                         </div>
                     </div>
 
@@ -380,7 +380,7 @@
                             Confirmar contraseña:
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-                            <input type="password" class="form-control" id="pass2" name="pass2" onkeypress='validate(event)' maxlength="10" required  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off  disabled pattern=".{5,10}" title="5 to 10 caracteres">
+                            <input type="password" class="form-control" id="pass2" name="pass2" onkeypress='validate(event)' maxlength="16" required  onCopy="return false" onDrag="return false" onDrop="return false" onPaste="return false" autocomplete=off  disabled pattern=".{5,16}" title="5 to 16 caracteres">
                         </div>
                     </div>
 
@@ -445,6 +445,16 @@ Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap-datepicker.es.js"></script>
+    <script type="text/javascript"> 
+        $(function(){ //script para dar formato al datepicker
+            $('.input-group.date').datepicker({
+                format: "dd/mm/yyyy", 
+                startView: 2,         
+                language: "es"   
+            });
+        });
+    </script>
     <script type="text/javascript">
 
     function validacion(){
@@ -494,14 +504,6 @@ Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
     }
 
     </script>
-    <script type="text/javascript"> 
-        $(function(){ //script para dar formato al datepicker
-            $('.datepicker').datepicker({
-                format: "dd/mm/yyyy",
-                language: "es"
-            });
-        });
-    </script>
     <script>
 
         var id, nombre;
@@ -518,8 +520,10 @@ Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
                         
                         var respuesta = xmlhttp.responseText;
 
-                        id = respuesta.substring(0, 3);
-                        nombre = respuesta.substring(4,50);
+                        var palabras = respuesta.split("-");
+
+                        id = palabras[0];
+                        nombre = palabras[1];
                         
                         if(respuesta == "Patrulla inexistente")
                         {
@@ -579,7 +583,7 @@ Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
 
                     }
                 }
-                xmlhttp.open("GET", "revisa_patrulla.php?p=" + str, true);
+                xmlhttp.open("GET", "revisa_patrulla.php?c=" + str, true);
                 xmlhttp.send();
             }
         }
