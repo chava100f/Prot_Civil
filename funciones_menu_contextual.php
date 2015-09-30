@@ -100,8 +100,8 @@
 			                Buscar <span class='caret'></span>
 			                </a>
 			                <ul class='dropdown-menu inverse-dropdown' >
-			                    <li><a href='#'>Usuario</a></li>
-			                    <li><a href='#'>Patrulla</a></li>
+			                    <li><a href='busca_usuario.php'>Usuario</a></li>
+			                    <li><a href='busca_patrulla.php'>Patrulla</a></li>
 			                </ul>
 			            </li>
 			            <li><a href='alta_patrulla.php'>Alta Patrulla</a></li>

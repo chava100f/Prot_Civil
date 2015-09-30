@@ -70,14 +70,14 @@ else
                 $apellido_p = $dat['apellido_p'];
                 $apellido_m = $dat['apellido_m'];
                 $fotografia = $dat['fotografia'];
-                $patrullas_id_patrullas = $dat['patrulla'];
+                $patrulla = $dat['patrulla'];
                 $calidad_miembro = $dat['calidad_miembro'];
                 $tipo_cuenta = $dat['tipo_cuenta'];
 
                 //Agregar codigo para mandar a modificar la patrulla seleccionada
                 $usuarios_tabla.='<tr><td><img src="'.$fotografia.'" style="width:50px;height:50px;" /></td>';
                 $usuarios_tabla.='<td>'.$nombre." ".$apellido_p." ".$apellido_m.'</td>';
-                $usuarios_tabla.='<td>'.$patrullas_id_patrullas.'</td>';
+                $usuarios_tabla.='<td>'.$patrulla.'</td>';
                 $usuarios_tabla.='<td>'.strtoupper($calidad_miembro).'</td>';
                 $usuarios_tabla.='<td>'.strtoupper($tipo_cuenta).'</td>';
                 $usuarios_tabla.='<td><a href="modificar_usuario.php?id='.$id_num_reg.'" class="btn btn-info">Modificar</td</tr>';

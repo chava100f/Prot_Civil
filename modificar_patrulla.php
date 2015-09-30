@@ -24,7 +24,7 @@ else
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/index-estilo.css" >
   <link rel="stylesheet" href="css/forms-estilo.css" >
-	<title>Alta Patrulla</title>
+	<title>Modifica Patrulla</title>
 </head>
 <body>
 

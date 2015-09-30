@@ -401,22 +401,22 @@
                             <textarea class="form-control" style="height: 300px;" id="terminosycondiciones" name="terminosycondiciones" maxlength="180" placeholder="Describir aquí" disabled>
 AVISO DE PRIVACIDAD
 
-Toda aquella información personal que el elemento proporciona se encuentra sujeta  a las normas de confidencialidad y privacidad y es almacenada en una base de datos de la Asociación. Los datos personales que usted comparta con la BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. no serán difundidos, distribuidos o comercializados. Esta información confidencial no se compoartirá con terceras partes, excepto que se tenga expresa autorización de quien la suscribe o cuando haya sido requerida por orden judicial para cumplor con las disposiciones procesales, su uso interno será con fines de administración de la información y recursos humanos de la Brigada.
+Toda aquella información personal que el elemento proporciona se encuentra sujeta  a las normas de confidencialidad y privacidad y es almacenada en una base de datos de la Asociación. Los datos personales que usted comparta con la BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C. no serán difundidos, distribuidos o comercializados. Esta información confidencial no se compartirá con terceras partes, excepto que se tenga expresa autorización de quien la suscribe o cuando haya sido requerida por orden judicial para cumplir con las disposiciones procesales, su uso interno será con fines de administración de información y recursos humanos de la Brigada.
 
 PRIMERO:
 La B.R.S.A.M.A.C. no asume responsabilidad alguna al aceptar esta solicitud, únicamente la recibe; por lo tanto el solicitante no queda automáticamente registrado como miembro por el solo hecho de haber entregado esta solicitud aun cuando hubiese pagado la cuota relativa. La B.R.S.A.M.A.C. se reserva el derecho de aceptar al solicitante y de aceptarlo como miembro, será avalado entregándole la credencial correspondiente al año en curso.
 
 SEGUNDO:
-Al aceptar la presente solicitud de registro el solicitante se compromete a cumplir y hacer los estatutos y reglamento(s) de la B.R.S.A.M.A.C.
+Al aceptar la presente solicitud de registro el solicitante se compromete a cumplir y hacer cumplir los estatutos y reglamento(s) de la B.R.S.A.M.A.C.
 "Conforme a los mismos confirmo que durante mi permanencia dentro de esta Institución en automático se renueve mi registro anual, el cual me comprometo a cubrir la cuota anual correspondiente, con la finalidad de agilizar el trámite cíclico hasta que por mi propio derecho desee continuar, hasta que así convenga a mis interés entonces realizaré por escrito mi baja o retiro de esta Brigada, con lo cual daré formal conclusión a mi relación con la misma".
 
 TERCERO (SI EL SOLICITANTE ES MENOR DE EDAD):
 "Declaramos bajo protesta decir la verdad de los datos personales escritos en esta solicitud de ingreso a la Brigada de Rescate del Socorro Alpino de México A. C., corresponden al solicitante menor de edad de quien ejercemos legalmente la patria potestad. Así mismo que lo autorizamos a ingresar a dicha Institución y a participar en las actividades que desarrolla. Liberamos y eximimos a la B.R.S.A.M.A.C., sus miembros y colaboradores de toda responsabilidad por los daños prejuicios y lesiones que nuestro autorizado sufriera durante estas actividades o por causa de ellas y asumimos las responsabilidades por los daños que resultan debido a su intervención. Este permiso se lo otorgamos por todo el tiempo que sea aspirante o miembro de la Brigada, sin menoscabo de que su permanencia en ella tenga interrupciones largas o cortas, y hasta que sea mayor de edad o lo cancelemos formalmente por escrito dirigido al Presidente de la Institución".
 
 CUARTO (PARA SOLICITANTES MAYOR DE EDAD):
-Libero y eximo a la B.R.S.A.M.A.C., sus miembros y colaboradores de toda responsabilidad por los daños, prejuicios y lesiones que sufriera durante sus actividades o por causa de ellas y asumo las responsabilidades por los daños que resulten debido a mi intervención. Este permiso lo otorgo por todo el tiempo que sea aspirante o miembro de la Brigada, sin menoscabo de que mi permanencia en ella tenga interrupciones largas o cortas, para realizar mi renuncia lo haré por escrito o me podrá ser revoada la calidad de miembro en los casos previstos en los estatutos, reglamento o ley vigilante.
+Libero y eximo a la B.R.S.A.M.A.C., sus miembros y colaboradores de toda responsabilidad por los daños, prejuicios y lesiones que sufriera durante sus actividades o por causa de ellas y asumo las responsabilidades por los daños que resulten debido a mi intervención. Este permiso lo otorgo por todo el tiempo que sea aspirante o miembro de la Brigada, sin menoscabo de que mi permanencia en ella tenga interrupciones largas o cortas, para realizar mi renuncia lo haré por escrito o me podrá ser revocada la calidad de miembro en los casos previstos en los estatutos, reglamento o ley vigente.
 
-Original para la Secretaria C.C.P. Tesorería Jefatura Operativa Nacional
+Original para la Secretaría C.C.P. Tesorería Jefatura Operativa Nacional
 
 Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
 

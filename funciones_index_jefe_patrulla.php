@@ -222,7 +222,8 @@ function obtener_patrulla_integrantes()//código para obtener el nombre de los i
             $mensaje.="<td>".$dat['apellido_m']."</td>";
             $mensaje.="<td>".$dat['email']."</td>";
             $mensaje.="<td>".$dat['calidad_miembro']."</td>";
-            $mensaje.="<td><a href='genera_reporte_usuario.php?id=".$dat['id_num_reg']."' class='btn btn-info'>Generar reporte</a></td></tr>";
+            $mensaje.="<td align='center'><a href='genera_reporte_usuario.php?id=".$dat['id_num_reg']."' class='btn btn-info'>Generar reporte</a></td>";
+            $mensaje.="<td align='center'><a href='genera_credencial_usuario.php?id=".$dat['id_num_reg']."' class='btn btn-info'>Generar credencial</a></td></tr>";
         }
     }
     else

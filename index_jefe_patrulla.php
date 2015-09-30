@@ -96,7 +96,8 @@ else
                         <th>Apellido Materno</th>
                         <th>Email</th>
                         <th>Calidad</th>
-                        <th>Reporte</th>
+                        <th><div align="center">Reporte</div></th>
+                        <th><div align="center">Credencial</div></th>
                     </thead>
                     <tbody>
                         <?php echo obtener_patrulla_integrantes(); ?>

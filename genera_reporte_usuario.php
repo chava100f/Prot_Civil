@@ -17,11 +17,73 @@ else
 
   $conexion = conectar();
 
-  $id_usuario_reporte = $_GET['id']; //lo obtiene por URL en el link de la tabla
-
   $color_celda="<td bgcolor='#224FB0' style='color:white;'>";
   $color_celda_titulo="<td bgcolor='#224FB0' colspan='6' align='center' style='color:white;'>";
   $color_celda_esp1="<td bgcolor='#224FB0' colspan='3' style='color:white;'>";
+
+  //Setting the variables 
+
+  $nombre = "";
+  $apellido_p = "";
+  $apellido_m = "";
+  $fecha_nac = "";
+  $dom_calle = "";
+  $dom_num_ext = "";
+  $dom_num_int = "";
+  $dom_col = "";
+  $dom_del_mun = "";
+  $id_dom_estado = "";
+  $dom_cp = "";
+  $telefono_casa = "";
+  $telefono_celular = "";
+  $telefono_trabajo = "";
+  $telefono_extension = "";
+  $email = "";
+  $tipo_cuenta = "";
+  $calidad_miembro = "";
+  $fotografia = "";
+  $contacto1 = "";
+  $contacto2 = "";
+  $telefono_c1 = "";
+  $telefono_c2 = "";
+  $fecha_registro = "";
+  $id_patrullas = "";
+
+  $nombre_patrulla = "";
+
+  $dom_estado = "";
+
+  $estado_civil = "";
+  $ocupacion = "";
+  $escolaridad = "";
+  $edad = "";
+  $trabajo_escuela = "";
+  $nacionalidad = "";
+  $cartilla_num = "";
+  $licencia_tipo = "";
+  $licencia_num = "";
+  $pasaporte = "";
+
+  $tipo_sangre = "";
+  $padecimientos_limitfisicas = "";
+  $alergias = "";
+  $servicio_medico = "";
+
+  $genero = "";
+  $estatura = "";
+  $peso = "";
+  $complexion = "";
+  $cabello = "";
+  $ojos = "";
+  $cara = "";
+  $nariz = "";
+  $senias_particulares = "";
+
+  $cargos_anteriores = "";
+  $patrullero = "";
+  $fecha_graduacion = "";
+  $fecha_ingreso = "";
+  $dir_ccpp = "";
 
 
   $query = 'SELECT * FROM datos_personales WHERE id_num_reg="'.$id_usuario_reporte.'"';
@@ -232,17 +294,17 @@ $codigoHTML='
 
        $codigoHTML.=$color_celda;
 
-       $codigoHTML.='<strong>Direccion</strong></td>
+       $codigoHTML.='<strong>Domicilio</strong></td>
         <td colspan="3">';
 
               $codigo_mostrar = $dom_calle." #".$dom_num_ext;
 
               if($dom_num_int!="")
               {
-                $codigo_mostrar.=" Int ".$dom_num_int." ";
+                $codigo_mostrar.=" INT. ".$dom_num_int." ";
               }
 
-              $codigo_mostrar.= "<br>Colonia ". $dom_col.", ".$dom_del_mun.", ".$dom_estado; 
+              $codigo_mostrar.= "<br>COL. ". $dom_col.", ".$dom_del_mun.", ".$dom_estado; 
               $codigoHTML.=$codigo_mostrar;
 
       $codigoHTML.='
@@ -255,9 +317,9 @@ $codigoHTML='
        $codigoHTML.='<strong>Telefonos</strong></td>
         <td colspan="3">';
 
-              $codigo_mostrar = "Casa: ".$telefono_casa."<br>";
-              $codigo_mostrar .= "Celular: ".$telefono_celular."<br>";
-              $codigo_mostrar .= "Trabajo: ".$telefono_trabajo." - ext: ".$telefono_extension;
+              $codigo_mostrar = "CASA: ".$telefono_casa."<br>";
+              $codigo_mostrar .= "CELULAR: ".$telefono_celular."<br>";
+              $codigo_mostrar .= "TRABAJO: ".$telefono_trabajo." - ext: ".$telefono_extension;
               $codigoHTML.=$codigo_mostrar;
 
       $codigoHTML.='
@@ -774,62 +836,154 @@ $codigoHTML='
           
       $codigoHTML.='</td>
       </tr>
-      <tr>';
-
-      $codigoHTML.=$color_celda_titulo;
-
-      $codigoHTML.='<strong>Nombre y Firma de los padres o tutores</strong></td>
-      </tr> 
-      <tr>';
-
-      $codigoHTML.=$color_celda;
-
-      $codigoHTML.='<strong>Nombre</strong></td>
-        <td colspan="2">____________________________</td>';
-
-      $codigoHTML.=$color_celda;
-
-      $codigoHTML.='<strong>Firma</strong></td>
-        <td colspan="2">____________________________</td>
-      </tr>
-      <tr>';
-
-      $codigoHTML.=$color_celda;
-
-      $codigoHTML.='<strong>Nombre</strong></td>
-        <td colspan="2">____________________________</td>';
-
-      $codigoHTML.=$color_celda;
-
-      $codigoHTML.='<strong>Firma</strong></td>
-        <td colspan="2">____________________________</td>
-      </tr>
-      <tr>';
-
-      $codigoHTML.=$color_celda_titulo;
-
-      $codigoHTML.='<strong>Firma de Miembro de la BRSAM y/o Jefe de patrulla</strong></td>
-      </tr> 
-      <tr>';
-
-      $codigoHTML.=$color_celda;
-
-      $codigoHTML.='<strong>Miembro BRSAM Patrulla/Delegación</strong></td>
-        <td colspan="2">____________________________</td>';
-
-      $codigoHTML.=$color_celda;
-
-      $codigoHTML.='<strong>Vo. Bo. Jefe de Patrulla o Delegación</strong></td>
-        <td colspan="2">____________________________</td>
-      </tr>
       <tr>
-        <td colspan="6" align="center">
-          Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
+        <td>OBSERVACIONES:</td>
+        <td colspan="5"></td>
+      </tr>
+
+      <tr>
+        <td colspan="6"><div style="color: white;">BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C.</div></td>
+      </tr>
+
+      <tr>
+        <td colspan="6"><div style="color: white;">BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C.</div></td>
+      </tr>
+
+      <tr>
+        <td>ENTREGA CURRICULUM</td>
+        <td></td>
+        <td>ENTREGA DOCUMENTOS</td>
+        <td></td>
+        <td>ENTREGA COMPROBANTE DE PAGO</td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <td colspan="6">AVISO DE PRIVACIDAD<br>
+
+            Toda aquella información personal que el elemento proporciona se encuentra sujeta
+             a las normas de confidencialidad y privacidad y es almacenada en una base de datos
+             de la Asociación. Los datos personales que usted comparta con la BRIGADA DE RESCATE
+             DEL SOCORRO ALPINO DE MÉXICO, A.C. no serán difundidos, distribuidos o comercializados.
+             Esta información confidencial no se compartirá con terceras partes, excepto que se
+             tenga expresa autorización de quien la suscribe o cuando haya sido requerida por orden
+             judicial para cumplir con las disposiciones procesales, su uso interno será con fines
+             de administración de información y recursos humanos de la Brigada.
+
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="6">PRIMERO:<br>
+
+            La B.R.S.A.M.A.C. no asume responsabilidad alguna al aceptar esta solicitud, 
+            únicamente la recibe; por lo tanto el solicitante no queda automáticamente 
+            registrado como miembro por el solo hecho de haber entregado esta solicitud 
+            aun cuando hubiese pagado la cuota relativa. La B.R.S.A.M.A.C. se reserva el 
+            derecho de aceptar al solicitante y de aceptarlo como miembro, será avalado 
+            entregándole la credencial correspondiente al año en curso.
+
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="6">SEGUNDO:<br>
+
+            <u>Al firmar la presente solicitud de registro el solicitante se compromete a 
+            cumplir y hacer cumplir los estatutos y reglamento(s) de la B.R.S.A.M.A.C.</u><br>
+            "Conforme a los mismos confirmo que durante mi permanencia dentro de esta 
+            Institución en automático se renueve mi registro anual, el cual me comprometo 
+            a cubrir la cuota anual correspondiente, con la finalidad de agilizar el trámite 
+            cíclico hasta que por mi propio derecho desee continuar, hasta que así convenga 
+            a mis interés entonces realizaré por escrito mi baja o retiro de esta Brigada, 
+            con lo cual daré formal conclusión a mi relación con la misma".
+
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="6">TERCERO:
+            <div style="font-size: 11px;">SI EL SOLICITANTE ES MENOR DE EDAD</div>
+
+            "Declaramos bajo protesta decir la verdad de los datos personales escritos en 
+            esta solicitud de ingreso a la Brigada de Rescate del Socorro Alpino de México 
+            A. C., corresponden al solicitante menor de edad de quien ejercemos legalmente 
+            la patria potestad. Así mismo que lo autorizamos a ingresar a dicha Institución 
+            y a participar en las actividades que desarrolla. Liberamos y eximimos a la 
+            B.R.S.A.M.A.C., sus miembros y colaboradores de toda responsabilidad por los 
+            daños prejuicios y lesiones que nuestro autorizado sufriera durante estas 
+            actividades o por causa de ellas y asumimos las responsabilidades por los daños 
+            que resultan debido a su intervención. Este permiso se lo otorgamos por todo el 
+            tiempo que sea aspirante o miembro de la Brigada, sin menoscabo de que su 
+            permanencia en ella tenga interrupciones largas o cortas, y hasta que sea mayor 
+            de edad o lo cancelemos formalmente por escrito dirigido al Presidente de la 
+            Institución".<br><br>
+
+            <table width="100%">
+              <tr>
+                <td colspan="2">Nombre y firma de los padres o tutores</td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <div style="font-size: 10px; color: white;">SI EL SOLICITANTE ES MENOR DE EDAD</div>
+                </td>
+              </tr>
+              <tr>
+                <td>NOMBRE</td>
+                <td>NOMBRE</td>
+              </tr>
+              <tr>
+                <td>___________________________________</td>
+                <td>___________________________________</td>
+              </tr>
+              <tr>
+                <td>FIRMA</td>
+                <td>FIRMA</td>
+              </tr>
+            </table>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="6">CUARTO:
+            <div style="font-size: 11px;">PARA SOLICITANTES MAYOR DE EDAD</div>
+
+            Libero y eximo a la B.R.S.A.M.A.C., sus miembros y colaboradores de toda 
+            responsabilidad por los daños, prejuicios y lesiones que sufriera durante 
+            sus actividades o por causa de ellas y asumo las responsabilidades por los 
+            daños que resulten debido a mi intervención. Este permiso lo otorgo por todo 
+            el tiempo que sea aspirante o miembro de la Brigada, sin menoscabo de que 
+            mi permanencia en ella tenga interrupciones largas o cortas, para realizar 
+            mi renuncia lo haré por escrito o me podrá ser revocada la calidad de miembro 
+            en los casos previstos en los estatutos, reglamento o ley vigente.<br><br>
+
+            <table width="100%">
+              <tr>
+                <td colspan="2">FIRMA</td>
+              </tr>
+              <tr>
+                <td>___________________________________</td>
+                <td>___________________________________</td>
+              </tr>
+              <tr>
+                <td>Miembro BRSAM Patrulla/Delegación</td>
+                <td>Vo. Bo. Jefe de Patrulla o Delegación</td>
+              </tr>
+            </table>
+
         </td>
       </tr>
 
     </table>
 </div>
+  <p>Original para la Secretaría<br>
+  C.C.P. Tesorería<br> 
+  Jefatura Operativa Nacional
+  </p>
+  <div align="center">
+    Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
+  </div>
 </body>
 </html>';
 
