@@ -17,8 +17,15 @@
 	    }
 		//echo "<br><br><br><br><br><br><br><br><br><br><br><br>";
 
+	    $target_dir = "documentos"; //la dirección para guardar los documentos
 
-		$target_dir = "imagenes/".$id_usuario; //la dirección para guardar la imagen de perfil del usuario
+	    if(!file_exists($target_dir)) //Revisa que el directorio destino exista, si no entonces lo crea.
+		{	
+			//echo "No existe el directorio, se crea...";
+			mkdir($target_dir); //crea la carpeta 
+		}
+
+		$target_dir = "documentos/".$id_usuario; //la dirección para guardar la imagen de perfil del usuario
 		$uploadOk = 1;
 
 		$error="";

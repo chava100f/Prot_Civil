@@ -31,6 +31,7 @@
 			                    <li><a href='form_medico.php'>Información Medica</a></li>
 			                    <li><a href='form_info_fisica.php'>Información Fisica</a></li>
 			                    <li><a href='form_experiencia.php'>Información de experiencia en Patrullaje y Rescate</a></li>
+			                    <li><a href='form_docs.php'>Subir Documentos</a></li>
 			                    <li><a href='form_foto.php'>Cambiar imagen de perfil</a></li>
 			                    <li><a href='form_cambio_pass.php'>Cambiar contraseña</a></li>
 			                </ul>
@@ -67,6 +68,7 @@
 			                    <li><a href='form_medico.php'>Información Medica</a></li>
 			                    <li><a href='form_info_fisica.php'>Información Fisica</a></li>
 			                    <li><a href='form_experiencia.php'>Información de experiencia en Patrullaje y Rescate</a></li>
+			                    <li><a href='form_docs.php'>Subir Documentos</a></li>
 			                    <li><a href='form_foto.php'>Cambiar imagen de perfil</a></li>
 			                    <li><a href='form_cambio_pass.php'>Cambiar contraseña</a></li>
 			                </ul>

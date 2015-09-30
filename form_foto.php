@@ -88,7 +88,7 @@ else
 
             <div class="form-group">
                 <div class="col-xs-offset-2 col-xs-8">
-                    <input type = "submit" class="btn btn-primary btn-block" value = "Actualizar Datos" id="actualizar" name = "actualizar" width="100" height="50">
+                    <input type = "submit" class="btn btn-primary btn-block" value = "Subir Foto" id="actualizar" name = "actualizar" width="100" height="50">
                 </div>
             </div>
 

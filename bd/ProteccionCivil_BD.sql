@@ -74,6 +74,33 @@ DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
+-- Table `bd_proteccion_civil`.`documentos`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `bd_proteccion_civil`.`documentos` ;
+
+CREATE TABLE IF NOT EXISTS `bd_proteccion_civil`.`documentos` (
+  `acta_nacimiento` TEXT NULL DEFAULT NULL,
+  `curp` TEXT NULL DEFAULT NULL,
+  `ife` TEXT NULL DEFAULT NULL,
+  `comprobante_dom` TEXT NULL DEFAULT NULL,
+  `curriculum` TEXT NULL DEFAULT NULL,
+  `licencia_manejo` TEXT NULL DEFAULT NULL,
+  `cedula_profesional` TEXT NULL DEFAULT NULL,
+  `cartilla_servicio_militar` TEXT NULL DEFAULT NULL,
+  `carnet_afiliacion` TEXT NULL DEFAULT NULL,
+  `pasaporte` TEXT NULL DEFAULT NULL,
+  `datos_personales_id_num_reg` INT(11) NOT NULL,
+  PRIMARY KEY (`datos_personales_id_num_reg`),
+  CONSTRAINT `fk_documentos_datos_personales`
+    FOREIGN KEY (`datos_personales_id_num_reg`)
+    REFERENCES `bd_proteccion_civil`.`datos_personales` (`id_num_reg`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `bd_proteccion_civil`.`antecedentes`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `bd_proteccion_civil`.`antecedentes` ;
