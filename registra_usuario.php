@@ -302,8 +302,7 @@
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="input-group">
-                                <span class="input-group-addon" id="basic-addon1">045</span>
-                                <input type="text" class="form-control" id="telefono_casa" name="telefono_casa" maxlength="20" disabled aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" id="telefono_casa" name="telefono_casa" maxlength="20" disabled>
                             </div>
                         </div>
                     </div>
@@ -316,8 +315,7 @@
                         </label>
                         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                             <div class="input-group">
-                                <span class="input-group-addon" id="basic-addon1">044</span>
-                                <input type="text" class="form-control" id="telefono_celular" name="telefono_celular" maxlength="20"  disabled aria-describedby="basic-addon1">
+                                <input type="text" class="form-control" id="telefono_celular" name="telefono_celular" maxlength="20"  disabled>
                             </div>
                         </div>
                     </div>
@@ -434,7 +432,7 @@ Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
             </fieldset>
 
             <footer class="footer">
-                <small>Última modificación Agosto 2015</small>
+                <small>Última modificación Octubre 2015<br>Created by Salvador Antonio Cienfuegos Torres<br>s.cienfuegost@hotmail.com</small>
             </footer>
 
         </div>

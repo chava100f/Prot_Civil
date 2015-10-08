@@ -93,9 +93,7 @@ else
         </fieldset>
         
         <footer class="footer">
-
-            <small>Última modificación Septiembre 2015</small>
-
+            <small>Última modificación Octubre 2015<br>Created by Salvador Antonio Cienfuegos Torres<br>s.cienfuegost@hotmail.com</small>
         </footer>
         
         </div>

@@ -68,7 +68,7 @@ else
                     <input class="file-loading" type="file" id="acta_nacimiento" name="acta_nacimiento" multiple="false" >
                 </div>
             </div>
-
+            <?php echo ver_archivos($id_usuario,"acta_nacimiento"); //mensaje para mostrar que ya se subio el archivo ?>
             <?php echo $mensaje_server_acta_nac; //error por si no se sube el archivo o aviso de que se logró correctamente ?>
 
             <div class="form-group">
@@ -175,9 +175,7 @@ else
  		</fieldset>
  		
         <footer class="footer">
-
-            <small>Última modificación Agosto 2015</small>
-
+            <small>Última modificación Octubre 2015<br>Created by Salvador Antonio Cienfuegos Torres<br>s.cienfuegost@hotmail.com</small>
         </footer>
         
         </div>
@@ -187,7 +185,7 @@ else
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="fondo_encabezado.js" ></script>
     <script src="js/fileinput.min.js"></script> <!-- https://github.com/kartik-v/bootstrap-fileinput -->
-    <script src="js/fileinput_locale_es.js"></script>
+    <script src="js/fileinput_locale_es.js"></script> <!-- Código de validación local de los archivos con ayuda de bootstrap -->
     <script>
     $(document).on('ready', function() {
 

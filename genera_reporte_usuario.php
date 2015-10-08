@@ -13,7 +13,8 @@ else
 	$id_usuario_reporte = $_GET['id']; //lo obtiene por URL en el link de la tabla
 
   require_once("funciones.php");
-  require_once("dompdf/dompdf_config.inc.php");
+  require_once(dirname(__FILE__).'/html2pdf/html2pdf.class.php');
+  $pdf = new HTML2PDF('P','A4','fr','UTF-8');
 
   $conexion = conectar();
 
@@ -192,28 +193,20 @@ else
 
 /*?>*/
 $codigoHTML='
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset = "utf-8">
-	<title>Reporte PDF</title>
-</head>
-<body>
-	<div align="center">
-    <table width="100%" border="1">
+  <page backtop="5mm" backbottom="5mm" backleft="5mm" backright="5mm">
+    <table border="1" align="left">
       <tr> 
-        <td align="center" width="20%">
+        <td align="center">
           <img src="imagenes/brsam-logo.png"  style="width:100px;height:107px;"/>
         </td>
-        <td colspan="4" align="center" width="60%">
-          <div style="color: white; font-size: 4px;">BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C.</div><br>
+        <td colspan="4" align="center">
           <p><b>BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C.</b><br>
           RFC: BRS660309598<br>
           PREMIO NACIONAL DE PROTECCIÓN CIVIL 2009<br>
           PREMIO NACIONAL DE ACCIÓN VOLUNTARIA Y SOLIDARIADAD 2012<br>
           www.socorroalpinodemexico.org.mx<br></p>
         </td>
-        <td align="center" width="20%">
+        <td align="center">
           <img src="imagenes/brsam-logo.png" style="width:100px;height:107px;"/>
         </td>
       </tr>
@@ -222,7 +215,7 @@ $codigoHTML='
         <td rowspan="7" colspan="2" align="center">
 
       ';
-              $codigo_mostrar = "<img src='".$fotografia."' style='width:220px;height:300px;'/>";
+              $codigo_mostrar = "<img src='".$fotografia."' style='width:180px;height:220px;'/>";
               $codigoHTML.=$codigo_mostrar;
 
        $codigoHTML.='
@@ -410,7 +403,7 @@ $codigoHTML='
 
       $codigoHTML.=$color_celda;
 
-      $codigoHTML.='<strong>Nombre del Trabajo o Escuela actual</strong></td>
+      $codigoHTML.='<strong>Nombre del Trabajo o<br>Escuela actual</strong></td>
         <td colspan="5">';
           
               $codigo_mostrar = $trabajo_escuela;
@@ -546,7 +539,7 @@ $codigoHTML='
 
       $codigoHTML.=$color_celda;
 
-      $codigoHTML.='<strong>Padecimientos o Limitaciones Físicas</strong></td>
+      $codigoHTML.='<strong>Padecimientos o<br> Limitaciones Físicas</strong></td>
         <td colspan="5">';
           
               $codigo_mostrar = $padecimientos_limitfisicas;
@@ -778,7 +771,7 @@ $codigoHTML='
 
       $codigoHTML.=$color_celda_esp1;
 
-      $codigoHTML.='<strong>Nombre del Dir. C.C.P.P. o Calidad</strong></td>
+      $codigoHTML.='<strong>Nombre del Dir.<br>C.C.P.P. o Calidad</strong></td>
         <td colspan="3">';
           
               $codigo_mostrar = $dir_ccpp;
@@ -850,11 +843,11 @@ $codigoHTML='
       </tr>
 
       <tr>
-        <td>ENTREGA CURRICULUM</td>
+        <td>ENTREGA<br>CURRICULUM</td>
         <td></td>
-        <td>ENTREGA DOCUMENTOS</td>
+        <td>ENTREGA<br>DOCUMENTOS</td>
         <td></td>
-        <td>ENTREGA COMPROBANTE DE PAGO</td>
+        <td>ENTREGA<br>COMPROBANTE DE PAGO</td>
         <td></td>
       </tr>
 
@@ -902,7 +895,7 @@ $codigoHTML='
       </tr>
 
       <tr>
-        <td colspan="6">TERCERO:
+        <td colspan="6">TERCERO:<br>
             <div style="font-size: 11px;">SI EL SOLICITANTE ES MENOR DE EDAD</div>
 
             "Declaramos bajo protesta decir la verdad de los datos personales escritos en 
@@ -919,14 +912,9 @@ $codigoHTML='
             de edad o lo cancelemos formalmente por escrito dirigido al Presidente de la 
             Institución".<br><br>
 
-            <table width="100%">
+            <table>
               <tr>
                 <td colspan="2">Nombre y firma de los padres o tutores</td>
-              </tr>
-              <tr>
-                <td colspan="2">
-                  <div style="font-size: 10px; color: white;">SI EL SOLICITANTE ES MENOR DE EDAD</div>
-                </td>
               </tr>
               <tr>
                 <td>NOMBRE</td>
@@ -976,7 +964,6 @@ $codigoHTML='
       </tr>
 
     </table>
-</div>
   <p>Original para la Secretaría<br>
   C.C.P. Tesorería<br> 
   Jefatura Operativa Nacional
@@ -984,8 +971,7 @@ $codigoHTML='
   <div align="center">
     Orozco y Berra #26 - 5, Col. Buenavista, Deleg. Cuauhtémoc, D.F.
   </div>
-</body>
-</html>';
+  </page>';
 
 
   desconectar($conexion);
@@ -993,14 +979,11 @@ $codigoHTML='
   //echo $codigoHTML;
 
   //codigo para exportar a PDF
-  $codigoHTML=utf8_decode($codigoHTML);
-  $dompdf=new DOMPDF();
-  $dompdf->load_html($codigoHTML);
-  ini_set("memory_limit","128M");
-  $dompdf->render();
-  $nombre_reporte="Reporte_".$id_usuario_reporte.".pdf";
-  $dompdf->stream($nombre_reporte);
-
+  
+  $pdf->WriteHTML($codigoHTML);
+  $nombre_archivo="Reporte_".$id_usuario_reporte.".pdf";
+  $pdf->Output($nombre_archivo,'D');
+  
 }
     
 ?>

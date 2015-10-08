@@ -121,7 +121,7 @@
 						<a href="registra_usuario.php">Registrarse</a>   
 						<br/>
 						<span class="info">!</span>
-					   	<a href="olvido_password.php">Recuperar contraseña</a>
+					   	<a href="recupera_password.php">Recuperar contraseña</a>
 				   	</p>
 
 				   	<p class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
@@ -132,8 +132,8 @@
 			</fieldset>
 
 			<footer class="footer">
-				<small>Última modificación Agosto 2015</small>
-			</footer>
+	            <small>Última modificación Octubre 2015<br>Created by Salvador Antonio Cienfuegos Torres<br>s.cienfuegost@hotmail.com</small>
+	        </footer>
 		</div>
 
 		<div class="col-xs-1 col-sm-2 col-md-4 col-lg-4"></div>

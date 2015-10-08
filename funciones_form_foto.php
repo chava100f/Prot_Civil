@@ -22,6 +22,7 @@
 	    if(!file_exists($target_dir)) //Revisa que el directorio destino exista, si no entonces lo crea.
 		{	
 			//echo "No existe el directorio, se crea...";
+			//chmod( $dir_temp_foto, 0777 );
 			mkdir($target_dir); //crea la carpeta 
 		}
 
@@ -32,17 +33,6 @@
 
 		// Check if image file is a actual image or fake image
 		
-	    $check = getimagesize($_FILES["foto_perfil"]["tmp_name"]);
-	    if($check !== false) {
-	        //echo "File is an image - ".$check["mime"].".";
-	        $uploadOk = 1;
-	        //echo "primer if check if false";
-	    } else {
-	        $mensaje_server = '<div class="alert alert-danger" role="alert"><strong>Error:</strong> El archivo no es una imagen.</div>';
-	        $uploadOk = 0;
-	        //echo "primer else check if false";
-	    }
-
 	    if($uploadOk!==0)
 	    {
 		    $imageFileType= substr($_FILES["foto_perfil"]["type"], 6);// elimina el resultado de image/ y deja solo el tipo
@@ -71,6 +61,7 @@
 					if(!file_exists($target_dir)) //Revisa que el directorio destino exista, si no entonces lo crea.
 					{	
 						//echo "No existe el directorio, se crea...";
+						//chmod( $dir_temp_foto, 0777 );
 						mkdir($target_dir); //crea la carpeta 
 
 						//Como medida preventiva actualiza el registro en la BD donde se supone esta la dirección para la imagen de perfil
@@ -96,7 +87,7 @@
 					    $dir_temp_foto = realpath($dir_temp_foto); //obtiene la ruta completa del archivo
 
 					    //Codigo para obtener permisos de admin para eliminar el archivo antes de remplazarlo...
-						chmod( $dir_temp_foto, 0777 );
+						//chmod( $dir_temp_foto, 0777 );
 					    unlink($dir_temp_foto); //elimina el archivo
 					    //echo "unlink(".$dir_temp_foto;
 					    

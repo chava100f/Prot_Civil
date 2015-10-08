@@ -13,7 +13,8 @@ else
 	$id_usuario_credencial = $_GET['id']; //lo obtiene por URL en el link de la tabla
 
   require_once("funciones.php");
-  require_once("dompdf/dompdf_config.inc.php");
+  require_once(dirname(__FILE__).'/html2pdf/html2pdf.class.php');
+  $pdf = new HTML2PDF('P','A4','fr','UTF-8');
 
   $conexion = conectar();
 
@@ -105,28 +106,13 @@ else
 
 /*?>*/
 $codigoHTML='
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset = "utf-8">
-	<title>Credencial PDF</title>
-  <style type="text/css">
-
-    body {
-      font-size: 14px;
-    }
-  </style>
-
-</head>
-<body>
-	<div align="center">
-    <table width="100%" border="1">
+<page backtop="5mm" backbottom="5mm" backleft="5mm" backright="5mm">
+    <table width="100%" border="1" align="left">
       <tr> 
         <td align="center" width="20%">
           <img src="imagenes/brsam-logo.png"  style="width:100px;height:107px;"/>
         </td>
         <td colspan="3" width="80%" align="center">
-          <div style="color: white; font-size: 4px;">BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C.</div><br>
           <p><b>BRIGADA DE RESCATE DEL SOCORRO ALPINO DE MÉXICO, A.C.</b><br>
           RFC: BRS660309598<br>
           PREMIO NACIONAL DE PROTECCIÓN CIVIL 2009<br>
@@ -287,9 +273,8 @@ $codigoHTML='
         </td>
       </tr>
     </table>
-</div>
-</body>
-</html>';
+  </page>
+';
 
 
   desconectar($conexion);
@@ -297,14 +282,10 @@ $codigoHTML='
   //echo $codigoHTML;
 
   //codigo para exportar a PDF
-  
-  $codigoHTML=utf8_decode($codigoHTML);
-  $dompdf=new DOMPDF();
-  $dompdf->load_html($codigoHTML);
-  ini_set("memory_limit","128M");
-  $dompdf->render();
-  $nombre_reporte="Credencial_".$id_usuario_credencial.".pdf";
-  $dompdf->stream($nombre_reporte);
+
+  $pdf->WriteHTML($codigoHTML);
+  $nombre_archivo="Credencial_".$id_usuario_credencial.".pdf";
+  $pdf->Output($nombre_archivo,'D');
 
 }
     
